@@ -9,30 +9,31 @@
     <script src="../JS/AdminLogin.js"></script>
 </head>
 
-<body class="login-page">
-    <header class="login-header"><a class="login-brand" href="../index.html">WanderVista</a>
-        <nav class="login-nav"><a href="../index.html">Home</a> | <a href="AdminDashboard.html">Dashboard</a> | <a
+<body>
+    <header><a href="../index.html">WanderVista</a>
+        <nav><a href="../index.html">Home</a> | <a href="AdminDashboard.html">Dashboard</a> | <a
                 href="AdminRegistration.html">Register</a> | <a aria-current="page" href="AdminLogin.html">Login</a></nav>
     </header>
-    <main class="login-main">
-        <section class="login-intro">
+    <main>
+        <section>
             <h1>Admin Login</h1>
             <p>Enter your username and password.</p>
         </section>
-        <form class="login-form" novalidate="" onsubmit="return loginAccount()">
-            <fieldset class="login-section">
+        <form novalidate="" onreset="clearLoginMessage()" onsubmit="return loginAccount()">
+            <fieldset>
                 <legend>Admin Account</legend>
                 <label for="LoginUsername">Username</label>
                 <input id="LoginUsername" placeholder="Enter username" required="" type="text" />
                 <label for="LoginPassword">Password</label>
                 <input id="LoginPassword" placeholder="Enter password" required="" type="password" />
-                <p aria-live="polite" class="login-error" id="LoginMessage"></p>
-                <button class="login-button" type="submit">Validate fields</button>
+                <p aria-live="polite" class="error" id="LoginMessage"></p>
+                <button type="submit">Login</button>
+                <button type="reset">Clear</button>
                 <p>New admin? <a href="AdminRegistration.html">Register here</a></p>
             </fieldset>
         </form>
     </main>
-    <footer class="login-footer">WandaVista | A responsive travel website</footer>
+    <footer>WandaVista | A responsive travel website</footer>
 </body>
 
 </html>

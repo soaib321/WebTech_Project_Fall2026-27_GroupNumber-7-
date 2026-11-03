@@ -37,11 +37,11 @@ function validateAdminForm() {
 function showResult(success, message) {
     const result = field("ResultText");
     result.textContent = message;
-    result.className = success ? "registration-success" : "registration-error";
+    result.className = success ? "success" : "error";
 }
 
 function clearAllErrors() {
-    document.querySelectorAll(".registration-error").forEach((item) => item.textContent = "");
+    document.querySelectorAll(".error").forEach((item) => item.textContent = "");
     field("ResultText").textContent = "";
     field("ResultText").className = "";
 }
