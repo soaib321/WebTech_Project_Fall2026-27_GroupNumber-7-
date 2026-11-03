@@ -1,0 +1,174 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    background-color: honeydew;
+    color: black;
+}
+.top {
+    background-color: darkgreen;
+    color: white;
+    padding: 15px 8%;
+}
+.top h1 {
+    margin: 0;
+}
+.top p {
+    margin: 5px 0;
+}
+.navigation {
+    background-color: lightgreen;
+    padding: 15px 8%;
+}
+.navigation a {
+    color: darkgreen;
+    margin-right: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+.navigation a:hover {
+    color: white;
+    background-color: green;
+}
+.container {
+    width: 80%;
+    margin: 30px auto;
+}
+.small-box {
+    width: 80%;
+    margin: 20px auto;
+}
+h2 {
+    color: darkgreen;
+}
+fieldset {
+    background-color: white;
+    border: 1px solid gray;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+legend {
+    background-color: green;
+    color: white;
+    padding: 8px;
+    font-weight: bold;
+}
+table {
+    width: 100%;
+}
+td {
+    padding: 10px;
+}
+td:first-child {
+    width: 30%;
+    font-weight: bold;
+}
+input[type=text], input[type=password], input[type=number], select {
+    width: 90%;
+    padding: 8px;
+    border: 1px solid gray;
+}
+input[type=radio], input[type=checkbox] {
+    margin: 7px;
+}
+small {
+    display: block;
+    color: red;
+}
+.buttons, .center {
+    text-align: center;
+}
+input[type=submit], input[type=reset], button {
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    margin: 5px;
+    cursor: pointer;
+}
+input[type=reset] {
+    background-color: gray;
+}
+#ResultText {
+    text-align: center;
+    color: red;
+}
+#ResultText.validation-success {
+    color: darkgreen;
+}
+.footer {
+    background-color: darkgreen;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+
+
+.dashboard {
+    width: 75%;
+    margin: 30px auto;
+}
+
+.dashboard h2 {
+    color: darkgreen;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.dashboard fieldset {
+    background-color: white;
+    border: 2px solid green;
+    padding: 25px;
+}
+
+.dashboard legend {
+    background-color: green;
+    color: white;
+    padding: 10px;
+}
+
+.dashboard h3 {
+    color: darkgreen;
+    margin-top: 20px;
+}
+
+.dashboard p {
+    color: gray;
+    font-size: 16px;
+}
+
+.manager-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.manager-table td {
+    border: 1px solid lightgray;
+    padding: 12px;
+}
+
+.dashboard ul {
+    background-color: honeydew;
+    padding: 20px 40px;
+    line-height: 30px;
+}
+
+.dashboard li {
+    color: black;
+}
+
+.dashboard button {
+    background-color: darkgreen;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.dashboard button:hover {
+    background-color: green;
+}
+
+

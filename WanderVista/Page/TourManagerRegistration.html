@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tour Manager Registration</title>
+    <link rel="stylesheet" href="../design/tourManager.css">
+</head>
+<body>
+<div class="top">
+    <h1>WanderVista</h1>
+    <p>Tour Manager Portal</p>
+</div>
+<div class="navigation">
+    <a href="TourManagerRegistration.html">Register</a>
+    <a href="TourManagerLogin.html">Login</a>
+    <a href="TourManagerDashboard.html">Dashboard</a>
+    <a href="hotelManagerRegistration.html">Hotel Manager</a>
+</div>
+<div class="container">
+    <h2>Tour Manager Registration</h2>
+    <p>Fill in the form to create your account.</p>
+    <form onsubmit="return registerManager()" onreset="clearMessages()" novalidate>
+        <fieldset>
+            <legend>Personal Information</legend>
+            <table>
+                <tr><td>Full Name</td><td><input type="text" id="FullName" placeholder="Enter Your Name"><small id="NameError"></small></td></tr>
+                <tr><td>Email</td><td><input type="text" id="Email" placeholder="Enter Your Email"><small id="EmailError"></small></td></tr>
+                <tr><td>Phone</td><td><input type="text" id="Phone" placeholder="Enter Your Phone Number"><small id="PhoneError"></small></td></tr>
+                <tr><td>Age</td><td><input type="number" id="Age" placeholder="Enter Your Age"><small id="AgeError"></small></td></tr>
+                <tr><td>Gender</td><td>
+                    <label><input type="radio" name="gender" value="Male"> Male</label>
+                    <label><input type="radio" name="gender" value="Female"> Female</label>
+                    <label><input type="radio" name="gender" value="Other"> Other</label>
+                    <small id="GenderError"></small>
+                </td></tr>
+            </table>
+        </fieldset>
+        <fieldset>
+            <legend>Professional Information</legend>
+            <table>
+                <tr><td>Manager ID</td><td><input type="text" id="ManagerId" placeholder="Enter Your Manager ID"><small id="ManagerIdError"></small></td></tr>
+                <tr><td>Experience (Years)</td><td><input type="number" id="Experience" placeholder="Enter Your Experience"><small id="ExperienceError"></small></td></tr>
+                <tr><td>Tour Specialty</td><td>
+                    <select id="Specialty">
+                        <option value="">Select</option>
+                        <option>Adventure</option>
+                        <option>Nature</option>
+                        <option>Cultural</option>
+                        <option>City Tours</option>
+                    </select>
+                    <small id="SpecialtyError"></small>
+                </td></tr>
+                <tr><td>Preferred Location</td><td><input type="text" id="Location" placeholder="Enter Your Preferred Location"><small id="LocationError"></small></td></tr>
+                <tr><td>Available Days</td><td>
+                    <label><input type="checkbox" name="days" value="Friday"> Friday</label>
+                    <label><input type="checkbox" name="days" value="Saturday"> Saturday</label>
+                    <label><input type="checkbox" name="days" value="Sunday"> Sunday</label>
+                    <label><input type="checkbox" name="days" value="Monday"> Monday</label>
+                    <label><input type="checkbox" name="days" value="Tuesday"> Tuesday</label>
+                    <label><input type="checkbox" name="days" value="Wednesday"> Wednesday</label>
+                    <label><input type="checkbox" name="days" value="Thursday"> Thursday</label>
+                    <small id="DaysError"></small>
+                </td></tr>
+            </table>
+        </fieldset>
+        <fieldset>
+            <legend>Account Information</legend>
+            <table>
+                <tr><td>Username</td><td><input type="text" id="Username" placeholder="Enter Your Username"><small id="UsernameError"></small></td></tr>
+                <tr><td>Password</td><td><input type="password" id="Password" placeholder="Enter Your Password"><small id="PasswordError"></small></td></tr>
+                <tr><td>Confirm Password</td><td><input type="password" id="ConfirmPassword" placeholder="Confirm Your Password"><small id="ConfirmError"></small></td></tr>
+            </table>
+        </fieldset>
+        <p id="ResultText"></p>
+        <div class="buttons">
+            <input type="submit" value="Register">
+            <input type="reset" value="Clear">
+        </div>
+    </form>
+    <p class="center">Already registered? <a href="TourManagerLogin.html">Login here</a></p>
+</div>
+<div class="footer">WanderVista | Tour Manager</div>
+<script src="../js/tourManager.js"></script>
+</body>
+</html>
