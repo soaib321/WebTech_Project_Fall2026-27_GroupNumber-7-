@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Tourist Login | WanderVista</title>
+    <link href="../Design/TouristLogin.css" rel="stylesheet" />
+    <script defer src="../JS/TouristLogin.js"></script>
+</head>
+
+<body class="tourist account-page login-page">
+        <header class="top"><a class="brand" href="../index.html">
+    <img src="../img/wandervista-logo.png" alt="WanderVista Logo">
+    <span>WanderVista</span>
+        </a>
+            <nav><a href="../index.html">Home</a></nav>
+        </header>
+    <main class="account-main">
+        <section class="account-hero">
+            <h1>Tourist Login</h1>
+            <p>Enter your username and password.</p>
+        </section>
+        <form class="login-form account-form" novalidate="" onsubmit="return loginAccount('Tourist')">
+            <fieldset class="form-section">
+                <legend>Tourist Account</legend>
+                <label for="LoginUsername">Username</label>
+                <input id="LoginUsername" placeholder="Enter username" required="" type="text" />
+                <label for="LoginPassword">Password</label>
+                <input id="LoginPassword" placeholder="Enter password" required="" type="password" />
+                <p aria-live="polite" class="error" id="LoginMessage"></p>
+                <button class="primary-button" type="submit">Login</button>
+                <p>New tourist? <a href="TouristRegistration.html">Register here</a></p>
+            </fieldset>
+        </form>
+    </main>
+    <footer>WanderVista | Offline educational project | HTML, CSS and JavaScript</footer>
+</body>
+
+</html>

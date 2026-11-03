@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Tourist Registration</title>
+    <link href="../Design/TouristRegistration.css" rel="stylesheet" />
+    <script defer src="../JS/TouristRegistration.js"></script>
+</head>
+
+<body class="tourist account-page registration-page">
+    <header class="top"><a class="brand" href="../index.html">
+    <img src="../img/wandervista-logo.png" alt="WanderVista Logo">
+    <span>WanderVista</span>
+</a>
+        <nav><a href="../index.html">Home</a></nav>
+    </header>
+    <main class="account-main">
+
+      <section class="account-hero">
+          <h1>Tourist Registration</h1>
+          <p>Fill in the form below to register.</p>
+        </section>
+
+        <form autocomplete="on" class="account-form" novalidate="" onreset="clearAllErrors()"
+            onsubmit="return validateTouristForm()">
+            <fieldset class="form-section">
+                <legend>Tourist Personal Information</legend>
+                <div class="form-row">
+                    <div class="field-label"><label for="TouristName">Tourist Name:</label></div>
+                    <div class="field-control"><input id="TouristName" placeholder="Enter full name" type="text" />
+                        <p class="error" id="NameError"></p>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="field-label"><label for="TouristAge">Age:</label></div>
+                    <div class="field-control"><input id="TouristAge" placeholder="1 - 120" type="number" />
+                        <p class="error" id="AgeError"></p>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="field-label"><label for="TouristEmail">Email:</label></div>
+                    <div class="field-control"><input id="TouristEmail" placeholder="Enter email" type="email" />
+                        <p class="error" id="EmailError"></p>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="field-label"><label for="TouristPhone">Phone:</label></div>
+                    <div class="field-control"><input id="TouristPhone" placeholder="e.g. 01712345678" type="tel" />
+                        <p class="error" id="PhoneError"></p>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="field-label"><label>Gender:</label></div>
+                    <div class="field-control">
+                        <label class="choice"><input name="gender" type="radio" value="Male" /> Male</label>
+                        <label class="choice"><input name="gender" type="radio" value="Female" /> Female</label>
+                        <label class="choice"><input name="gender" type="radio" value="Other" /> Other</label>
+                        <p class="error" id="GenderError"></p>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="field-label"><label for="Destination">Preferred Destination:</label></div>
+                    <div class="field-control">
+                        <select id="Destination">
+                            <option value="">-- Select Preferred Destination --</option>
+                            <option value="Cox's Bazar">Cox's Bazar</option>
+                            <option value="Sajek">Sajek Valley</option>
+                            <option value="Sylhet">Sylhet</option>
+                            <option value="Bandarban">Bandarban</option>
+                            <option value="Saint Martin">Saint Martin</option>
+                        </select>
+                        <p class="error" id="DestinationError"></p>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="field-label"><label for="Address">Address:</label></div>
+                    <div class="field-control"><textarea id="Address" placeholder="Enter your address"></textarea>
+                        <p class="error" id="AddressError"></p>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="field-label"><label for="Nationality">Nationality:</label></div>
+                    <div class="field-control">
+                        <select id="Nationality">
+                            <option value="">-- Select Nationality --</option>
+                            <option value="Bangladesh">Bangladesh</option>
+                            <option value="USA">USA</option>
+                            <option value="UK">UK</option>
+                            <option value="Canada">Canada</option>
+                        </select>
+                        <p class="error" id="NationalityError"></p>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="form-section">
+                <legend>Travel Preferences</legend>
+                <div class="form-row">
+                    <div class="field-label"><label>Travel Interests:</label></div>
+                    <div class="field-control">
+                        <label class="choice"><input name="interest" type="checkbox" value="Adventure" />
+                            Adventure</label>
+                        <label class="choice"><input name="interest" type="checkbox" value="Beach" /> Beach</label>
+                        <label class="choice"><input name="interest" type="checkbox" value="Mountains" />
+                            Mountains</label>
+                        <label class="choice"><input name="interest" type="checkbox" value="Nature" /> Nature</label>
+                        <p class="error" id="InterestError"></p>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="field-label"><label for="EmergencyPhone">Emergency Contact:</label></div>
+                    <div class="field-control"><input id="EmergencyPhone" placeholder="e.g. 01812345678" type="tel" />
+                        <p class="error" id="EmergencyError"></p>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="field-label"><label for="TravelDocument">TravelDocument (optional):</label></div>
+                    <div class="field-control"><input id="TravelDocument" type="file" />
+                        <p class="hint">PDF, JPG or PNG, up to 2 MB</p>
+                        <p class="error" id="FileError"></p>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="form-section">
+                <legend>User Profile</legend>
+                <div class="form-row">
+                    <div class="field-label"><label for="UserName">Username:</label></div>
+                    <div class="field-control"><input id="UserName" placeholder="4 - 15 characters" type="text" />
+                        <p class="error" id="UserNameError"></p>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="field-label"><label for="Password">Password:</label></div>
+                    <div class="field-control"><input id="Password" placeholder="Enter password" type="password" />
+                        <p class="hint">At least 8 characters with an uppercase letter, a lowercase letter and a number
+                        </p>
+                        <p class="error" id="PasswordError"></p>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="field-label"><label for="ConfirmPassword">Confirm Password:</label></div>
+                    <div class="field-control"><input id="ConfirmPassword" placeholder="Re-enter password"
+                            type="password" />
+                        <p class="error" id="ConfirmError"></p>
+                    </div>
+                </div>
+            </fieldset>
+            <p id="ResultText"></p>
+            <a class="login-after" href="TouristLogin.html" id="LoginAfterRegister" style="display:none">Continue to
+                Login</a>
+            <p class="hint">Already registered? <a href="TouristLogin.html">Login here</a></p>
+            <input class="form-button" id="submit" type="submit" value="Register" />
+            <input class="form-button" id="reset" type="reset" value="Reset" />
+        </form>
+    </main>
+    <footer>WanderVista | Offline educational project | HTML, CSS and JavaScript</footer>
+</body>
+
+</html>

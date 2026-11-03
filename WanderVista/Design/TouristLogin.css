@@ -1,0 +1,138 @@
+* {
+    box-sizing: border-box
+}
+
+body {
+    margin: 0;
+    background: #e8f6ff;
+    color: #1d3b50;
+    font: 16px "Trebuchet MS", Arial, sans-serif
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 6%;
+    background: #1e88c7;
+    border-radius: 0 0 25px 25px
+}
+
+.top a {
+    color: white
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.7rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.brand img {
+    width: 180px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.brand span {
+    color: white;
+}
+
+.account-main {
+    width: min(680px, 92%);
+    margin: 42px auto 60px
+}
+
+.account-hero {
+    text-align: center;
+    background: #fff3e0;
+    border-radius: 25px;
+    padding: 22px
+}
+
+.account-hero h1 {
+    color: #e07a10
+}
+
+.account-form {
+    margin-top: 22px;
+    padding: 30px;
+    background: white;
+    border: 2px dashed #7cc4ee;
+    border-radius: 25px;
+    box-shadow: 0 10px 28px #1e88c722
+}
+
+.form-section {
+    border: 0
+}
+
+.form-section legend {
+    color: #1e88c7;
+    font-weight: bold
+}
+
+.login-form label {
+    display: block;
+    margin: 16px 0 6px
+}
+
+.login-form input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #bfe3f7;
+    border-radius: 20px;
+    font: inherit
+}
+
+.error {
+    color: #b42318;
+    min-height: 1.2em
+}
+
+.success {
+    color: #16703b;
+    min-height: 1.2em
+}
+
+.primary-button {
+    padding: 12px 22px;
+    border: 0;
+    border-radius: 30px;
+    background: #f3b06f;
+    color: white;
+    font: inherit;
+    cursor: pointer
+}
+
+.primary-button:hover {
+    background: #d4730f
+}
+
+a {
+    color: #1e88c7
+}
+
+footer {
+    padding: 20px;
+    text-align: center;
+    background: #1e88c7;
+    color: white
+}
+
+@media(max-width:600px) {
+    .top {
+        padding: 16px 5%
+    }
+
+    .account-main {
+        margin-top: 25px
+    }
+
+    .account-form {
+        padding: 18px
+    }
+}
