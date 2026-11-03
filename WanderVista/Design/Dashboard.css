@@ -1,0 +1,16 @@
+body {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 16px;
+    color: #1d2733;
+    background-color: #eef3f8;
+
+    background-image: url("../img/Dashboard.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}

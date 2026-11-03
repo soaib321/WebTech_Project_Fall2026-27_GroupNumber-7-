@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Hotel Manager Registration | WanderVista</title>
+
+        <link rel="stylesheet" href="../Design/hotelManager.css">
+        <link rel="stylesheet" href="../Design/Registration.css">
+
+<script src="../JS/main.js" defer></script>
+<script src="../JS/validation1.js" defer></script>
+<script src="../JS/hotelManager.js" defer></script>
+    </head>
+
+    <body class="hotelManager">
+
+<!-- <img src="../images/hot-back.jpg" id="logo" alt="Registration Background" class="registration-background-image"> -->
+       
+<div class="header">
+
+            <img src="../img/logo-mark.svg" id="logo" alt="WanderVista Logo">
+            <div class="header-text">
+                <h1>Hotel Manager Registration Form</h1>
+                <p>Join WanderVista and manage your hotel with ease.</p>
+            </div>
+        </div>
+
+        <div class="topnav">
+            <a href="../index.html">Home</a>
+            <a href="AdminRegistration.html">Admin</a>
+            <a href="TouristRegistration.html">Tourist</a>
+            <a href="HotelManagerRegistration.html" class="active">Hotel Manager</a>
+            <a href="TourManagerRegistration.html">Tour Manager</a>
+        </div>
+
+        <!-- novalidate turns off the browser's own checks, so our JavaScript does all the validation -->
+        <form onsubmit="return validateHotelManagerForm()" onreset="clearAllErrors()" novalidate>
+
+            <fieldset>
+                <legend>Personal Information</legend>
+
+                <table>
+                    <tr>
+                        <td><label for="ManagerName">Full Name:</label></td>
+                        <td>
+                            <input type="text" id="ManagerName" placeholder="Enter full name">
+                            <p class="error" id="NameError"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="ManagerEmail">Email:</label></td>
+                        <td>
+                            <input type="email" id="ManagerEmail" placeholder="Enter email">
+                            <p class="error" id="EmailError"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="ManagerPhone">Phone:</label></td>
+                        <td>
+                            <input type="tel" id="ManagerPhone" placeholder="e.g. 01712345678">
+                            <p class="error" id="PhoneError"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label>Gender:</label></td>
+                        <td>
+                            <label class="choice">
+                                <input type="radio" name="gender" value="Male"> Male
+                            </label>
+
+                            <label class="choice">
+                                <input type="radio" name="gender" value="Female"> Female
+                            </label>
+
+                            <label class="choice">
+                                <input type="radio" name="gender" value="Other"> Other
+                            </label>
+
+                            <p class="error" id="GenderError"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="ManagerDOB">Date of Birth:</label></td>
+                        <td>
+                            <input type="date" id="ManagerDOB">
+                            <p class="error" id="DOBError"></p>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+
+
+            <fieldset>
+                <legend>Hotel Information</legend>
+
+                <table>
+                    <tr>
+                        <td><label for="HotelName">Hotel Name:</label></td>
+                        <td>
+                            <input type="text" id="HotelName" placeholder="Enter hotel name">
+                            <p class="error" id="HotelNameError"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="HotelType">Hotel Type:</label></td>
+                        <td>
+                            <select id="HotelType">
+                                <option value="">-- Select Hotel Type --</option>
+                                <option value="Hotel">Hotel</option>
+                                <option value="Resort">Resort</option>
+                                <option value="Guest House">Guest House</option>
+                                <option value="Boutique Hotel">Boutique Hotel</option>
+                            </select>
+                            <p class="error" id="HotelTypeError"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="HotelAddress">Hotel Address:</label></td>
+                        <td>
+                            <textarea id="HotelAddress" placeholder="Enter hotel address"></textarea>
+                            <p class="error" id="AddressError"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="HotelCity">City / District:</label></td>
+                        <td>
+                            <input type="text" id="HotelCity" placeholder="Enter city or district">
+                            <p class="error" id="CityError"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="RoomNumber">Number of Rooms:</label></td>
+                        <td>
+                            <input type="number" id="RoomNumber" placeholder="Enter total rooms">
+                            <p class="error" id="RoomError"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="HotelWebsite">Hotel Website:</label></td>
+                        <td>
+                            <input type="url" id="HotelWebsite" placeholder="https://example.com">
+                            <p class="error" id="WebsiteError"></p>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+
+
+            <fieldset>
+                <legend>Professional Information</legend>
+
+                <table>
+                    <tr>
+                        <td><label for="Position">Position / Job Title:</label></td>
+                        <td>
+                            <select id="Position">
+                                <option value="">-- Select Position --</option>
+                                <option value="General Manager">General Manager</option>
+                                <option value="Assistant Manager">Assistant Manager</option>
+                                <option value="Hotel Manager">Hotel Manager</option>
+                                <option value="Operations Manager">Operations Manager</option>
+                            </select>
+                            <p class="error" id="PositionError"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="Experience">Experience (years):</label></td>
+                        <td>
+                            <input type="number" id="Experience" placeholder="0 - 40">
+                            <p class="error" id="ExperienceError"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="LicenseNo">Hotel License No:</label></td>
+                        <td>
+                            <input type="text" id="LicenseNo" placeholder="Enter license number">
+                            <p class="error" id="LicenseError"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="BusinessRegNo">Business Registration No:</label></td>
+                        <td>
+                            <input type="text" id="BusinessRegNo" placeholder="Enter registration number">
+                            <p class="error" id="BusinessRegError"></p>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+
+
+            <fieldset>
+                <legend>Account</legend>
+
+                <table>
+                    <tr>
+                        <td><label for="UserName">Username:</label></td>
+                        <td>
+                            <input type="text" id="UserName" placeholder="4 - 15 characters">
+                            <p class="error" id="UserNameError"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="Password">Password:</label></td>
+                        <td>
+                            <input type="password" id="Password" placeholder="Enter password">
+                            <p class="hint">At least 8 characters with an uppercase letter, a lowercase letter and a number</p>
+                            <p class="error" id="PasswordError"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="ConfirmPassword">Confirm Password:</label></td>
+                        <td>
+                            <input type="password" id="ConfirmPassword" placeholder="Re-enter password">
+                            <p class="error" id="ConfirmError"></p>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+
+
+            <p id="ResultText"></p>
+
+            <input type="submit" id="submit" value="Register">
+            <input type="reset" id="reset" value="Reset">
+    
+         <p style="text-align: center; margin-top: 15px;color: #13005f; font-size: 20px;">
+    Do you have an account?
+    <a href="HotelManagerLogin.html"
+       style="color: #0E7C86; text-decoration: none; font-weight: bold; font-size: 20px;">
+        Login Here
+    </a>
+</p>
+        </form>
+
+
+    
+
+        <div class="footer">
+            <h5>WanderVista | Hotel Manager Registration</h5>
+        </div>
+
+    </body>
+</html>

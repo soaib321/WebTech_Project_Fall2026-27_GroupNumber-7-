@@ -1,0 +1,328 @@
+
+* {
+    box-sizing: border-box;
+}
+
+/* Header, Navigation and Footer */
+
+.header {
+    display: flex;
+    align-items: center;
+    color: white;
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+}
+
+
+#logo {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+    margin:2px;
+}
+
+.header-text {
+    flex: 1;
+    text-align: center;
+
+}
+
+.header h1 {
+    margin: 0 0 0 -10px;
+    font-size: 28px;
+}
+
+.header p {
+    margin:0 0 0 -10px;
+    color: #dfe6ee;
+}
+
+/*  Top Navigation */
+
+.topnav {
+    text-align: center;
+    background-color: rgba(255, 0, 0, 0.7);
+    margin: 15px 0 20px 0;
+    padding: 5px;
+    border: 1px solid #d6e1e8;
+    border-radius: 30px;
+}
+
+.topnav a {
+    display: inline-block;
+    color: #12263A;
+    padding: 10px 18px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 25px;
+}
+
+.topnav a:hover {
+    background-color: #dceff0;
+    color: #0E7C86;
+    opacity: 0.65;
+}
+
+.topnav a.active {
+    background-color: #0E7C86;
+    opacity: 0.85;
+    color: white;
+}
+
+
+.footer {
+    background-color: rgba(10, 25, 47, 0.7);
+    color: white;
+    text-align: center;
+    padding: 4px;
+    margin-top: 20px;
+    border-radius: 6px;
+}
+
+.footer h5 {
+    margin: 8px ;
+}
+
+/* Hotel Manager Theme */
+
+.hotelManager .header {
+    background-color: rgba(10, 25, 47, 0.8);
+}
+.hotelManager legend{
+    background-color: #2b5a89;
+}
+
+/* Forms */
+
+fieldset {
+    background-color: rgba(255, 255, 255, 0.6);
+    border: 1px solid #c9d3de;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+legend {
+    color: white;
+    background-color: #0E7C86;
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 8px 6px;
+    vertical-align: top;
+}
+
+td:first-child {
+    width: 34%;
+    padding-top: 16px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+input[type="url"],
+select,
+textarea {
+    width: 100%;
+    padding: 8px 10px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 16px;
+    border: 1px solid #aab7c4;
+    border-radius: 5px;
+    background-color: #f5fafb;
+}
+
+textarea {
+    height: 100px;
+    resize: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #0E7C86;
+}
+
+/* Radio Buttons */
+
+.choice {
+    display: inline-block;
+    margin: 10px 14px 0 0;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    accent-color: #0E7C86;
+}
+
+/* Error Messages */
+
+.error {
+    color: red;
+    font-size: 14px;
+    margin: 4px 0 0 0;
+}
+
+.error:empty {
+    display: none;
+}
+
+.hint {
+    color: #000407;
+    font-size: 13px;
+    margin: 4px 0 0 0;
+}
+
+/* Result Message */
+
+#ResultText {
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+#ResultText:empty {
+    display: none;
+}
+
+#ResultText.success {
+    color: #1b6b2a;
+    background-color: #e3f4e6;
+    border: 1px solid #9fd3a9;
+}
+
+#ResultText.failed {
+    color: #a11b1b;
+    background-color: #fbe5e5;
+    border: 1px solid #efaaaa;
+}
+
+/* Submit and Reset Buttons */
+
+
+input[type="submit"],
+input[type="reset"] {
+    width: 48%;
+    padding: 12px 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    margin: 6px 4px;
+}
+
+#submit {
+    background-color: #0E7C86;
+    color: white;
+}
+
+#reset {
+    background-color: #e2ebf0;
+
+    color: #12263A;
+    border: 1px solid #0E7C86;
+}
+
+#submit:hover {
+    background-color: #12263A;
+    opacity: 0.8;
+}
+
+#reset:hover {
+    background-color: #cbdde4;
+    opacity: 0.7;
+}
+
+
+
+
+/*  Dashboard  */
+
+.welcome {
+    background-color: rgba(255, 255, 255, 0.85);
+    border-left: 5px solid #0E7C86;
+    border-radius: 8px;
+    padding: 18px;
+    margin-bottom: 20px;
+}
+
+.dashboard {
+    background-color: rgba(255, 255, 255, 0.6);
+    border: 1px solid #c9d3de;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+
+
+.dashboard td {
+    display: block;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.65);
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.dashboard a {
+    display: inline-block;
+    background-color: #0E7C86;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+.dashboard a:hover {
+    background-color: #12263A;
+}
+
+/* Small Screens */
+
+@media (max-width: 600px) {
+
+    td {
+        display: block;
+        width: 100%;
+    }
+
+    td:first-child {
+        width: 100%;
+        padding-bottom: 0;
+    }
+
+    .topnav a {
+        float: none;
+        display: block;
+        text-align: center;
+    }
+
+    input[type="submit"],
+    input[type="reset"] {
+        width: 100%;
+        margin: 6px 0 0 0;
+    }
+
+    .dashboard {
+        padding: 12px;
+    }
+}
