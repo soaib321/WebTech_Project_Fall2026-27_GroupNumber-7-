@@ -1,0 +1,134 @@
+* {
+    box-sizing: border-box
+}
+
+body {
+    margin: 0;
+    background: #2b2f38;
+    color: #222;
+    font: 16px "Courier New", monospace
+}
+
+.login-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 6%;
+    background: #1c1f26;
+    border-bottom: 4px solid #c0392b
+}
+
+.login-header a {
+    color: #fff;
+    text-decoration: none
+}
+
+.login-brand {
+    font-size: 1.35rem;
+    font-weight: bold;
+    text-decoration: none
+}
+
+.login-main {
+    width: min(680px, 92%);
+    margin: 42px auto 60px
+}
+
+.login-intro {
+    text-align: center;
+    padding: 12px 0 24px
+}
+
+.login-intro h1 {
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px
+}
+
+.login-intro p {
+    color: #c9ccd3
+}
+
+.login-form {
+    padding: 28px;
+    background: #fff;
+    border: 2px solid #c0392b;
+    box-shadow: 0 12px 35px #0004
+}
+
+.login-section {
+    border: 1px solid #bbb;
+    padding: 24px
+}
+
+.login-section legend {
+    color: #c0392b;
+    text-transform: uppercase;
+    font-weight: bold
+}
+
+.login-section label {
+    display: block;
+    margin: 16px 0 6px
+}
+
+.login-section input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #888;
+    background: #fafafa;
+    font: inherit
+}
+
+.login-error {
+    color: #b42318;
+    min-height: 1.2em
+}
+
+.login-notice {
+    color: #8e2a20;
+    min-height: 1.2em
+}
+
+.login-button {
+    padding: 12px 20px;
+    border: 0;
+    background: #c0392b;
+    color: #fff;
+    text-transform: uppercase;
+    font: inherit;
+    cursor: pointer
+}
+
+.login-button:hover {
+    background: #8e2a20
+}
+
+a {
+    color: #c0392b
+}
+
+.login-footer {
+    padding: 20px;
+    text-align: center;
+    background: #1c1f26;
+    color: #fff
+}
+
+@media(max-width:600px) {
+    .login-header {
+        padding: 16px 5%
+    }
+
+    .login-main {
+        margin-top: 24px
+    }
+
+    .login-form {
+        padding: 14px
+    }
+
+    .login-section {
+        padding: 16px
+    }
+}

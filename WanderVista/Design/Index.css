@@ -1,0 +1,142 @@
+:root {
+    --dark: #15334a;
+    --accent: #0b8196
+}
+
+* {
+    box-sizing: border-box
+}
+
+body {
+    margin: 0;
+    background: #f0f6f7;
+    color: #17354a;
+    font-family: Arial, sans-serif
+}
+
+.hero {
+    background: linear-gradient(130deg, #103b58, #0c8a9b);
+    color: white;
+    text-align: center;
+    padding: 75px 20px
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin: 0
+}
+
+.hero p {
+    font-size: 18px;
+    max-width: 650px;
+    margin: 15px auto
+}
+
+main {
+    max-width: 1080px;
+    margin: 35px auto;
+    padding: 0 20px
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 17px
+}
+
+.card {
+    background: white;
+    border-radius: 13px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px #00000016
+}
+
+.card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover
+}
+
+.content {
+    padding: 18px
+}
+
+.content h2 {
+    font-size: 21px
+}
+
+.btn {
+    display: inline-block;
+    background: #0b8196;
+    color: white;
+    text-decoration: none;
+    padding: 10px 14px;
+    border-radius: 8px
+}
+
+footer {
+    text-align: center;
+    background: #15334a;
+    color: white;
+    padding: 25px
+}
+
+@media(max-width:850px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr)
+    }
+}
+
+@media(max-width:520px) {
+    .cards {
+        grid-template-columns: 1fr
+    }
+
+    .hero h1 {
+        font-size: 35px
+    }
+}
+
+/* Keep all card buttons aligned and neatly spaced. */
+.card {
+    display: flex;
+    flex-direction: column
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    flex: 1
+}
+
+.content p {
+    flex: 1;
+    line-height: 1.4
+}
+
+.card-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px
+}
+
+.card-links .btn {
+    text-align: center;
+    margin: 0
+}
+
+@media(max-width:1200px) {
+    .card-links {
+        flex-direction: column;
+        align-items: stretch
+    }
+}
+
+.section-title {
+    margin-top: 44px;
+}
+
+.btn:hover {
+    background: #08677a;
+}
