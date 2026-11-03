@@ -6,10 +6,10 @@ body {
     margin: 0;
     background: #2b2f38;
     color: #222;
-    font: 16px "Courier New", monospace
+    font: 17px "Courier New", monospace
 }
 
-.dashboard-header {
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -18,38 +18,38 @@ body {
     border-bottom: 4px solid #c0392b
 }
 
-.dashboard-header a {
+header a {
     color: #fff;
     text-decoration: none
 }
 
-.dashboard-brand {
+header > a {
     font-size: 1.35rem;
     font-weight: bold;
     text-decoration: none
 }
 
-.dashboard-main {
+main {
     width: min(900px, 94%);
     margin: 35px auto 55px
 }
 
-.dashboard-intro {
+.intro {
     text-align: center;
     padding: 12px 0 24px
 }
 
-.dashboard-intro h1 {
+.intro h1 {
     color: #fff;
     text-transform: uppercase;
     letter-spacing: 2px
 }
 
-.dashboard-intro p {
+.intro p {
     color: #c9ccd3
 }
 
-.dashboard-section {
+.panel {
     margin-bottom: 22px;
     padding: 22px;
     border: 2px solid #c0392b;
@@ -57,75 +57,71 @@ body {
     box-shadow: 0 12px 35px #0004
 }
 
-.dashboard-section > h2 {
+main > section > h2 {
     margin: 0 0 16px;
     color: #c0392b;
-    font-size: 1.15rem;
+    font-size: 1.25rem;
     text-transform: uppercase
 }
 
-.dashboard-summary-grid {
+.summary-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 12px
 }
 
-.dashboard-summary-card {
+.summary-grid > article {
     padding: 14px;
     border: 1px solid #bbb;
     text-align: center
 }
 
-.dashboard-summary-card h3 {
+.summary-grid h3 {
     margin: 0;
-    font-size: .9rem
+    font-size: 1rem
 }
 
-.dashboard-summary-card p {
+.summary-grid p {
     margin: 10px 0 0;
     color: #c0392b;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: bold
 }
 
-.dashboard-management-grid {
+.management-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px
 }
 
-.dashboard-management-card {
+.management-grid > article {
     padding: 16px;
     border: 1px solid #bbb
 }
 
-.dashboard-management-card h3 {
+.management-grid h3 {
     margin: 0;
-    font-size: 1rem
+    font-size: 1.1rem
 }
 
-.dashboard-management-card p {
+.management-grid p {
     min-height: 2.8em;
     color: #555;
-    font-size: .88rem;
+    font-size: 1rem;
     line-height: 1.5
 }
 
-.dashboard-action {
+.management-grid span {
     display: inline-block;
     padding: 9px 13px;
     background: #c0392b;
     color: #fff;
     text-decoration: none;
     text-transform: uppercase;
-    font-size: .8rem
+    font-size: .9rem
 }
 
-.dashboard-action:hover {
-    background: #8e2a20
-}
-
-.dashboard-footer {
+footer {
     padding: 20px;
     text-align: center;
     background: #1c1f26;
@@ -133,25 +129,25 @@ body {
 }
 
 @media(max-width:650px) {
-    .dashboard-header {
+    header {
         padding: 16px 5%
     }
 
-    .dashboard-main {
+    main {
         margin-top: 24px
     }
 
-    .dashboard-section {
+    .panel {
         padding: 15px
     }
 
-    .dashboard-summary-grid {
+    .summary-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr))
     }
 }
 
 @media(max-width:420px) {
-    .dashboard-management-grid {
+    .management-grid {
         grid-template-columns: 1fr
     }
 }
