@@ -11,13 +11,13 @@
 
 <body>
     <header><a href="../index.html">WanderVista</a>
-        <nav><a href="../index.html">Home</a> | <a href="AdminDashboard.html">Dashboard</a> | <a
-                aria-current="page" href="AdminRegistration.html">Register</a> | <a href="AdminLogin.html">Login</a></nav>
+        <nav><a href="../index.html">Home</a> | <a href="AdminLogin.html">Login</a> |
+            <a aria-current="page" href="AdminRegistration.html">Register</a> |
+            <a href="AdminCreateUser.html">User Management</a></nav>
     </header>
     <main>
         <section>
             <h1>Admin Registration</h1>
-            <p>Fill in the form below to register.</p>
         </section>
         <form autocomplete="on" novalidate="" onreset="clearAllErrors()"
             onsubmit="return validateAdminForm()">
@@ -59,7 +59,7 @@
                 <div class="row">
                     <div class="label"><label for="AdminRole">Admin Role:</label></div>
                     <div class="control">
-                        <select id="AdminRole">
+                        <select id="AdminRole" onchange="setAdminRolePermissions()">
                             <option value="">-- Select Role --</option>
                             <option value="Super Admin">Super Admin</option>
                             <option value="Tour Operations Admin">Tour Operations Admin</option>
@@ -72,15 +72,16 @@
             <fieldset>
                 <legend>Permissions</legend>
                 <div class="row">
-                    <div class="label"><label>Can Manage:</label></div>
+                    <div class="label"><label>Permissions:</label></div>
                     <div class="control">
-                        <label class="choice"><input name="permission" type="checkbox" value="TourManagers" />
-                            TourManagers</label>
-                        <label class="choice"><input name="permission" type="checkbox" value="HotelManagers" />
-                            HotelManagers</label>
-                        <label class="choice"><input name="permission" type="checkbox" value="Tourists" />
+                        <p class="hint">Permissions are set by the selected admin role.</p>
+                        <label class="choice"><input disabled name="permission" type="checkbox" value="TourManagers" />
+                            Tour Managers</label>
+                        <label class="choice"><input disabled name="permission" type="checkbox" value="HotelManagers" />
+                            Hotel Managers</label>
+                        <label class="choice"><input disabled name="permission" type="checkbox" value="Tourists" />
                             Tourists</label>
-                        <label class="choice"><input name="permission" type="checkbox" value="Reports" />
+                        <label class="choice"><input disabled name="permission" type="checkbox" value="Reports" />
                             Reports</label>
                         <p class="error" id="PermissionError"></p>
                     </div>

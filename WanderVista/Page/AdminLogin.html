@@ -6,13 +6,13 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Admin Login | WanderVista</title>
     <link href="../Design/AdminLogin.css" rel="stylesheet" />
-    <script src="../JS/AdminLogin.js"></script>
+    <script defer src="../JS/AdminLogin.js"></script>
 </head>
 
 <body>
     <header><a href="../index.html">WanderVista</a>
-        <nav><a href="../index.html">Home</a> | <a href="AdminDashboard.html">Dashboard</a> | <a
-                href="AdminRegistration.html">Register</a> | <a aria-current="page" href="AdminLogin.html">Login</a></nav>
+        <nav><a href="../index.html">Home</a> | <a aria-current="page" href="AdminLogin.html">Login</a> |
+            <a href="AdminRegistration.html">Register</a> | <a href="AdminCreateUser.html">User Management</a></nav>
     </header>
     <main>
         <section>
@@ -26,6 +26,8 @@
                 <input id="LoginUsername" placeholder="Enter username" required="" type="text" />
                 <label for="LoginPassword">Password</label>
                 <input id="LoginPassword" placeholder="Enter password" required="" type="password" />
+                <label class="show-password"><input id="ShowPassword" onchange="togglePasswordVisibility()" type="checkbox" />
+                    Show password</label>
                 <p aria-live="polite" class="error" id="LoginMessage"></p>
                 <button type="submit">Login</button>
                 <button type="reset">Clear</button>
