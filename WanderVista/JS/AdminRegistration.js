@@ -11,6 +11,21 @@ function isValidPhone(phone) {
     return /^\+?[\d\s()-]+$/.test(phone) && digits.length >= 7 && digits.length <= 15;
 }
 
+function setAdminRolePermissions() {
+    const rolePermissions = {
+        "Super Admin": ["TourManagers", "HotelManagers", "Tourists", "Reports"],
+        "Tour Operations Admin": ["TourManagers", "Tourists"],
+        "Hotel & Booking Admin": ["HotelManagers", "Reports"]
+    };
+    const selectedPermissions = rolePermissions[value("AdminRole")] || [];
+
+    document.querySelectorAll('input[name="permission"]').forEach((permission) => {
+        permission.checked = selectedPermissions.includes(permission.value);
+        permission.disabled = true;
+    });
+    showError("PermissionError", "");
+}
+
 function validateAdminForm() {
     const checks = [];
     checks.push(showError("NameError", value("AdminName").length >= 2 ? "" : "Enter your full name."));
@@ -30,7 +45,20 @@ function validateAdminForm() {
         return false;
     }
 
-    showResult(true, "Your details are valid. Admin account approval is pending (demo only).");
+    try {
+        localStorage.setItem("wanderVistaAdminCredentials", JSON.stringify({
+            username: value("UserName"),
+            password: password
+        }));
+    } catch (error) {
+        showResult(false, "Your account could not be saved in this browser. Check storage settings and try again.");
+        return false;
+    }
+
+    showResult(true, "Registration successful. Redirecting you to admin login...");
+    window.setTimeout(() => {
+        window.location.href = "AdminLogin.html";
+    }, 800);
     return false;
 }
 

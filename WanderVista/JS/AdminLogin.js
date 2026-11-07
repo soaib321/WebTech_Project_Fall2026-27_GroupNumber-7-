@@ -4,18 +4,35 @@ function loginAccount() {
     const password = document.getElementById("LoginPassword").value;
     message.className = "error";
 
-    if (!/^[A-Za-z0-9_]{4,15}$/.test(username)) {
-        message.textContent = "Use 4-15 letters, numbers or underscores for your username.";
+    if (!username || !password) {
+        message.textContent = "Enter both your username and password.";
         return false;
     }
 
-    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(password)) {
-        message.textContent = "Use at least 8 characters with uppercase, lowercase and a number.";
+    let registeredCredentials;
+    try {
+        const savedCredentials = localStorage.getItem("wanderVistaAdminCredentials");
+        registeredCredentials = savedCredentials ? JSON.parse(savedCredentials) : null;
+    } catch (error) {
+        message.textContent = "Saved admin account data could not be read. Please register again.";
+        return false;
+    }
+
+    const isDemoAdmin = username === "admin" && password === "admin123";
+    const isRegisteredAdmin = registeredCredentials &&
+        username === registeredCredentials.username &&
+        password === registeredCredentials.password;
+
+    if (!isDemoAdmin && !isRegisteredAdmin) {
+        message.textContent = "Incorrect username or password.";
         return false;
     }
 
     message.className = "notice";
-    message.textContent = "Username and password formats are valid.";
+    message.textContent = "Login successful. Opening user management...";
+    window.setTimeout(() => {
+        window.location.href = "AdminCreateUser.html";
+    }, 500);
     return false;
 }
 
@@ -23,4 +40,12 @@ function clearLoginMessage() {
     const message = document.getElementById("LoginMessage");
     message.textContent = "";
     message.className = "error";
+    document.getElementById("ShowPassword").checked = false;
+    document.getElementById("LoginPassword").type = "password";
+}
+
+function togglePasswordVisibility() {
+    const password = document.getElementById("LoginPassword");
+    const showPassword = document.getElementById("ShowPassword").checked;
+    password.type = showPassword ? "text" : "password";
 }

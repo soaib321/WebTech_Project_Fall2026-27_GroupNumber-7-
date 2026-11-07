@@ -4,9 +4,9 @@
 
 body {
     margin: 0;
-    background: #2b2f38;
-    color: #222;
-    font: 16px "Courier New", monospace
+    background: #f3f4f6;
+    color: #1f2937;
+    font: 16px Arial, sans-serif
 }
 
 .registration-header {
@@ -14,8 +14,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 18px 6%;
-    background: #1c1f26;
-    border-bottom: 4px solid #c0392b
+    background: #1f2937
 }
 
 .registration-header a {
@@ -40,30 +39,30 @@ body {
 }
 
 .registration-intro h1 {
-    color: #fff;
+    color: #1f2937;
     text-transform: uppercase;
     letter-spacing: 2px
 }
 
 .registration-intro p {
-    color: #c9ccd3
+    color: #4b5563
 }
 
 .registration-form {
     padding: 26px;
     background: #fff;
-    border: 2px solid #c0392b;
-    box-shadow: 0 12px 35px #0004
+    border: 1px solid #d1d5db;
+    border-radius: 6px
 }
 
 .registration-section {
     margin: 0 0 20px;
-    border: 1px solid #bbb;
+    border: 1px solid #d1d5db;
     padding: 22px
 }
 
 .registration-section legend {
-    color: #c0392b;
+    color: #1f2937;
     text-transform: uppercase;
     font-weight: bold
 }
@@ -84,13 +83,22 @@ body {
 .registration-control textarea {
     width: 100%;
     padding: 10px;
-    border: 1px solid #888;
-    border-radius: 0;
+    border: 1px solid #9ca3af;
+    border-radius: 4px;
+    background: #fff;
     font: inherit
 }
 
+.registration-control input:focus,
+.registration-control select:focus,
+.registration-control textarea:focus {
+    outline: 2px solid #2563eb;
+    outline-offset: 1px
+}
+
 .registration-control textarea {
-    min-height: 80px
+    min-height: 80px;
+    resize: none
 }
 
 .registration-choice {
@@ -120,7 +128,7 @@ body {
     padding: 11px 18px;
     margin: 8px 8px 0 0;
     border: 0;
-    background: #c0392b;
+    background: #334155;
     color: #fff;
     text-transform: uppercase;
     text-decoration: none;
@@ -129,7 +137,7 @@ body {
 }
 
 .registration-button:hover {
-    background: #8e2a20
+    background: #1f2937
 }
 
 .registration-form #reset {
@@ -138,13 +146,13 @@ body {
 }
 
 a {
-    color: #c0392b
+    color: #1d4ed8
 }
 
 .registration-footer {
     padding: 20px;
     text-align: center;
-    background: #1c1f26;
+    background: #1f2937;
     color: #fff
 }
 

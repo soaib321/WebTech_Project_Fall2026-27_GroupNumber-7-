@@ -82,6 +82,7 @@ function setAccessLevel(groupId, level) {
         } else {
             box.checked = index === 0;
         }
+        box.disabled = true;
     });
 }
 
@@ -90,7 +91,6 @@ function checkTourist(checks) {
     checks.push(showError("TouristStyleError", isChecked("TouristStyle") ? "" : "Select a travel style."));
     checks.push(showError("TouristBudgetError", value("TouristBudget") ? "" : "Select a budget range."));
     checks.push(showError("TouristMembershipError", value("TouristMembership") ? "" : "Select a membership."));
-    checks.push(showError("TouristEmergencyError", isValidPhone(value("TouristEmergency")) ? "" : "Enter a valid emergency contact number."));
 }
 
 function checkTourManager(checks) {
@@ -116,6 +116,11 @@ function validateCreateUserForm() {
     checks.push(showError("NameError", value("UserFullName").length >= 2 ? "" : "Enter the user's full name."));
     checks.push(showError("EmailError", /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value("UserEmail")) ? "" : "Enter a valid email address."));
     checks.push(showError("PhoneError", isValidPhone(value("UserPhone")) ? "" : "Enter a valid phone number."));
+    checks.push(showError("GenderError", isChecked("UserGender") ? "" : "Select a gender."));
+    checks.push(showError("NationalityError", value("UserNationality").length >= 2 ? "" : "Enter the user's nationality."));
+    checks.push(showError("AddressError", value("UserAddress").length >= 5 ? "" : "Enter the user's address."));
+    const emergencyContact = value("UserEmergency");
+    checks.push(showError("EmergencyError", !emergencyContact || isValidPhone(emergencyContact) ? "" : "Enter a valid emergency contact number."));
     checks.push(showError("DOBError", isAdult(value("UserDOB")) ? "" : "Enter a valid date of birth (18 years or older)."));
     checks.push(showError("RoleError", role ? "" : "Select a role."));
 
