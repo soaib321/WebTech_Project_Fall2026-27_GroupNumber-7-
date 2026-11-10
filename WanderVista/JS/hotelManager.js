@@ -153,11 +153,13 @@ function checkHotelManagerLogin()
 
     if (loginStatus !== "true")
     {
-        // If not logged in, go back to Login page
         window.location.replace("HotelManagerLogin.html");
         return;
     }
 
+    let managerName = sessionStorage.getItem("hotelManagerName");
+
+    document.getElementById("dashboardUserName").textContent = managerName;
 }
 
 

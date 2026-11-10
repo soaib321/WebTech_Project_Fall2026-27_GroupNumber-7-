@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Hotel Facilities & Policies | WanderVista</title>
+
+        <link rel="stylesheet" href="../Design/hotelManager.css">
+        <link rel="stylesheet" href="../Design/facilitiesPolicy.css">
+
+        <script src="../JS/main.js"></script>
+        <script src="../JS/validation1.js"></script>
+        <script src="../JS/hotelManager.js"></script>
+
+    </head>
+
+    <body class="hotelManager">
+
+        <!-- Header -->
+
+        <div class="header">
+
+            <img src="../img/logo-mark.svg" id="logo" alt="WanderVista Logo">
+
+            <div class="header-text">
+                <h1>Hotel Facilities & Policies</h1>
+                <p>Manage your hotel's facilities and policies.</p>
+            </div>
+
+        </div>
+
+
+        <!-- Navigation -->
+
+        <div class="topnav">
+
+
+
+            <a href="../index.html">Home</a>
+            <a href="HotelManagerDashboard.html">Dashboard</a>
+            <a href="HotelManagerAccountSettings.html">Account Settings</a>
+            <a href="HotelFacilitiesPolicies.html" class="active">Facilities & Policies</a>
+            <a href="HotelRoomManagement.html">Room Management</a>
+            <a href="HotelBookingManagement.html">Booking Management</a>
+            <a href="HotelManagerLogin.html" onclick="return logoutHotelManager()">Logout</a>
+
+        </div>
+
+
+        <!-- Facilities and Policies Form -->
+
+        <form onsubmit="return validateHotelFacilitiesForm()"
+              onreset="clearAllErrors()"
+              novalidate>
+
+
+            <!-- Hotel Facilities -->
+
+            <fieldset>
+
+                <legend>Hotel Facilities</legend>
+
+                <table>
+
+                    <tr>
+                        <td>
+                            <label>Available Facilities:</label>
+                        </td>
+
+                        <td>
+
+                            <label class="choice">
+                                <input type="checkbox" name="facilities" value="Wi-Fi">
+                                Wi-Fi
+                            </label>
+
+                            <label class="choice">
+                                <input type="checkbox" name="facilities" value="Swimming Pool">
+                                Swimming Pool
+                            </label>
+
+                            <label class="choice">
+                                <input type="checkbox" name="facilities" value="Gym">
+                                Gym
+                            </label>
+
+                            <label class="choice">
+                                <input type="checkbox" name="facilities" value="Restaurant">
+                                Restaurant
+                            </label>
+
+                            <label class="choice">
+                                <input type="checkbox" name="facilities" value="Parking">
+                                Parking
+                            </label>
+
+                            <label class="choice">
+                                <input type="checkbox" name="facilities" value="Spa">
+                                Spa
+                            </label>
+
+                            <label class="choice">
+                                <input type="checkbox" name="facilities" value="Airport Shuttle">
+                                Airport Shuttle
+                            </label>
+
+                            <p class="error" id="FacilitiesError"></p>
+
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <label for="HotelDescription">Hotel Description:</label>
+                        </td>
+
+                        <td>
+
+                            <textarea id="HotelDescription"
+                                      placeholder="Describe your hotel and its services"></textarea>
+
+                            <p class="error" id="DescriptionError"></p>
+
+                        </td>
+                    </tr>
+
+                </table>
+
+            </fieldset>
+
+
+            <!-- Hotel Policies -->
+
+            <fieldset>
+
+                <legend>Hotel Policies</legend>
+
+                <table>
+
+                    <tr>
+                        <td>
+                            <label for="CheckInTime">Check-in Time:</label>
+                        </td>
+
+                        <td>
+
+                            <input type="time" id="CheckInTime">
+
+                            <p class="error" id="CheckInError"></p>
+
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <label for="CheckOutTime">Check-out Time:</label>
+                        </td>
+
+                        <td>
+
+                            <input type="time" id="CheckOutTime">
+
+                            <p class="error" id="CheckOutError"></p>
+
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <label for="CancellationPolicy">Cancellation Policy:</label>
+                        </td>
+
+                        <td>
+
+                            <select id="CancellationPolicy">
+
+                                <option value="">-- Select Cancellation Policy --</option>
+                                <option value="Flexible">Flexible</option>
+                                <option value="Moderate">Moderate</option>
+                                <option value="Strict">Strict</option>
+                                <option value="Non-refundable">Non-refundable</option>
+
+                            </select>
+
+                            <p class="error" id="CancellationError"></p>
+
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <label for="SmokingPolicy">Smoking Policy:</label>
+                        </td>
+
+                        <td>
+
+                            <select id="SmokingPolicy">
+
+                                <option value="">-- Select Smoking Policy --</option>
+                                <option value="Smoking Allowed">Smoking Allowed</option>
+                                <option value="Non-Smoking">Non-Smoking</option>
+                                <option value="Designated Areas Only">Designated Areas Only</option>
+
+                            </select>
+
+                            <p class="error" id="SmokingError"></p>
+
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <label for="PetPolicy">Pet Policy:</label>
+                        </td>
+
+                        <td>
+
+                            <select id="PetPolicy">
+
+                                <option value="">-- Select Pet Policy --</option>
+                                <option value="Pets Allowed">Pets Allowed</option>
+                                <option value="Pets Not Allowed">Pets Not Allowed</option>
+                                <option value="Small Pets Only">Small Pets Only</option>
+
+                            </select>
+
+                            <p class="error" id="PetError"></p>
+
+                        </td>
+                    </tr>
+
+                </table>
+
+            </fieldset>
+
+
+            <p id="ResultText"></p>
+
+
+            <!-- Buttons -->
+
+            <input type="submit" id="submit" value="Save Facilities & Policies">
+
+            <input type="reset" id="reset" value="Reset">
+
+
+            <p style="text-align: center; margin-top: 15px;">
+
+                <a href="HotelManagerDashboard.html"
+                   style="color: #0E7C86; text-decoration: none; font-weight: bold;">
+
+                    Back to Dashboard
+
+                </a>
+
+            </p>
+
+
+        </form>
+
+
+        <!-- Footer -->
+
+        <div class="footer">
+
+            <h5>WanderVista | Hotel Facilities & Policies</h5>
+
+        </div>
+
+
+        <script>
+            checkHotelManagerLogin();
+        </script>
+
+    </body>
+
+</html>

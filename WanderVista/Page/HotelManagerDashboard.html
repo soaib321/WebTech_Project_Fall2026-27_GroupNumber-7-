@@ -12,75 +12,84 @@
         <link rel="stylesheet" href="../Design/Dashboard.css">
 
         <script src="../JS/main.js"></script>
-
+        <script src="../JS/hotelManager.js"></script>
 
     </head>
 
-<body class="hotelManager">
+    <body class="hotelManager">
 
         <div class="header">
-                            <img src="../img/logo-mark.svg" id="logo" alt="WanderVista Logo">
+
+            <img src="../img/logo-mark.svg" id="logo" alt="WanderVista Logo">
 
             <div class="header-text">
                 <h1>Hotel Manager Dashboard</h1>
             </div>
+
         </div>
+
 
         <div class="topnav">
+
             <a href="../index.html">Home</a>
             <a href="HotelManagerDashboard.html" class="active">Dashboard</a>
-            <a href="HotelManagerLogin.html">Logout</a>
+            <a href="HotelManagerLogin.html" onclick="return logoutHotelManager()">Logout</a>
+
         </div>
 
 
-        
-<div class="welcome">
+        <div class="welcome">
 
-<h2>Welcome, Hotel Manager!</h2>
-    <p>Welcome to your WanderVista dashboard.</p>
-    <p>Manage your hotel information and bookings from here.</p>
+            <h2>Welcome, <span id="dashboardUserName">Hotel Manager</span>!</h2>
 
-</div>
+            <p>Welcome to your WanderVista dashboard.</p>
+            <p>Manage your hotel activities from here.</p>
+
+        </div>
 
 
-<div class="dashboard">
+        <div class="dashboard">
 
-    <h2>Dashboard Menu</h2>
+            <h2>Dashboard Menu</h2>
 
-    <table>
+            <table>
 
-        <tr>
-            <td>
-                <h3>My Profile</h3>
-                <p>View your personal information.</p>
-                <a href="#">View Profile</a>
-            </td>
+                <tr>
 
-            <td>
-                <h3>Hotel Information</h3>
-                <p>View your hotel details.</p>
-                <a href="#">View Hotel</a>
-            </td>
-        </tr>
+                    <td>
+                        <h3>Account Settings</h3>
+                        <p>Manage your account and password settings.</p>
+                        <a href="HotelManagerAccountSettings.html">Manage Account</a>
+                    </td>
 
-        <tr>
-            <td>
-                <h3>My Rooms</h3>
-                <p>View your hotel's room information.</p>
-                <a href="#">View Rooms</a>
-            </td>
+                    <td>
+                        <h3>Hotel Facilities & Policies</h3>
+                        <p>Manage hotel facilities, services and policies.</p>
+                        <a href="HotelFacilitiesPolicies.html">Manage Facilities</a>
+                    </td>
 
-            <td>
-                <h3>Bookings</h3>
-                <p>View your hotel reservations.</p>
-                <a href="#">View Bookings</a>
-            </td>
-        </tr>
+                </tr>
 
-    </table>
 
-</div>
+                <tr>
 
+                    <td>
+                        <h3>Room Management</h3>
+                        <p>Add and manage individual hotel rooms.</p>
+                        <a href="HotelRoomManagement.html">Manage Rooms</a>
+                    </td>
+
+                    <td>
+                        <h3>Booking Management</h3>
+                        <p>Manage guest reservations and booking details.</p>
+                        <a href="HotelBookingManagement.html">Manage Bookings</a>
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
 
 
         <div class="footer">
@@ -89,5 +98,11 @@
 
         </div>
 
+
+        <script>
+            checkHotelManagerLogin();
+        </script>
+
     </body>
+
 </html>

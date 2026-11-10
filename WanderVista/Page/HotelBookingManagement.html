@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Booking Management | WanderVista</title>
+
+        <link rel="stylesheet" href="../Design/hotelManager.css">
+        <link rel="stylesheet" href="../Design/bookingManagement.css">
+
+        <script src="../JS/main.js"></script>
+        <script src="../JS/validation1.js"></script>
+        <script src="../JS/hotelManager.js"></script>
+
+    </head>
+
+    <body class="hotelManager">
+
+        <!-- Header -->
+
+        <div class="header">
+
+            <img src="../img/logo-mark.svg" id="logo" alt="WanderVista Logo">
+
+            <div class="header-text">
+                <h1>Hotel Booking Management</h1>
+                <p>Manage your guest reservations.</p>
+            </div>
+
+        </div>
+
+
+        <!-- Navigation -->
+
+        <div class="topnav">
+
+            <a href="../index.html">Home</a>
+            <a href="HotelManagerDashboard.html">Dashboard</a>
+            <a href="HotelManagerAccountSettings.html">Account Settings</a>
+            <a href="HotelFacilitiesPolicies.html">Facilities & Policies</a>
+            <a href="HotelRoomManagement.html">Room Management</a>
+            <a href="HotelBookingManagement.html" class="active">Booking Management</a>
+            <a href="HotelManagerLogin.html" onclick="return logoutHotelManager()">Logout</a>
+
+        </div>
+
+
+        <!-- Booking Management Form -->
+
+        <form onsubmit="return validateHotelBookingForm()"
+              onreset="clearAllErrors()"
+              novalidate>
+
+
+            <!-- Guest Information -->
+
+            <fieldset>
+
+                <legend>Guest Information</legend>
+
+                <table>
+
+                    <tr>
+                        <td>
+                            <label for="GuestName">Guest Name:</label>
+                        </td>
+
+                        <td>
+
+                            <input type="text" id="GuestName"
+                                   placeholder="Enter guest name">
+
+                            <p class="error" id="GuestNameError"></p>
+
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <label for="GuestEmail">Email Address:</label>
+                        </td>
+
+                        <td>
+
+                            <input type="email" id="GuestEmail"
+                                   placeholder="Enter guest email">
+
+                            <p class="error" id="GuestEmailError"></p>
+
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <label for="GuestPhone">Phone Number:</label>
+                        </td>
+
+                        <td>
+
+                            <input type="tel" id="GuestPhone"
+                                   placeholder="e.g. 01712345678">
+
+                            <p class="error" id="GuestPhoneError"></p>
+
+                        </td>
+                    </tr>
+
+                </table>
+
+            </fieldset>
+
+
+            <!-- Booking Information -->
+
+            <fieldset>
+
+                <legend>Booking Information</legend>
+
+                <table>
+
+                    <tr>
+                        <td>
+                            <label for="BookingRoom">Room Number:</label>
+                        </td>
+
+                        <td>
+
+                            <input type="text" id="BookingRoom"
+                                   placeholder="Enter room number">
+
+                            <p class="error" id="BookingRoomError"></p>
+
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <label for="CheckIn">Check-in Date:</label>
+                        </td>
+
+                        <td>
+
+                            <input type="date" id="CheckIn">
+
+                            <p class="error" id="CheckInError"></p>
+
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <label for="CheckOut">Check-out Date:</label>
+                        </td>
+
+                        <td>
+
+                            <input type="date" id="CheckOut">
+
+                            <p class="error" id="CheckOutError"></p>
+
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <label for="GuestCount">Number of Guests:</label>
+                        </td>
+
+                        <td>
+
+                            <input type="number" id="GuestCount"
+                                   placeholder="Enter number of guests">
+
+                            <p class="error" id="GuestCountError"></p>
+
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <label for="BookingStatus">Booking Status:</label>
+                        </td>
+
+                        <td>
+
+                            <select id="BookingStatus">
+
+                                <option value="">-- Select Booking Status --</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Confirmed">Confirmed</option>
+                                <option value="Cancelled">Cancelled</option>
+
+                            </select>
+
+                            <p class="error" id="BookingStatusError"></p>
+
+                        </td>
+                    </tr>
+
+                </table>
+
+            </fieldset>
+
+
+            <p id="ResultText"></p>
+
+
+            <!-- Buttons -->
+
+            <input type="submit" id="submit" value="Save Booking">
+
+            <input type="reset" id="reset" value="Reset">
+
+
+            <p style="text-align: center; margin-top: 15px;">
+
+                <a href="HotelManagerDashboard.html"
+                   style="color: #0E7C86; text-decoration: none; font-weight: bold;">
+
+                    Back to Dashboard
+
+                </a>
+
+            </p>
+
+
+        </form>
+
+
+        <!-- Footer -->
+
+        <div class="footer">
+
+            <h5>WanderVista | Booking Management</h5>
+
+        </div>
+
+
+        <script>
+            checkHotelManagerLogin();
+        </script>
+
+    </body>
+
+</html>

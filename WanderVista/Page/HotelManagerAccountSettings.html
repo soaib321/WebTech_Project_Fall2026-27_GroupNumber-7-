@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Account Settings | WanderVista</title>
+
+        <link rel="stylesheet" href="../Design/hotelManager.css">
+        <link rel="stylesheet" href="../Design/accountSettings.css">
+
+        <script src="../JS/main.js"></script>
+        <script src="../JS/validation1.js"></script>
+        <script src="../JS/hotelManager.js"></script>
+
+    </head>
+
+    <body class="hotelManager">
+
+        <!-- Header -->
+
+        <div class="header">
+
+            <img src="../img/logo-mark.svg" id="logo" alt="WanderVista Logo">
+
+            <div class="header-text">
+                <h1>Hotel Manager Account Settings</h1>
+                <p>Manage your account security.</p>
+            </div>
+
+        </div>
+
+
+        <!-- Navigation -->
+
+        <div class="topnav">
+
+            <a href="../index.html">Home</a>
+            <a href="HotelManagerDashboard.html">Dashboard</a>
+            <a href="HotelManagerAccountSettings.html" class="active">Account Settings</a>
+            <a href="HotelFacilitiesPolicies.html">Facilities & Policies</a>
+            <a href="HotelRoomManagement.html">Room Management</a>
+            <a href="HotelBookingManagement.html">Booking Management</a>
+            <a href="HotelManagerLogin.html" onclick="return logoutHotelManager()">Logout</a>
+
+        </div>
+
+
+        <!-- Account Settings Form -->
+
+        <form onsubmit="return validateHotelManagerAccountSettings()"
+              onreset="clearAllErrors()"
+              novalidate>
+
+            <fieldset>
+
+                <legend>Account Information</legend>
+
+                <table>
+
+                    <tr>
+                        <td>
+                            <label for="AccountUsername">Username:</label>
+                        </td>
+
+                        <td>
+                            <input type="text" id="AccountUsername" value="noor" readonly>
+                            <p class="hint">Username cannot be changed.</p>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <label for="CurrentPassword">Current Password:</label>
+                        </td>
+
+                        <td>
+                            <input type="password" id="CurrentPassword"
+                                   placeholder="Enter current password">
+
+                            <p class="error" id="CurrentPasswordError"></p>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <label for="NewPassword">New Password:</label>
+                        </td>
+
+                        <td>
+                            <input type="password" id="NewPassword"
+                                   placeholder="Enter new password">
+
+                            <p class="hint">
+                                At least 8 characters with an uppercase letter,
+                                a lowercase letter and a number.
+                            </p>
+
+                            <p class="error" id="NewPasswordError"></p>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <label for="ConfirmNewPassword">Confirm New Password:</label>
+                        </td>
+
+                        <td>
+                            <input type="password" id="ConfirmNewPassword"
+                                   placeholder="Re-enter new password">
+
+                            <p class="error" id="ConfirmNewPasswordError"></p>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </fieldset>
+
+
+            <p id="ResultText"></p>
+
+
+            <input type="submit" id="submit" value="Update Password">
+
+            <input type="reset" id="reset" value="Reset">
+
+
+            <p style="text-align: center; margin-top: 15px;">
+                <a href="HotelManagerDashboard.html"
+                   style="color: #0E7C86; text-decoration: none; font-weight: bold;">
+                    Back to Dashboard
+                </a>
+            </p>
+
+        </form>
+
+
+        <!-- Footer -->
+
+        <div class="footer">
+
+            <h5>WanderVista | Hotel Manager Account Settings</h5>
+
+        </div>
+
+
+        <script>
+            checkHotelManagerLogin();
+        </script>
+
+    </body>
+
+</html>

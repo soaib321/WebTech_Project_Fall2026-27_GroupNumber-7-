@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Room Management | WanderVista</title>
+
+        <link rel="stylesheet" href="../Design/hotelManager.css">
+        <link rel="stylesheet" href="../Design/roomManagement.css">
+
+        <script src="../JS/main.js"></script>
+        <script src="../JS/validation1.js"></script>
+        <script src="../JS/hotelManager.js"></script>
+
+    </head>
+
+    <body class="hotelManager">
+
+        <!-- Header -->
+
+        <div class="header">
+
+            <img src="../img/logo-mark.svg" id="logo" alt="WanderVista Logo">
+
+            <div class="header-text">
+                <h1>Hotel Room Management</h1>
+                <p>Add and manage your hotel rooms.</p>
+            </div>
+
+        </div>
+
+
+        <!-- Navigation -->
+
+        <div class="topnav">
+
+            <a href="../index.html">Home</a>
+            <a href="HotelManagerDashboard.html">Dashboard</a>
+            <a href="HotelManagerAccountSettings.html">Account Settings</a>
+            <a href="HotelFacilitiesPolicies.html">Facilities & Policies</a>
+            <a href="HotelRoomManagement.html" class="active">Room Management</a>
+            <a href="HotelBookingManagement.html">Booking Management</a>
+            <a href="HotelManagerLogin.html" onclick="return logoutHotelManager()">Logout</a>
+
+        </div>
+
+
+        <!-- Room Management Form -->
+
+        <form onsubmit="return validateRoomManagementForm()"
+              onreset="clearAllErrors()"
+              novalidate>
+
+
+            <fieldset>
+
+                <legend>Room Information</legend>
+
+                <table>
+
+                    <tr>
+                        <td>
+                            <label for="RoomNumber">Room Number:</label>
+                        </td>
+
+                        <td>
+
+                            <input type="text" id="RoomNumber"
+                                   placeholder="e.g. 101 or A101">
+
+                            <p class="error" id="RoomNumberError"></p>
+
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <label for="RoomType">Room Type:</label>
+                        </td>
+
+                        <td>
+
+                            <select id="RoomType">
+
+                                <option value="">-- Select Room Type --</option>
+                                <option value="Single">Single Room</option>
+                                <option value="Double">Double Room</option>
+                                <option value="Deluxe">Deluxe Room</option>
+                                <option value="Suite">Suite Room</option>
+                                <option value="Family">Family Room</option>
+
+                            </select>
+
+                            <p class="error" id="RoomTypeError"></p>
+
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <label for="RoomPrice">Price Per Night (BDT):</label>
+                        </td>
+
+                        <td>
+
+                            <input type="number" id="RoomPrice"
+                                   placeholder="Enter room price" min="1">
+
+                            <p class="error" id="RoomPriceError"></p>
+
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <label for="RoomCapacity">Room Capacity:</label>
+                        </td>
+
+                        <td>
+
+                            <input type="number" id="RoomCapacity"
+                                   placeholder="Maximum number of guests" min="1" max="20">
+
+                            <p class="error" id="RoomCapacityError"></p>
+
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <label for="RoomStatus">Room Status:</label>
+                        </td>
+
+                        <td>
+
+                            <select id="RoomStatus">
+
+                                <option value="">-- Select Room Status --</option>
+                                <option value="Available">Available</option>
+                                <option value="Occupied">Occupied</option>
+                                <option value="Maintenance">Under Maintenance</option>
+
+                            </select>
+
+                            <p class="error" id="RoomStatusError"></p>
+
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <label for="RoomDescription">Room Description:</label>
+                        </td>
+
+                        <td>
+
+                            <textarea id="RoomDescription"
+                                      placeholder="Describe the room and its features"></textarea>
+
+                            <p class="error" id="RoomDescriptionError"></p>
+
+                        </td>
+                    </tr>
+
+                </table>
+
+            </fieldset>
+
+
+            <p id="ResultText"></p>
+
+
+            <!-- Buttons -->
+
+            <input type="submit" id="submit" value="Add Room">
+
+            <input type="reset" id="reset" value="Reset">
+
+
+            <p style="text-align: center; margin-top: 15px;">
+
+                <a href="HotelManagerDashboard.html"
+                   style="color: #0E7C86; text-decoration: none; font-weight: bold;">
+
+                    Back to Dashboard
+
+                </a>
+
+            </p>
+
+
+        </form>
+
+
+        <!-- Footer -->
+
+        <div class="footer">
+
+            <h5>WanderVista | Room Management</h5>
+
+        </div>
+
+
+        <script>
+            checkHotelManagerLogin();
+        </script>
+
+    </body>
+
+</html>
