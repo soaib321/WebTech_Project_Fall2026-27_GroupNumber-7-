@@ -81,34 +81,18 @@ function validateHotelManagerForm()
 
 
     if (isValid)
-    {
-        // Save registration information for the login page
-        let managerAccount = {
-            name: document.getElementById("ManagerName").value.trim(),
-            email: document.getElementById("ManagerEmail").value.trim(),
-            username: document.getElementById("UserName").value.trim(),
-            password: document.getElementById("Password").value,
-            hotelName: document.getElementById("HotelName").value.trim()
-        };
+{
+    showResult(true, "Registration successful! Redirecting to login...");
 
-        localStorage.setItem(
-            "hotelManagerAccount",
-            JSON.stringify(managerAccount)
-        );
-
-        showResult(true, "Registration successful! Redirecting to login...");
-
-        // Go to Hotel Manager Login page
-        window.location.href = "HotelManagerLogin.html";
-    }
-    else
-    {
-        showResult(false);
-    }
-
-    return false;
+    window.location.href = "HotelManagerLogin.html";
+}
+else
+{
+    showResult(false);
 }
 
+return false;
+}
 console.log("Hotel Manager Login Connected");
 
 // Hotel Manager Login Validation
@@ -117,9 +101,9 @@ function validateHotelManagerLogin()
     let validUsername = validateUsername("UserName", "UserNameError");
 
     let password = document.getElementById("Password").value;
+
     let validPassword = true;
 
-    // Check password is empty
     if (password === "")
     {
         showError("PasswordError", "Please enter your password");
@@ -131,7 +115,6 @@ function validateHotelManagerLogin()
     }
 
 
-    // Stop if any field is empty or invalid
     if (!validUsername || !validPassword)
     {
         showResult(false);
@@ -139,36 +122,22 @@ function validateHotelManagerLogin()
     }
 
 
-    // Get registered account information
-    let savedData = localStorage.getItem("hotelManagerAccount");
-
-    if (savedData === null)
-    {
-        showError("PasswordError", "No account found. Please register first.");
-        showResult(false);
-        return false;
-    }
-
-
-    let account = JSON.parse(savedData);
-
     let username = document.getElementById("UserName").value.trim();
 
 
-    // Check username and password
-    if (username === account.username && password === account.password)
+    // Check Dummy Login Credentials
+    if (username === "noor" && password === "Nn123456")
     {
-        // Save login status
         sessionStorage.setItem("hotelManagerLoggedIn", "true");
 
-        sessionStorage.setItem("hotelManagerName", account.name);
+        sessionStorage.setItem("hotelManagerName", "Noor");
 
-        // Redirect to Dashboard
         window.location.href = "HotelManagerDashboard.html";
     }
     else
     {
         showError("PasswordError", "Incorrect username or password");
+
         showResult(false);
     }
 

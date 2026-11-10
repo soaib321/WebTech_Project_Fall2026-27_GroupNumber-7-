@@ -201,15 +201,17 @@ input[type="checkbox"] {
 }
 
 #ResultText.success {
-    color: #1b6b2a;
+    color: green;
     background-color: #e3f4e6;
-    border: 1px solid #9fd3a9;
+    border: 2px solid #9fd3a9;
+    border-radius: 50px;
 }
 
 #ResultText.failed {
-    color: #a11b1b;
+    color: red;
     background-color: #fbe5e5;
-    border: 1px solid #efaaaa;
+    border: 2px solid #efaaaa;
+    border-radius: 50px;
 }
 
 /* Submit and Reset Buttons */
