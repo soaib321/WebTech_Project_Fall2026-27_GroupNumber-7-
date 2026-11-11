@@ -409,6 +409,55 @@ function validateConfirmPassword(passwordId, confirmId, errorId)
 }
 
 
+
+// Hotel License Number Validation
+function validateLicenseNo(inputId, errorId)
+{
+    let value = document.getElementById(inputId).value.trim();
+
+    let expression = /^HL[0-9]{6}$/;
+
+    if (value === "")
+    {
+        showError(errorId, "Please enter the hotel license number");
+        return false;
+    }
+
+    if (!expression.test(value))
+    {
+        showError(errorId, "License number must look like HL123456");
+        return false;
+    }
+
+    clearError(errorId);
+    return true;
+}
+
+
+// Business Registration Number Validation
+function validateBusinessRegNo(inputId, errorId)
+{
+    let value = document.getElementById(inputId).value.trim();
+
+    let expression = /^BR[0-9]{6}$/;
+
+    if (value === "")
+    {
+        showError(errorId, "Please enter the business registration number");
+        return false;
+    }
+
+    if (!expression.test(value))
+    {
+        showError(errorId, "Registration number must look like BR123456");
+        return false;
+    }
+
+    clearError(errorId);
+    return true;
+}
+
+
 //File Validation
 
 // function validateFile(inputId, errorId, allowedTypes)
@@ -442,6 +491,32 @@ function validateConfirmPassword(passwordId, confirmId, errorId)
 //     clearError(errorId);
 //     return true;
 // }
+
+
+
+// Room Number Validation
+function validateRoomNumber(inputId, errorId)
+{
+    let roomNumber = document.getElementById(inputId).value.trim();
+
+let expression = /^([A-Z][0-9]{3}|[0-9]{3})$/;
+
+    if (roomNumber === "")
+    {
+        showError(errorId, "Please enter the room number");
+        return false;
+    }
+
+    if (!expression.test(roomNumber))
+    {
+        showError(errorId, "Room number must be like A101 or 203");
+        return false;
+    }
+
+    clearError(errorId);
+
+    return true;
+}
 
 
 // Show Final Result 
