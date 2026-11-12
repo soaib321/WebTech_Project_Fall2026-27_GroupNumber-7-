@@ -1,0 +1,241 @@
+
+* {
+    box-sizing: border-box
+}
+
+body {
+    margin: 0;
+    background: #e8f6ff;
+    color: #1d3b50;
+    font: 16px "Trebuchet MS", Arial, sans-serif
+}
+
+/* Navigation Bar */
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 6%;
+    background: #1e88c7;
+    border-radius: 0 0 25px 25px
+}
+
+.top a {
+    color: white
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.7rem;
+    font-weight: bold;
+    text-decoration: none
+}
+
+.brand span {
+    color: white
+}
+
+.brand img {
+    width: 180px;
+    height: 100px;
+    object-fit: contain
+}
+
+.topnav {
+    display: flex;
+    gap: 25px
+}
+
+.topnav a {
+    text-decoration: none;
+    font-weight: bold
+}
+
+.topnav a:hover,
+.topnav a.active {
+    color: #fff3e0;
+    text-decoration: underline
+}
+
+/* Page Header */
+
+.header {
+    width: min(900px, 94%);
+    margin: 35px auto 0;
+    text-align: center;
+    background: #fff3e0;
+    border-radius: 25px;
+    padding: 22px
+}
+
+.header h1 {
+    color: #e07a10
+}
+
+.header p {
+    color: #58778b
+}
+
+/* Welcome Section */
+
+.welcome-section {
+    width: min(1100px, 94%);
+    margin: 22px auto;
+    padding: 30px;
+    background: #1e88c7;
+    color: white;
+    border-radius: 25px
+}
+
+.welcome-section h2 {
+    margin-bottom: 12px
+}
+
+.welcome-section p {
+    line-height: 1.6
+}
+
+/* Dashboard Content */
+
+.dashboard-content {
+    width: min(1100px, 94%);
+    margin: 22px auto 55px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px
+}
+
+/* Dashboard Cards */
+
+.dashboard-card {
+    padding: 26px;
+    background: white;
+    border: 2px dashed #7cc4ee;
+    border-radius: 25px;
+    box-shadow: 0 10px 28px #1e88c722
+}
+
+.dashboard-card h2 {
+    color: #168acb;
+    border-bottom: 2px solid #f3b06d;
+    padding-bottom: 10px;
+    margin-bottom: 20px
+}
+
+.dashboard-card table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 6px 0
+}
+
+.dashboard-card td {
+    padding: 12px 8px;
+    vertical-align: top;
+    border-bottom: 1px solid #bfe3f7
+}
+
+.dashboard-card td:first-child {
+    width: 202px;
+    padding-right: 12px
+}
+
+.dashboard-card p {
+    line-height: 1.7;
+    color: #58778b
+}
+
+/* Logout Button */
+
+.logout-section {
+    text-align: center;
+    margin: 22px auto 55px
+}
+
+.primary-button {
+    display: inline-block;
+    padding: 11px 20px;
+    margin: 8px 8px 0 0;
+    border: 0;
+    border-radius: 30px;
+    background: #f3b06d;
+    color: white;
+    font: inherit;
+    cursor: pointer
+}
+
+.primary-button:hover {
+    background: #d4730f
+}
+
+/* Footer */
+
+.footer {
+    padding: 20px;
+    text-align: center;
+    background: #1e88c7;
+    color: white
+}
+
+/* Responsive Design */
+
+@media(max-width: 768px) {
+    .top {
+        padding: 16px 5%;
+        flex-direction: column;
+        gap: 15px
+    }
+
+    .dashboard-content {
+        grid-template-columns: 1fr
+    }
+
+    .welcome-section {
+        padding: 22px
+    }
+}
+
+@media(max-width: 650px) {
+    .header {
+        margin-top: 24px
+    }
+
+    .dashboard-content {
+        margin-bottom: 30px
+    }
+
+    .dashboard-card {
+        padding: 16px
+    }
+
+    .dashboard-card table {
+        margin: 0
+    }
+
+    .dashboard-card tr {
+        display: block;
+        margin: 12px 0
+    }
+
+    .dashboard-card td,
+    .dashboard-card td:first-child {
+        display: flow-root;
+        width: 100%;
+        padding: 8px
+    }
+
+    .brand {
+        font-size: 1.4rem
+    }
+
+    .brand img {
+        width: 120px;
+        height: 70px
+    }
+
+    .topnav {
+        gap: 20px
+    }
+}

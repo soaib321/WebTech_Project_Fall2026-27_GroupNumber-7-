@@ -1,34 +1,79 @@
+console.log("TouristLogin.js Connected");
+function showError(message) {
+    let loginMessage = document.getElementById("LoginMessage");
+    loginMessage.className = "error";
+    loginMessage.textContent = message;
+}
+
+function showSuccess(message) {
+    let loginMessage = document.getElementById("LoginMessage");
+    loginMessage.className = "success";
+    loginMessage.textContent = message;
+}
+
+function validateUsername(username) {
+    return username !== "";
+}
+
+function validatePassword(password) {
+    return password !== "";
+}
+
 function loginAccount(role) {
-    const message = document.getElementById("LoginMessage");
-    const username = document.getElementById("LoginUsername").value.trim();
-    const password = document.getElementById("LoginPassword").value;
-    message.className = "error";
+
+    let username = document.getElementById("LoginUsername").value.trim();
+    let password = document.getElementById("LoginPassword").value;
+
+    let validUsername = validateUsername(username);
+    let validPassword = validatePassword(password);
 
     if (role !== "Tourist") {
-        message.textContent = "This page can only sign in a tourist account.";
-        return false;
-    }
-    if (!username || !password) {
-        message.textContent = "Enter your username and password.";
+        showError("This page is only for tourists.");
         return false;
     }
 
-    try {
-        const accounts = JSON.parse(localStorage.getItem("wandervista-tourist-accounts") || "[]");
-        if (!Array.isArray(accounts)) {
-            throw new Error("Stored account data is invalid.");
-        }
-        const account = accounts.find((item) =>
-            item.username.toLowerCase() === username.toLowerCase() && item.password === password
-        );
-        if (!account) {
-            message.textContent = "Tourist account not found. Check your credentials or register first.";
-            return false;
-        }
-        message.className = "success";
-        message.textContent = `Login successful. Welcome, ${account.name}.`;
-    } catch (error) {
-        message.textContent = "Could not read account data from browser storage. Check that storage is enabled and try again.";
+    if (!validUsername || !validPassword) {
+        showError("Enter your username and password.");
+        return false;
     }
+
+    let accounts = JSON.parse(
+        localStorage.getItem("wandervista-tourist-accounts") || "[]"
+    );
+
+    let account = null;
+
+    for (let i = 0; i < accounts.length; i++) {
+
+        if (
+            accounts[i].username.toLowerCase() === username.toLowerCase() &&
+            accounts[i].password === password
+        ) {
+            account = accounts[i];
+            break;
+        }
+    }
+
+    if (account === null) {
+        showError("Invalid username or password.");
+    }
+    else {
+        showSuccess("Login successful. Welcome, " + account.name + "!");
+
+        sessionStorage.setItem("wandervista-tourist-username", account.username);
+
+        setTimeout(function() {
+            window.location.href = "TouristDashboard.html";
+        }, 800);
+    }
+
     return false;
+}
+
+function clearLoginMessage() {
+
+    let loginMessage = document.getElementById("LoginMessage");
+
+    loginMessage.textContent = "";
+    loginMessage.className = "";
 }

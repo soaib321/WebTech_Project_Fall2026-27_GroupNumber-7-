@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../Design/TouristDashboard.css">
+    <script src="../JS/TouristDashboard.js" defer></script>
+
+    <title>Tourist Dashboard | WanderVista</title>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Navigation Bar -->
+        <header class="top">
+
+            <a class="brand" href="../index.html">
+                <img src="../img/wandervista-logo.png" alt="WanderVista Logo">
+                <span>WanderVista</span>
+            </a>
+
+            <nav class="topnav">
+                <a href="../index.html">Home</a>
+                <a href="TouristDashboard.html" class="active">Dashboard</a>
+            </nav>
+
+        </header>
+
+        <!-- Dashboard Header -->
+        <div class="header">
+            <h1>Tourist Dashboard</h1>
+            <p>Welcome to your personal travel dashboard.</p>
+        </div>
+
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+
+            <h2>Welcome, <span id="WelcomeName">Tourist</span>!</h2>
+
+            <p>
+                Explore Bangladesh and manage your tourist profile
+                from one place.
+            </p>
+
+        </section>
+
+        <!-- Dashboard Content -->
+        <main class="dashboard-content">
+
+            <!-- Profile Section -->
+            <section class="dashboard-card">
+
+                <h2>My Profile</h2>
+
+                <table>
+
+                    <tr>
+                        <td><strong>Name</strong></td>
+                        <td id="DashboardName">-</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Username</strong></td>
+                        <td id="DashboardUsername">-</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Email</strong></td>
+                        <td id="DashboardEmail">-</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Phone</strong></td>
+                        <td id="DashboardPhone">-</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Age</strong></td>
+                        <td id="DashboardAge">-</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Gender</strong></td>
+                        <td id="DashboardGender">-</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Nationality</strong></td>
+                        <td id="DashboardNationality">-</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Favourite Destination</strong></td>
+                        <td id="DashboardDestination">-</td>
+                    </tr>
+
+                </table>
+
+            </section>
+
+            <!-- Explore Section -->
+            <section class="dashboard-card">
+
+                <h2>Explore Bangladesh</h2>
+
+                <p>
+                    Discover beautiful places, natural attractions
+                    and cultural destinations across Bangladesh.
+                </p>
+
+            </section>
+
+        </main>
+
+        <!-- Logout Section -->
+        <div class="logout-section">
+
+            <button type="button" class="primary-button"
+                onclick="logoutTourist()">
+                Logout
+            </button>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            WanderVista | Offline educational project | HTML, CSS and JavaScript
+        </footer>
+
+    </div>
+
+</body>
+</html>

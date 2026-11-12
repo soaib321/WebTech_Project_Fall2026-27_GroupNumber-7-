@@ -1,40 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../Design/TouristLogin.css">
+    <script src="../JS/TouristLogin.js" defer></script>
+
     <title>Tourist Login | WanderVista</title>
-    <link href="../Design/TouristLogin.css" rel="stylesheet" />
-    <script defer src="../JS/TouristLogin.js"></script>
 </head>
 
-<body class="tourist account-page login-page">
-        <header class="top"><a class="brand" href="../index.html">
-    <img src="../img/wandervista-logo.png" alt="WanderVista Logo">
-    <span>WanderVista</span>
-        </a>
-            <nav><a href="../index.html">Home</a></nav>
+<body>
+
+    <div class="container">
+
+        <header class="top">
+            <a class="brand" href="../index.html">
+                <img src="../img/wandervista-logo.png" alt="WanderVista Logo">
+                <span>WanderVista</span>
+            </a>
+
+            <nav class="topnav">
+                <a href="../index.html">Home</a>
+            </nav>
         </header>
-    <main class="account-main">
-        <section class="account-hero">
+
+        <div class="header">
             <h1>Tourist Login</h1>
             <p>Enter your username and password.</p>
-        </section>
-        <form class="login-form account-form" novalidate="" onsubmit="return loginAccount('Tourist')">
-            <fieldset class="form-section">
-                <legend>Tourist Account</legend>
-                <label for="LoginUsername">Username</label>
-                <input id="LoginUsername" placeholder="Enter username" required="" type="text" />
-                <label for="LoginPassword">Password</label>
-                <input id="LoginPassword" placeholder="Enter password" required="" type="password" />
-                <p aria-live="polite" class="error" id="LoginMessage"></p>
-                <button class="primary-button" type="submit">Login</button>
-                <p>New tourist? <a href="TouristRegistration.html">Register here</a></p>
-            </fieldset>
-        </form>
-    </main>
-    <footer>WanderVista | Offline educational project | HTML, CSS and JavaScript</footer>
-</body>
+        </div>
 
+        <form onsubmit="return loginAccount('Tourist')" 
+              onreset="clearLoginMessage()" novalidate>
+
+            <fieldset>
+                <legend>Tourist Account</legend>
+
+                <table>
+
+                    <tr>
+                        <td>
+                            <label for="LoginUsername">Username</label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <input type="text" id="LoginUsername"
+                                placeholder="Enter username">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="LoginPassword">Password</label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <input type="password" id="LoginPassword"
+                                placeholder="Enter password">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p class="error" id="LoginMessage"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <input class="primary-button" id="submit"
+                                type="submit" value="Login">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>
+                                New tourist?
+                                <a href="TouristRegistration.html">Register here</a>
+                            </p>
+                        </td>
+                    </tr>
+
+                </table>
+            </fieldset>
+
+        </form>
+
+        <footer class="footer">
+            WanderVista | Offline educational project | HTML, CSS and JavaScript
+        </footer>
+
+    </div>
+
+</body>
 </html>

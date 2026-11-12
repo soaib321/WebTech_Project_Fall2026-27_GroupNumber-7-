@@ -31,34 +31,32 @@ body {
     text-decoration: none;
 }
 
+.brand span {
+    color: white;
+}
+
 .brand img {
     width: 180px;
     height: 100px;
     object-fit: contain;
 }
 
-.brand span {
-    color: white;
-}
-
-.account-main {
+.header {
     width: min(680px, 92%);
-    margin: 42px auto 60px
-}
-
-.account-hero {
+    margin: 42px auto 0;
     text-align: center;
     background: #fff3e0;
     border-radius: 25px;
     padding: 22px
 }
 
-.account-hero h1 {
+.header h1 {
     color: #e07a10
 }
 
-.account-form {
-    margin-top: 22px;
+form {
+    width: min(680px, 92%);
+    margin: 22px auto 60px;
     padding: 30px;
     background: white;
     border: 2px dashed #7cc4ee;
@@ -66,21 +64,31 @@ body {
     box-shadow: 0 10px 28px #1e88c722
 }
 
-.form-section {
+fieldset {
     border: 0
 }
 
-.form-section legend {
+legend {
     color: #1e88c7;
     font-weight: bold
 }
 
-.login-form label {
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 0;
+}
+
+label {
     display: block;
     margin: 16px 0 6px
 }
 
-.login-form input {
+input[type="text"],
+input[type="password"] {
     width: 100%;
     padding: 12px;
     border: 2px solid #bfe3f7;
@@ -116,7 +124,7 @@ a {
     color: #1e88c7
 }
 
-footer {
+.footer {
     padding: 20px;
     text-align: center;
     background: #1e88c7;
@@ -128,11 +136,11 @@ footer {
         padding: 16px 5%
     }
 
-    .account-main {
+    .header {
         margin-top: 25px
     }
 
-    .account-form {
+    form {
         padding: 18px
     }
 }

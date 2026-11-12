@@ -1,101 +1,155 @@
-const accountStorageKey = "wandervista-tourist-accounts";
-const field = (id) => document.getElementById(id);
-const value = (id) => field(id).value.trim();
+console.log("TouristRegistration.js Connected");
+function getValue(id) {
+    return document.getElementById(id).value.trim();
+}
 
 function showError(id, message) {
-    field(id).textContent = message;
-    return !message;
+    document.getElementById(id).textContent = message;
+    return message === "";
 }
 
-function isValidPhone(phone) {
-    const digits = phone.replace(/\D/g, "");
-    return /^\+?[\d\s()-]+$/.test(phone) && digits.length >= 7 && digits.length <= 15;
-}
-
-function collectProfile(form) {
-    const profile = {};
-    for (const control of form.elements) {
-        const key = control.name || control.id;
-        if (!key || control.type === "password" || control.type === "file" ||
-            ["submit", "reset", "button"].includes(control.type) ||
-            (["radio", "checkbox"].includes(control.type) && !control.checked)) {
-            continue;
-        }
-        if (Object.hasOwn(profile, key)) {
-            profile[key] = Array.isArray(profile[key]) ? [...profile[key], control.value] : [profile[key], control.value];
-        } else {
-            profile[key] = control.value;
-        }
-    }
-    return profile;
+function validatePhone(phone) {
+    let digits = phone.replace(/\D/g, "");
+    return digits.length >= 7 && digits.length <= 15;
 }
 
 function validateTouristForm() {
-    const checks = [];
-    checks.push(showError("NameError", value("TouristName").length >= 2 ? "" : "Enter your full name."));
-    const age = Number(value("TouristAge"));
-    checks.push(showError("AgeError", Number.isInteger(age) && age >= 1 && age <= 120 ? "" : "Enter an age from 1 to 120."));
-    checks.push(showError("EmailError", /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value("TouristEmail")) ? "" : "Enter a valid email address."));
-    checks.push(showError("PhoneError", isValidPhone(value("TouristPhone")) ? "" : "Enter a valid phone number."));
-    checks.push(showError("GenderError", document.querySelector('input[name="gender"]:checked') ? "" : "Select a gender."));
-    checks.push(showError("DestinationError", value("Destination") ? "" : "Select a preferred destination."));
-    checks.push(showError("AddressError", value("Address").length >= 10 ? "" : "Address must be at least 10 characters."));
-    checks.push(showError("NationalityError", value("Nationality") ? "" : "Select a nationality."));
-    checks.push(showError("InterestError", document.querySelector('input[name="interest"]:checked') ? "" : "Select at least one travel interest."));
 
-    const emergencyPhone = value("EmergencyPhone");
-    const phoneValid = isValidPhone(emergencyPhone);
-    const samePhone = emergencyPhone.replace(/\D/g, "") === value("TouristPhone").replace(/\D/g, "");
-    checks.push(showError("EmergencyError", !phoneValid ? "Enter a valid emergency contact number." : samePhone ? "Emergency contact must differ from your phone." : ""));
+    let validName = showError("NameError",
+        getValue("TouristName").length >= 2 ? "" : "Enter your full name.");
 
-    const file = field("TravelDocument").files[0];
-    const allowedFile = !file || (/\.(pdf|jpe?g|png)$/i.test(file.name) && file.size <= 2 * 1024 * 1024);
-    checks.push(showError("FileError", allowedFile ? "" : "Choose a PDF, JPG or PNG file up to 2 MB."));
-    checks.push(showError("UserNameError", /^[A-Za-z0-9_]{4,15}$/.test(value("UserName")) ? "" : "Use 4-15 letters, numbers or underscores."));
-    const password = field("Password").value;
-    checks.push(showError("PasswordError", /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(password) ? "" : "Use at least 8 characters with uppercase, lowercase and a number."));
-    checks.push(showError("ConfirmError", password && password === field("ConfirmPassword").value ? "" : "Passwords do not match."));
+    let age = Number(getValue("TouristAge"));
+    let validAge = showError("AgeError",
+        age >= 1 && age <= 120 && Number.isInteger(age) ? "" : "Enter age from 1 to 120.");
 
-    if (!checks.every(Boolean)) {
+    let validEmail = showError("EmailError",
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(getValue("TouristEmail")) ? "" : "Enter a valid email.");
+
+    let validPhone = showError("PhoneError",
+        validatePhone(getValue("TouristPhone")) ? "" : "Enter a valid phone number.");
+
+    let gender = document.querySelector('input[name="gender"]:checked');
+    let validGender = showError("GenderError",
+        gender ? "" : "Select your gender.");
+
+    let validDestination = showError("DestinationError",
+        getValue("Destination") ? "" : "Select a destination.");
+
+    let validAddress = showError("AddressError",
+        getValue("Address").length >= 10 ? "" : "Enter at least 10 characters.");
+
+    let validNationality = showError("NationalityError",
+        getValue("Nationality") ? "" : "Select your nationality.");
+
+    let interests = document.querySelectorAll('input[name="interest"]:checked');
+    let validInterest = showError("InterestError",
+        interests.length > 0 ? "" : "Select at least one interest.");
+
+    let emergency = getValue("EmergencyPhone");
+    let validEmergency = showError("EmergencyError",
+        validatePhone(emergency) &&
+        emergency.replace(/\D/g, "") !== getValue("TouristPhone").replace(/\D/g, "")
+        ? "" : "Enter a different valid emergency number.");
+
+    let file = document.getElementById("TravelDocument").files[0];
+    let validFile = showError("FileError",
+        !file || (/\.(pdf|jpg|jpeg|png)$/i.test(file.name) && file.size <= 2097152)
+        ? "" : "Select PDF, JPG or PNG up to 2 MB.");
+
+    let username = getValue("UserName");
+    let validUsername = showError("UserNameError",
+        /^[A-Za-z0-9_]{4,15}$/.test(username) ? "" : "Username must be 4-15 characters.");
+
+    let password = document.getElementById("Password").value;
+    let validPassword = showError("PasswordError",
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(password)
+        ? "" : "Use 8 characters with uppercase, lowercase and number.");
+
+    let validConfirm = showError("ConfirmError",
+        password === document.getElementById("ConfirmPassword").value && password !== ""
+        ? "" : "Passwords do not match.");
+
+    let isValid = validName && validAge && validEmail && validPhone &&
+        validGender && validDestination && validAddress && validNationality &&
+        validInterest && validEmergency && validFile && validUsername &&
+        validPassword && validConfirm;
+
+    if (isValid) {
+        saveTouristAccount();
+    } else {
         showResult(false, "Please correct the highlighted fields.");
-        return false;
     }
-    return saveTouristAccount();
+
+    return false;
 }
 
 function saveTouristAccount() {
-    try {
-        const accounts = JSON.parse(localStorage.getItem(accountStorageKey) || "[]");
-        if (!Array.isArray(accounts)) {
-            throw new Error("Stored account data is invalid.");
+
+    let accounts = JSON.parse(localStorage.getItem("wandervista-tourist-accounts") || "[]");
+    let username = getValue("UserName");
+
+    for (let i = 0; i < accounts.length; i++) {
+        if (accounts[i].username.toLowerCase() === username.toLowerCase()) {
+            showError("UserNameError", "Username already exists.");
+            showResult(false, "Choose another username.");
+            return;
         }
-        const username = value("UserName");
-        if (accounts.some((account) => account.username.toLowerCase() === username.toLowerCase())) {
-            showError("UserNameError", "That username is already registered for this role.");
-            showResult(false, "Please choose a different username.");
-            return false;
-        }
-        const profile = collectProfile(field("submit").form);
-        accounts.push({ username, password: field("Password").value, name: value("TouristName"), profile });
-        localStorage.setItem(accountStorageKey, JSON.stringify(accounts));
-        showResult(true, `Tourist ${value("TouristName")} registered successfully.`);
-        field("LoginAfterRegister").style.display = "inline-block";
-        return false;
-    } catch (error) {
-        showResult(false, "Could not save this account in browser storage. Check that storage is enabled and try again.");
-        return false;
     }
+
+    let gender = document.querySelector('input[name="gender"]:checked').value;
+
+    let interests = [];
+    let selectedInterests = document.querySelectorAll('input[name="interest"]:checked');
+
+    for (let i = 0; i < selectedInterests.length; i++) {
+        interests.push(selectedInterests[i].value);
+    }
+
+    let profile = {
+        TouristName: getValue("TouristName"),
+        TouristAge: getValue("TouristAge"),
+        TouristEmail: getValue("TouristEmail"),
+        TouristPhone: getValue("TouristPhone"),
+        gender: gender,
+        Destination: getValue("Destination"),
+        Address: getValue("Address"),
+        Nationality: getValue("Nationality"),
+        interest: interests,
+        EmergencyPhone: getValue("EmergencyPhone"),
+        UserName: username
+    };
+
+    let account = {
+        username: username,
+        password: document.getElementById("Password").value,
+        name: getValue("TouristName"),
+        profile: profile
+    };
+
+    accounts.push(account);
+
+    localStorage.setItem("wandervista-tourist-accounts", JSON.stringify(accounts));
+
+    showResult(true, "Tourist registered successfully!");
+
+    document.getElementById("LoginAfterRegister").style.display = "inline-block";
 }
 
 function showResult(success, message) {
-    const result = field("ResultText");
+    let result = document.getElementById("ResultText");
     result.textContent = message;
     result.className = success ? "success" : "error";
 }
 
 function clearAllErrors() {
-    document.querySelectorAll(".error").forEach((item) => item.textContent = "");
-    field("ResultText").textContent = "";
-    field("ResultText").className = "";
-    field("LoginAfterRegister").style.display = "none";
+
+    let errors = document.querySelectorAll(".error");
+
+    for (let i = 0; i < errors.length; i++) {
+        errors[i].textContent = "";
+    }
+
+    document.getElementById("ResultText").textContent = "";
+    document.getElementById("ResultText").className = "";
+    document.getElementById("LoginAfterRegister").style.display = "none";
 }
