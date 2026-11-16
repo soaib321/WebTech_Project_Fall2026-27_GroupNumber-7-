@@ -74,9 +74,9 @@ function validateHotelManagerForm()
     let isValid = validName && validEmail && validPhone && validGender && validDOB &&
                   validHotelName && validHotelType &&
                   validAddress && validCity && validRooms && validWebsite &&
-                  validPosition && validExperience &&
+            validPosition && validExperience &&
                   validLicense && validBusinessReg &&
-                  validUsername && validPassword && validConfirm;
+                   validUsername && validPassword && validConfirm;
 
 
     if (isValid)
@@ -347,7 +347,6 @@ function validateHotelFacilitiesForm()
     let validPet = validateSelect("PetPolicy","PetError","Pet Policy");
 
 
-    // Check All Validation Results
     let isValid = validFacilities && validDescription && validCheckIn && validCheckOut &&
 validCancellation && validSmoking && validPet;
 

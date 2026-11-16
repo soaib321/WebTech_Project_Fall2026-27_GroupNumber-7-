@@ -136,28 +136,6 @@ function validateNumber(inputId, errorId, label, min, max)
 }
 
 
-//Pattern Validation
-
-// function validatePattern(inputId, errorId, label, expression, example)
-// {
-//     let value = document.getElementById(inputId).value.trim().toUpperCase();
-
-//     if (value === "")
-//     {
-//         showError(errorId, "Please enter the " + label);
-//         return false;
-//     }
-
-//     if (!expression.test(value))
-//     {
-//         showError(errorId, label + " must look like " + example);
-//         return false;
-//     }
-
-//     clearError(errorId);
-//     return true;
-// }
-
 
 //Dropdown Validation
 
@@ -202,41 +180,6 @@ function validateRadio(groupName, errorId, label)
     return true;
 }
 
-
-//Checkbox Validation
-
-// function validateCheckbox(groupName, errorId, label, minimum)
-// {
-//     let boxes = document.querySelectorAll('input[name="' + groupName + '"]');
-//     let selected = [];
-
-//     for (let i = 0; i < boxes.length; i++)
-//     {
-//         if (boxes[i].checked)
-//         {
-//             selected.push(boxes[i].value);
-//         }
-//     }
-
-//     if (selected.length < minimum)
-//     {
-//         if (minimum === 1)
-//         {
-//             showError(errorId, "Please select at least one " + label);
-//         }
-//         else
-//         {
-//             showError(errorId, "Please select at least " + minimum + " " + label + "s");
-//         }
-
-//         return false;
-//     }
-
-//     console.log("Selected " + label + "s: " + selected.join(", "));
-
-//     clearError(errorId);
-//     return true;
-// }
 
 
 //Date of Birth Validation
@@ -456,41 +399,6 @@ function validateBusinessRegNo(inputId, errorId)
     clearError(errorId);
     return true;
 }
-
-
-//File Validation
-
-// function validateFile(inputId, errorId, allowedTypes)
-// {
-//     let fileInput = document.getElementById(inputId);
-
-//     if (fileInput.files.length === 0)
-//     {
-//         clearError(errorId);
-//         return true;
-//     }
-
-//     let file = fileInput.files[0];
-
-//     let fileName = file.name.toLowerCase();
-
-//     let extension = fileName.slice(fileName.lastIndexOf(".") + 1);
-
-//     if (!allowedTypes.includes(extension))
-//     {
-//         showError(errorId, "Only " + allowedTypes.join(", ") + " files are allowed");
-//         return false;
-//     }
-
-//     if (file.size > 2 * 1024 * 1024)
-//     {
-//         showError(errorId, "File must be 2 MB or smaller");
-//         return false;
-//     }
-
-//     clearError(errorId);
-//     return true;
-// }
 
 
 
