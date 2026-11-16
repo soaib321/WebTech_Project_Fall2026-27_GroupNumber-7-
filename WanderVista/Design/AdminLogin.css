@@ -1,0 +1,151 @@
+* {
+    box-sizing: border-box
+}
+
+body {
+    margin: 0;
+    background: #f3f4f6;
+    color: #1f2937;
+    font: 16px Arial, sans-serif
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 6%;
+    background: #1f2937
+}
+
+header a {
+    color: #fff;
+    text-decoration: none
+}
+
+header > a {
+    font-size: 1.35rem;
+    font-weight: bold;
+    text-decoration: none
+}
+
+main {
+    width: min(680px, 92%);
+    margin: 42px auto 60px
+}
+
+main > section {
+    text-align: center;
+    padding: 12px 0 24px
+}
+
+main > section h1 {
+    color: #1f2937;
+    text-transform: uppercase;
+    letter-spacing: 2px
+}
+
+main > section p {
+    color: #4b5563
+}
+
+form {
+    padding: 28px;
+    background: #fff;
+    border: 1px solid #d1d5db;
+    border-radius: 6px
+}
+
+fieldset {
+    border: 1px solid #d1d5db;
+    padding: 24px
+}
+
+fieldset legend {
+    color: #1f2937;
+    text-transform: uppercase;
+    font-weight: bold
+}
+
+fieldset label {
+    display: block;
+    margin: 16px 0 6px
+}
+
+fieldset input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #9ca3af;
+    border-radius: 4px;
+    background: #fff;
+    color: #1f2937;
+    font: inherit
+}
+
+fieldset input:focus {
+    outline: 2px solid #2563eb;
+    outline-offset: 1px
+}
+
+.show-password {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.show-password input {
+    width: auto;
+    margin: 0;
+}
+
+.error {
+    color: #b42318;
+    min-height: 1.2em
+}
+
+.notice {
+    color: #166534;
+    min-height: 1.2em
+}
+
+button {
+    padding: 12px 20px;
+    border: 0;
+    background: #334155;
+    color: #fff;
+    text-transform: uppercase;
+    font: inherit;
+    cursor: pointer
+}
+
+button:hover {
+    background: #1f2937
+}
+
+a {
+    color: #1d4ed8
+}
+
+footer {
+    padding: 20px;
+    text-align: center;
+    background: #1f2937;
+    color: #fff
+}
+
+@media(max-width:600px) {
+    header {
+        padding: 16px 5%
+    }
+
+    main {
+        margin-top: 24px
+    }
+
+    form {
+        padding: 14px
+    }
+
+    fieldset {
+        padding: 16px
+    }
+}
