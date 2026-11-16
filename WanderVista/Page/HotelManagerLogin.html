@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Hotel Manager Login | WanderVista</title>
+
+        <link rel="stylesheet" href="../Design/hotelManager.css">
+        <link rel="stylesheet" href="../Design/Login.css">
+
+<script src="../JS/main.js"></script>
+<script src="../JS/validation1.js"></script>
+<script src="../JS/hotelManager.js"></script>
+    </head>
+
+    <body class="hotelManager">
+
+        <div class="header">
+                    <img src="../img/logo-mark.svg" id="logo" alt="WanderVista Logo">
+               <div class="header-text">
+                <h1>Hotel Manager Login</h1>
+                <p>Welcome back! Manage your hotel with WanderVista.</p>
+            </div>
+        </div>
+
+        <div class="topnav">
+            <a href="../index.html">Home</a>
+            <a href="AdminLogin.html">Admin</a>
+            <a href="TouristLogin.html">Tourist</a>
+            <a href="HotelManagerLogin.html" class="active">Hotel Manager</a>
+            <a href="TourManagerLogin.html">Tour Manager</a>
+        </div>
+
+
+        <form onsubmit="return validateHotelManagerLogin()" onreset="clearAllErrors()" novalidate>
+
+            <fieldset>
+                <legend>Login Information</legend>
+
+                <table>
+
+                    <tr>
+                        <td><label for="UserName">Username:</label></td>
+                        <td>
+                            <input type="text" id="UserName" placeholder="Enter your username">
+                            <p class="error" id="UserNameError"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="Password">Password:</label></td>
+                        <td>
+                            <input type="password" id="Password" placeholder="Enter your password">
+                            <p class="error" id="PasswordError"></p>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </fieldset>
+
+
+            <p id="ResultText"></p>
+
+            <input type="submit" id="submit" value="Login">
+            <input type="reset" id="reset" value="Reset">
+
+         <p style="text-align: center; margin-top: 15px;color: #13005f; font-size: 20px;">
+    Don't have an account?
+    <a href="HotelManagerRegistration.html"
+       style="color: #0E7C86; text-decoration: none; font-weight: bold; font-size: 20px;">
+        Register Here
+    </a>
+</p>
+
+        </form>
+
+
+        <div class="footer">
+            <h5>WanderVista | Hotel Manager Login</h5>
+        </div>
+
+    </body>
+</html>
