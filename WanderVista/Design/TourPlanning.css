@@ -1,0 +1,139 @@
+
+body {
+    margin: 0;
+    font-family: Arial;
+    background-color: honeydew;
+    color: black;
+}
+.top {
+    background-color: darkgreen;
+    color: white;
+    padding: 15px 10%;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+}
+.top h1 {
+    margin: 0;
+}
+.top p {
+    margin: 5px 0;
+}
+.navigation {
+    background-color: lightgreen;
+    padding: 15px 10%;
+}
+.navigation a {
+    color: darkgreen;
+    margin-right: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 6px 8px;
+    border-radius: 4px;
+}
+.navigation a:hover {
+    color: white;
+    background-color: green;
+}
+.container {
+    width: 80%;
+    margin: 30px auto;
+}
+h2 {
+    color: darkgreen;
+}
+fieldset {
+    background-color: rgba(255, 255, 255, 0.35);
+    border: 1px solid gray;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 6px;
+}
+legend {
+    background-color: green;
+    color: white;
+    padding: 8px;
+    font-weight: bold;
+    border-radius: 4px;
+}
+table {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+}
+td {
+    padding: 10px;
+    border-radius: 4px;
+}
+td:first-child {
+    width: 30%;
+    font-weight: bold;
+}
+input[type=text], input[type=password], input[type=number], input[type=date], select {
+    width: 95%;
+    padding: 8px;
+    border: 1px solid gray;
+    background-color: rgba(255, 255, 255, 0.85);
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+input[type=radio], input[type=checkbox] {
+    margin: 7px;
+}
+.error {
+    color: red;
+    font-size: 13px;
+    margin: 5px 0;
+}
+.buttons, .center {
+    text-align: center;
+}
+input[type=submit], input[type=reset], button {
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+input[type=reset] {
+    background-color: gray;
+}
+#ResultText {
+    text-align: center;
+    color: red;
+}
+#ResultText.validation-success {
+    color: darkgreen;
+}
+.footer {
+    background-color: darkgreen;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+/* Travel background */
+body {
+    background-image: url("../img/tour-background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.container {
+    background-color: rgba(240, 255, 240, 0.70);
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 8px;
+}

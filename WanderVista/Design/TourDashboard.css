@@ -1,0 +1,182 @@
+
+body {
+    margin: 0;
+    font-family: Arial;
+    background-color: honeydew;
+    color: black;
+}
+.top {
+    background-color: darkgreen;
+    color: white;
+    padding: 15px 10%;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+}
+.top h1 {
+    margin: 0;
+}
+.top p {
+    margin: 5px 0;
+}
+.navigation {
+    background-color: lightgreen;
+    padding: 15px 10%;
+}
+.navigation a {
+    color: darkgreen;
+    margin-right: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 6px 8px;
+    border-radius: 4px;
+}
+.navigation a:hover {
+    color: white;
+    background-color: green;
+}
+.container {
+    width: 80%;
+    margin: 30px auto;
+}
+h2 {
+    color: darkgreen;
+}
+fieldset {
+    background-color: rgba(255, 255, 255, 0.35);
+    border: 1px solid gray;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 6px;
+}
+legend {
+    background-color: green;
+    color: white;
+    padding: 8px;
+    font-weight: bold;
+    border-radius: 4px;
+}
+table {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+}
+td {
+    padding: 10px;
+    border-radius: 4px;
+}
+td:first-child {
+    width: 30%;
+    font-weight: bold;
+}
+.buttons, .center {
+    text-align: center;
+}
+button {
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.footer {
+    background-color: darkgreen;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+.dashboard {
+    width: 75%;
+    margin: 30px auto;
+}
+
+.dashboard h2 {
+    color: darkgreen;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.dashboard fieldset {
+    background-color: rgba(255, 255, 255, 0.35);
+    border: 2px solid green;
+    padding: 25px;
+}
+
+.dashboard legend {
+    background-color: green;
+    color: white;
+    padding: 10px;
+}
+
+.dashboard h3 {
+    color: darkgreen;
+    margin-top: 20px;
+}
+
+.dashboard p {
+    color: black;
+    font-size: 16px;
+}
+
+.manager-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.manager-table td {
+    border: 1px solid rgb(23, 66, 17);
+    padding: 12px;
+
+}
+
+.dashboard ul {
+    background-color: rgba(240, 255, 240, 0.55);
+    padding: 20px 40px;
+    line-height: 30px;
+    border-radius: 4px;
+}
+
+.dashboard li {
+    color: black;
+}
+
+.dashboard button {
+    background-color: darkgreen;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.dashboard button:hover {
+    background-color: green;
+}
+
+/* Travel background */
+body {
+    background-image: url("../img/tour-background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.container {
+    background-color: rgba(240, 255, 240, 0.70);
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
