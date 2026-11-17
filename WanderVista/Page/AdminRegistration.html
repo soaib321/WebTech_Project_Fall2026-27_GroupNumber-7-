@@ -4,120 +4,81 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Admin Registration</title>
+    <title>Admin Registration | WanderVista</title>
     <link href="../Design/AdminRegistration.css" rel="stylesheet" />
     <script defer src="../JS/AdminRegistration.js"></script>
 </head>
 
 <body>
-    <header><a href="../index.html">WanderVista</a>
-        <nav><a href="../index.html">Home</a> | <a href="AdminLogin.html">Login</a> |
-            <a aria-current="page" href="AdminRegistration.html">Register</a> |
-            <a href="AdminCreateUser.html">User Management</a></nav>
+    <header>
+        <img src="../img/logo-mark.svg" alt="WanderVista logo" />
+        <h1>WanderVista</h1>
     </header>
+    <nav><a href="../index.html">Home</a>
+        <a href="AdminLogin.html">Admin Login</a>
+        <a aria-current="page" href="AdminRegistration.html">Admin Registration</a>
+        <a href="AdminCreateUser.html">Create User</a></nav>
     <main>
-        <section>
-            <h1>Admin Registration</h1>
-        </section>
-        <form autocomplete="on" novalidate="" onreset="clearAllErrors()"
-            onsubmit="return validateAdminForm()">
+        <h2>Admin Registration</h2>
+        <p>Set up an administrator account for WanderVista travel operations.</p>
+        <p class="hint">This page validates details only. It does not create an account or store credentials.</p>
+        <form autocomplete="off" novalidate="">
             <fieldset>
-                <legend>Admin Information</legend>
-                <div class="row">
-                    <div class="label"><label for="AdminName">Full Name:</label></div>
-                    <div class="control"><input id="AdminName" placeholder="Enter full name" type="text" />
-                        <p class="error" id="NameError"></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="label"><label for="AdminID">Admin ID:</label></div>
-                    <div class="control"><input id="AdminID" placeholder="e.g. ADM-1234" type="text" />
-                        <p class="error" id="AdminIDError"></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="label"><label for="AdminEmail">Email:</label></div>
-                    <div class="control"><input id="AdminEmail" placeholder="Enter email" type="email" />
-                        <p class="error" id="EmailError"></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="label"><label for="AdminPhone">Phone:</label></div>
-                    <div class="control"><input id="AdminPhone" placeholder="e.g. 01712345678" type="tel" />
-                        <p class="error" id="PhoneError"></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="label"><label>Gender:</label></div>
-                    <div class="control">
-                        <label class="choice"><input name="gender" type="radio" value="Male" /> Male</label>
-                        <label class="choice"><input name="gender" type="radio" value="Female" /> Female</label>
-                        <label class="choice"><input name="gender" type="radio" value="Other" /> Other</label>
-                        <p class="error" id="GenderError"></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="label"><label for="AdminRole">Admin Role:</label></div>
-                    <div class="control">
-                        <select id="AdminRole" onchange="setAdminRolePermissions()">
-                            <option value="">-- Select Role --</option>
+                <legend>Contact and role</legend>
+                <table>
+                    <tr><td><label for="AdminName">Full name</label></td>
+                        <td><input id="AdminName" placeholder="Enter full name" type="text" />
+                            <p id="NameError"></p></td></tr>
+                    <tr><td><label for="AdminID">Admin ID</label></td>
+                        <td><input id="AdminID" placeholder="e.g. ADM-1234" type="text" />
+                            <p id="AdminIDError"></p></td></tr>
+                    <tr><td><label for="AdminEmail">Email</label></td>
+                        <td><input id="AdminEmail" placeholder="name@example.com" type="email" />
+                            <p id="EmailError"></p></td></tr>
+                    <tr><td><label for="AdminPhone">Phone</label></td>
+                        <td><input id="AdminPhone" placeholder="Enter 11 digits" type="text" />
+                            <p id="PhoneError"></p></td></tr>
+                    <tr><td><label for="AdminRole">Admin role</label></td>
+                        <td><select id="AdminRole">
+                            <option value="">-- Select role --</option>
                             <option value="Super Admin">Super Admin</option>
                             <option value="Tour Operations Admin">Tour Operations Admin</option>
                             <option value="Hotel &amp; Booking Admin">Hotel &amp; Booking Admin</option>
-                        </select>
-                        <p class="error" id="RoleError"></p>
-                    </div>
-                </div>
+                        </select><p id="RoleError"></p></td></tr>
+                </table>
             </fieldset>
             <fieldset>
-                <legend>Permissions</legend>
-                <div class="row">
-                    <div class="label"><label>Permissions:</label></div>
-                    <div class="control">
-                        <p class="hint">Permissions are set by the selected admin role.</p>
-                        <label class="choice"><input disabled name="permission" type="checkbox" value="TourManagers" />
-                            Tour Managers</label>
-                        <label class="choice"><input disabled name="permission" type="checkbox" value="HotelManagers" />
-                            Hotel Managers</label>
-                        <label class="choice"><input disabled name="permission" type="checkbox" value="Tourists" />
-                            Tourists</label>
-                        <label class="choice"><input disabled name="permission" type="checkbox" value="Reports" />
-                            Reports</label>
-                        <p class="error" id="PermissionError"></p>
-                    </div>
-                </div>
+                <legend>Travel operations access</legend>
+                <p class="hint">Access is assigned automatically based on the admin role.</p>
+                <label><input disabled name="permission" type="checkbox" value="TourManagers" /> Tour managers</label><br />
+                <label><input disabled name="permission" type="checkbox" value="HotelManagers" /> Hotel managers and stays</label><br />
+                <label><input disabled name="permission" type="checkbox" value="Tourists" /> Travelers</label><br />
+                <label><input disabled name="permission" type="checkbox" value="Reports" /> Booking reports</label>
+                <p id="PermissionError"></p>
             </fieldset>
             <fieldset>
-                <legend>Account</legend>
-                <div class="row">
-                    <div class="label"><label for="UserName">Username:</label></div>
-                    <div class="control"><input id="UserName" placeholder="4 - 15 characters" type="text" />
-                        <p class="error" id="UserNameError"></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="label"><label for="Password">Password:</label></div>
-                    <div class="control"><input id="Password" placeholder="Enter password" type="password" />
-                        <p class="hint">At least 8 characters with an uppercase letter, a lowercase letter and a number
-                        </p>
-                        <p class="error" id="PasswordError"></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="label"><label for="ConfirmPassword">Confirm Password:</label></div>
-                    <div class="control"><input id="ConfirmPassword" placeholder="Re-enter password"
-                            type="password" />
-                        <p class="error" id="ConfirmError"></p>
-                    </div>
-                </div>
+                <legend>Sign-in details</legend>
+                <table>
+                    <tr><td><label for="UserName">Username</label></td>
+                        <td><input id="UserName" placeholder="4 - 15 characters" type="text" />
+                            <p id="UserNameError"></p></td></tr>
+                    <tr><td><label for="Password">Password</label></td>
+                        <td><input id="Password" placeholder="Choose a password" type="password" />
+                            <p class="hint">At least 8 characters, including uppercase, lowercase, and a number.</p>
+                            <p id="PasswordError"></p></td></tr>
+                    <tr><td><label for="ConfirmPassword">Confirm password</label></td>
+                        <td><input id="ConfirmPassword" placeholder="Re-enter password" type="password" />
+                            <p id="ConfirmError"></p></td></tr>
+                </table>
             </fieldset>
-            <p aria-live="polite" id="ResultText"></p>
+            <p aria-live="polite" id="ResultError" hidden></p>
+            <p aria-live="polite" id="ResultSuccess" hidden></p>
             <p class="hint">Already registered? <a href="AdminLogin.html">Login here</a></p>
             <input type="submit" value="Register" />
             <input type="reset" value="Reset" />
         </form>
     </main>
-    <footer>WandaVista | A responsive travel website</footer>
+    <footer>WanderVista | Travel Site</footer>
 </body>
 
 </html>

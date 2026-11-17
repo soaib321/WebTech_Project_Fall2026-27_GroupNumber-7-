@@ -1,75 +1,228 @@
-const field = (id) => document.getElementById(id);
-const value = (id) => field(id).value.trim();
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
 
-function showError(id, message) {
-    field(id).textContent = message;
-    return !message;
-}
+    if (form) {
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            collectData();
+        });
 
-function isValidPhone(phone) {
-    const digits = phone.replace(/\D/g, "");
-    return /^\+?[\d\s()-]+$/.test(phone) && digits.length >= 7 && digits.length <= 15;
-}
+        form.addEventListener("reset", clearAllErrors);
+    }
+
+    const roleField = document.getElementById("AdminRole");
+
+    if (roleField) {
+        roleField.addEventListener("change", setAdminRolePermissions);
+        setAdminRolePermissions();
+    }
+});
 
 function setAdminRolePermissions() {
-    const rolePermissions = {
-        "Super Admin": ["TourManagers", "HotelManagers", "Tourists", "Reports"],
-        "Tour Operations Admin": ["TourManagers", "Tourists"],
-        "Hotel & Booking Admin": ["HotelManagers", "Reports"]
-    };
-    const selectedPermissions = rolePermissions[value("AdminRole")] || [];
+    const role = document.getElementById("AdminRole").value;
+    const permissions = document.querySelectorAll('input[name="permission"]');
 
-    document.querySelectorAll('input[name="permission"]').forEach((permission) => {
-        permission.checked = selectedPermissions.includes(permission.value);
-        permission.disabled = true;
-    });
-    showError("PermissionError", "");
+    for (let i = 0; i < permissions.length; i++) {
+        permissions[i].checked = false;
+        permissions[i].disabled = true;
+
+        if (role === "Super Admin") {
+            permissions[i].checked = true;
+        } else if (role === "Tour Operations Admin") {
+            if (permissions[i].value === "TourManagers" || permissions[i].value === "Tourists") {
+                permissions[i].checked = true;
+            }
+        } else if (role === "Hotel & Booking Admin") {
+            if (permissions[i].value === "HotelManagers" || permissions[i].value === "Reports") {
+                permissions[i].checked = true;
+            }
+        }
+    }
+
+    document.getElementById("PermissionError").textContent = "";
 }
 
-function validateAdminForm() {
-    const checks = [];
-    checks.push(showError("NameError", value("AdminName").length >= 2 ? "" : "Enter your full name."));
-    checks.push(showError("AdminIDError", /^ADM-\d{4}$/.test(value("AdminID")) ? "" : "Use the format ADM-1234."));
-    checks.push(showError("EmailError", /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value("AdminEmail")) ? "" : "Enter a valid email address."));
-    checks.push(showError("PhoneError", isValidPhone(value("AdminPhone")) ? "" : "Enter a valid phone number."));
-    checks.push(showError("GenderError", document.querySelector('input[name="gender"]:checked') ? "" : "Select a gender."));
-    checks.push(showError("RoleError", value("AdminRole") ? "" : "Select an admin role."));
-    checks.push(showError("PermissionError", document.querySelector('input[name="permission"]:checked') ? "" : "Select at least one permission."));
-    checks.push(showError("UserNameError", /^[A-Za-z0-9_]{4,15}$/.test(value("UserName")) ? "" : "Use 4-15 letters, numbers or underscores."));
-    const password = field("Password").value;
-    checks.push(showError("PasswordError", /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(password) ? "" : "Use at least 8 characters with uppercase, lowercase and a number."));
-    checks.push(showError("ConfirmError", password && password === field("ConfirmPassword").value ? "" : "Passwords do not match."));
+function collectData() {
+    const nameIsValid = validateName();
+    const idIsValid = validateAdminID();
+    const emailIsValid = validateEmail();
+    const phoneIsValid = validatePhone();
+    const roleIsValid = validateRole();
+    const permissionIsValid = validatePermission();
+    const usernameIsValid = validateUsername();
+    const passwordIsValid = validatePassword();
+    const confirmationIsValid = validatePasswordConfirmation();
 
-    if (!checks.every(Boolean)) {
+    if (!nameIsValid || !idIsValid || !emailIsValid || !phoneIsValid ||
+        !roleIsValid || !permissionIsValid || !usernameIsValid ||
+        !passwordIsValid || !confirmationIsValid) {
         showResult(false, "Please correct the highlighted fields.");
         return false;
     }
 
-    try {
-        localStorage.setItem("wanderVistaAdminCredentials", JSON.stringify({
-            username: value("UserName"),
-            password: password
-        }));
-    } catch (error) {
-        showResult(false, "Your account could not be saved in this browser. Check storage settings and try again.");
+    document.getElementById("Password").value = "";
+    document.getElementById("ConfirmPassword").value = "";
+
+    showResult(true, "Registration successful. Details were validated only; no account or credentials were stored. Redirecting to admin login...");
+
+    window.setTimeout(function () {
+        window.location.href = "AdminLogin.html";
+    }, 800);
+
+    return true;
+}
+
+function validateName() {
+    const name = document.getElementById("AdminName").value.trim();
+    const error = document.getElementById("NameError");
+
+    if (name.length < 2) {
+        error.textContent = "Enter your full name.";
         return false;
     }
 
-    showResult(true, "Registration successful. Redirecting you to admin login...");
-    window.setTimeout(() => {
-        window.location.href = "AdminLogin.html";
-    }, 800);
-    return false;
+    error.textContent = "";
+    return true;
+}
+
+function validateAdminID() {
+    const adminID = document.getElementById("AdminID").value.trim();
+    const error = document.getElementById("AdminIDError");
+
+    if (!/^ADM-\d{4}$/.test(adminID)) {
+        error.textContent = "Use the format ADM-1234.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
+}
+
+function validateEmail() {
+    const email = document.getElementById("AdminEmail").value.trim();
+    const error = document.getElementById("EmailError");
+    const emailFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailFormat.test(email)) {
+        error.textContent = "Enter a valid email address.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
+}
+
+function validatePhone() {
+    const phone = document.getElementById("AdminPhone").value.trim();
+    const error = document.getElementById("PhoneError");
+    const containsOnlyDigits = /^\d+$/.test(phone);
+    const hasElevenDigits = phone.length === 11;
+
+    if (!containsOnlyDigits || !hasElevenDigits) {
+        error.textContent = "Enter an 11-digit phone number.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
+}
+
+function validateRole() {
+    const role = document.getElementById("AdminRole").value;
+    const error = document.getElementById("RoleError");
+
+    if (role === "") {
+        error.textContent = "Select an admin role.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
+}
+
+function validatePermission() {
+    const permission = document.querySelector('input[name="permission"]:checked');
+    const error = document.getElementById("PermissionError");
+
+    if (!permission) {
+        error.textContent = "Select an admin role to assign access.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
+}
+
+function validateUsername() {
+    const username = document.getElementById("UserName").value.trim();
+    const error = document.getElementById("UserNameError");
+    const usernameFormat = /^[A-Za-z0-9_]{4,15}$/;
+
+    if (!usernameFormat.test(username)) {
+        error.textContent = "Use 4-15 letters, numbers or underscores.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
+}
+
+function validatePassword() {
+    const password = document.getElementById("Password").value;
+    const error = document.getElementById("PasswordError");
+    const hasLowercase = /[a-z]/.test(password);
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasNumber = /\d/.test(password);
+
+    if (password.length < 8 || !hasLowercase || !hasUppercase || !hasNumber) {
+        error.textContent = "Use at least 8 characters with uppercase, lowercase and a number.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
+}
+
+function validatePasswordConfirmation() {
+    const password = document.getElementById("Password").value;
+    const confirmation = document.getElementById("ConfirmPassword").value;
+    const error = document.getElementById("ConfirmError");
+
+    if (password === "" || password !== confirmation) {
+        error.textContent = "Passwords do not match.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
 }
 
 function showResult(success, message) {
-    const result = field("ResultText");
-    result.textContent = message;
-    result.className = success ? "success" : "error";
+    const error = document.getElementById("ResultError");
+    const successMessage = document.getElementById("ResultSuccess");
+
+    error.textContent = "";
+    successMessage.textContent = "";
+    error.hidden = success;
+    successMessage.hidden = !success;
+
+    if (success) {
+        successMessage.textContent = message;
+    } else {
+        error.textContent = message;
+    }
 }
 
 function clearAllErrors() {
-    document.querySelectorAll(".error").forEach((item) => item.textContent = "");
-    field("ResultText").textContent = "";
-    field("ResultText").className = "";
+    const errorMessages = document.querySelectorAll('p[id$="Error"]');
+
+    for (let i = 0; i < errorMessages.length; i++) {
+        errorMessages[i].textContent = "";
+    }
+
+    document.getElementById("ResultError").hidden = true;
+    document.getElementById("ResultSuccess").textContent = "";
+    document.getElementById("ResultSuccess").hidden = true;
+
+    window.setTimeout(setAdminRolePermissions, 0);
 }

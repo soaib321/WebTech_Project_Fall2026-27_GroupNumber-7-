@@ -1,61 +1,63 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>User Management | WanderVista</title>
-    <link href="../Design/AdminCreateUser.css" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create User | WanderVista</title>
+    <link rel="stylesheet" href="../Design/AdminCreateUser.css" />
     <script defer src="../JS/AdminCreateUser.js"></script>
 </head>
 
-<body class="registration-page">
-    <header class="registration-header"><a class="registration-brand" href="../index.html">WanderVista</a>
-        <nav class="registration-nav"><a href="../index.html">Home</a> |
-            <a href="AdminLogin.html">Login</a> | <a href="AdminRegistration.html">Register</a> |
-            <a aria-current="page" href="AdminCreateUser.html">User Management</a></nav>
+<body>
+    <header>
+        <img src="../img/logo-mark.svg" alt="WanderVista logo" />
+        <h1>WanderVista</h1>
     </header>
-    <main class="registration-main">
-        <section class="registration-intro">
-            <h1>User Management</h1>
-            <p>Create a user account and assign its role and access.</p>
-        </section><!-- novalidate turns off the browser's own checks, so our JavaScript does all the validation -->
-        <form autocomplete="off" class="registration-form" novalidate="" onreset="clearAllErrors()"
-            onsubmit="return validateCreateUserForm()">
-            <fieldset class="registration-section">
-                <legend>User Information</legend>
-                <div class="registration-row">
-                    <div class="registration-label"><label for="UserFullName">Full Name:</label></div>
-                    <div class="registration-control"><input id="UserFullName" placeholder="Enter user's full name" type="text" />
-                        <p class="registration-error" id="NameError"></p>
-                    </div>
-                </div>
-                <div class="registration-row">
-                    <div class="registration-label"><label for="UserEmail">Email:</label></div>
-                    <div class="registration-control"><input id="UserEmail" placeholder="Enter user's email" type="email" />
-                        <p class="registration-error" id="EmailError"></p>
-                    </div>
-                </div>
-                <div class="registration-row">
-                    <div class="registration-label"><label for="UserPhone">Phone:</label></div>
-                    <div class="registration-control"><input id="UserPhone" placeholder="e.g. 01712345678" type="tel" />
-                        <p class="registration-error" id="PhoneError"></p>
-                    </div>
-                </div>
-                <div class="registration-row">
-                    <div class="registration-label"><span>Gender:</span></div>
-                    <div class="registration-control">
-                        <label class="registration-choice"><input name="UserGender" type="radio" value="Female" /> Female</label>
-                        <label class="registration-choice"><input name="UserGender" type="radio" value="Male" /> Male</label>
-                        <label class="registration-choice"><input name="UserGender" type="radio" value="Other" /> Other</label>
-                        <p class="registration-error" id="GenderError"></p>
-                    </div>
-                </div>
-                <div class="registration-row">
-                    <div class="registration-label"><label for="UserNationality">Nationality:</label></div>
-                    <div class="registration-control">
-                        <select id="UserNationality">
-                            <option value="">-- Select Nationality --</option>
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="AdminLogin.html">Admin Login</a>
+        <a href="AdminRegistration.html">Admin Registration</a>
+        <a aria-current="page" href="AdminCreateUser.html">Create User</a>
+    </nav>
+    <main>
+        <h2>Create a travel account</h2>
+        <p>Enter the profile and account details for a traveler or travel partner.</p>
+        <form autocomplete="off" novalidate>
+            <fieldset>
+                <legend>Personal and contact details</legend>
+                <table>
+                    <tr>
+                        <td><label for="UserFullName">Full name</label></td>
+                        <td><input id="UserFullName" placeholder="Enter full name" type="text" />
+                            <p id="NameError"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="UserEmail">Email</label></td>
+                        <td><input id="UserEmail" placeholder="name@example.com" type="email" />
+                            <p id="EmailError"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="UserPhone">Phone</label></td>
+                        <td><input id="UserPhone" placeholder="e.g. +8801712345678" type="tel" />
+                            <p id="PhoneError"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span>Gender</span></td>
+                        <td>
+                            <label><input name="UserGender" type="radio" value="Female" /> Female</label>
+                            <label><input name="UserGender" type="radio" value="Male" /> Male</label>
+                            <label><input name="UserGender" type="radio" value="Other" /> Other</label>
+                            <p id="GenderError"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="UserNationality">Nationality</label></td>
+                        <td><select id="UserNationality">
+                            <option value="">-- Select nationality --</option>
                             <option value="Bangladeshi">Bangladeshi</option>
                             <option value="Indian">Indian</option>
                             <option value="Nepalese">Nepalese</option>
@@ -67,292 +69,244 @@
                             <option value="Australian">Australian</option>
                             <option value="Other">Other</option>
                         </select>
-                        <p class="registration-error" id="NationalityError"></p>
-                    </div>
-                </div>
-                <div class="registration-row">
-                    <div class="registration-label"><label for="UserAddress">Address:</label></div>
-                    <div class="registration-control"><textarea id="UserAddress" placeholder="Enter address" rows="3"></textarea>
-                        <p class="registration-error" id="AddressError"></p>
-                    </div>
-                </div>
-                <div class="registration-row">
-                    <div class="registration-label"><label for="UserEmergency">Emergency Contact:</label></div>
-                    <div class="registration-control"><input id="UserEmergency" placeholder="e.g. 01712345678" type="tel" />
-                        <p class="registration-hint">Optional</p>
-                        <p class="registration-error" id="EmergencyError"></p>
-                    </div>
-                </div>
-                <div class="registration-row">
-                    <div class="registration-label"><label for="UserDOB">Date of Birth:</label></div>
-                    <div class="registration-control"><input id="UserDOB" placeholder="" type="date" />
-                        <p class="registration-hint">The user must be at least 18 years old</p>
-                        <p class="registration-error" id="DOBError"></p>
-                    </div>
-                </div>
-            </fieldset>
-            <fieldset class="registration-section">
-                <legend>User Role</legend>
-                <div class="registration-row">
-                    <div class="registration-label"><label for="AssignedRole">Assign Role:</label></div>
-                    <div class="registration-control">
-                        <select id="AssignedRole" onchange="showRoleOptions()">
-                            <option value="">-- Select Role --</option>
-                            <option value="Tourist">Tourist</option>
+                            <p id="NationalityError"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="UserDOB">Date of birth</label></td>
+                        <td><input id="UserDOB" type="date" />
+                            <p class="hint">Used for traveler profiles and age-appropriate bookings.</p>
+                            <p id="DOBError"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="UserAddress">Home address</label></td>
+                        <td><textarea id="UserAddress" placeholder="Street, city, and country" rows="3"></textarea>
+                            <p id="AddressError"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="UserEmergency">Emergency contact</label></td>
+                        <td><input id="UserEmergency" placeholder="Optional phone number" type="tel" />
+                            <p class="hint">Optional</p>
+                            <p id="EmergencyError"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="AssignedRole">Account type</label></td>
+                        <td><select id="AssignedRole">
+                            <option value="">-- Select account type --</option>
+                            <option value="Tourist">Traveler</option>
                             <option value="Tour Manager">Tour Manager</option>
                             <option value="Hotel Manager">Hotel Manager</option>
                         </select>
-                        <p class="registration-hint" id="RoleNote">Select a role to see the options for that role.</p>
-                        <p class="registration-error" id="RoleError"></p>
-                    </div>
-                </div>
+                            <p id="RoleError"></p>
+                        </td>
+                    </tr>
+                </table>
             </fieldset>
-            <div class="registration-hidden" id="TouristSection">
-            <fieldset class="registration-section">
-                <legend>Tourist Details</legend>
-                <div class="registration-row">
-                    <div class="registration-label"><label for="TouristDestination">Preferred Destination:</label></div>
-                    <div class="registration-control"><select id="TouristDestination"><option value="">-- Select Destination Type --</option><option value="Beach">Beach</option><option value="Hills">Hills</option><option value="City">City</option><option value="Heritage">Heritage</option></select>
-                        <p class="registration-error" id="TouristDestinationError"></p>
-                    </div>
-                </div>
-                <div class="registration-row">
-                    <div class="registration-label"><label>Travel Style:</label></div>
-                    <div class="registration-control">
-                        <label class="registration-choice"><input name="TouristStyle" type="radio" value="Solo" /> Solo</label>
-                        <label class="registration-choice"><input name="TouristStyle" type="radio" value="Family" /> Family</label>
-                        <label class="registration-choice"><input name="TouristStyle" type="radio" value="Group" /> Group</label>
-                        <p class="registration-error" id="TouristStyleError"></p>
-                    </div>
-                </div>
-                <div class="registration-row">
-                    <div class="registration-label"><label for="TouristBudget">Budget Range:</label></div>
-                    <div class="registration-control"><select id="TouristBudget"><option value="">-- Select Budget --</option><option value="Low">Low</option><option value="Medium">Medium</option><option value="High">High</option></select>
-                        <p class="registration-error" id="TouristBudgetError"></p>
-                    </div>
-                </div>
-                <div class="registration-row">
-                    <div class="registration-label"><label for="TouristMembership">Membership:</label></div>
-                    <div class="registration-control"><select id="TouristMembership"><option value="">-- Select Membership --</option><option value="Standard">Standard</option><option value="Silver">Silver</option><option value="Gold">Gold</option></select>
-                        <p class="registration-error" id="TouristMembershipError"></p>
-                    </div>
-                </div>
+
+            <fieldset id="TouristFields" hidden>
+                <legend>Traveler preferences</legend>
+                <table>
+                    <tr>
+                        <td><label for="TouristDestination">Preferred destination</label></td>
+                        <td><select id="TouristDestination">
+                            <option value="">-- Select destination type --</option>
+                            <option value="Beach">Beach</option>
+                            <option value="Hills">Hills</option>
+                            <option value="City">City</option>
+                            <option value="Heritage">Heritage</option>
+                            <option value="Wildlife">Wildlife</option>
+                        </select>
+                            <p id="TouristDestinationError"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span>Travel style</span></td>
+                        <td>
+                            <label><input name="TouristStyle" type="radio" value="Solo" /> Solo</label>
+                            <label><input name="TouristStyle" type="radio" value="Family" /> Family</label>
+                            <label><input name="TouristStyle" type="radio" value="Group" /> Group</label>
+                            <p id="TouristStyleError"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="TouristBudget">Typical travel budget</label></td>
+                        <td><select id="TouristBudget">
+                            <option value="">-- Select budget --</option>
+                            <option value="Budget">Budget</option>
+                            <option value="Mid-range">Mid-range</option>
+                            <option value="Premium">Premium</option>
+                        </select>
+                            <p id="TouristBudgetError"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="TouristMembership">Membership tier (optional)</label></td>
+                        <td><select id="TouristMembership">
+                            <option value="">-- Select membership --</option>
+                            <option value="Standard">Standard</option>
+                            <option value="Silver">Silver</option>
+                            <option value="Gold">Gold</option>
+                        </select>
+                            <p id="TouristMembershipError"></p>
+                        </td>
+                    </tr>
+                </table>
             </fieldset>
-            <fieldset class="registration-section">
-                <legend>Tourist Access</legend>
-                <div class="registration-row">
-                    <div class="registration-label"><label>Access Level:</label></div>
-                    <div class="registration-control">
-                        <label class="registration-choice"><input name="TouristAccess" type="radio" value="Full" onchange="setAccessLevel('TouristPermissions', this.value)" /> Full</label>
-                        <label class="registration-choice"><input name="TouristAccess" type="radio" value="Limited" onchange="setAccessLevel('TouristPermissions', this.value)" /> Limited</label>
-                        <label class="registration-choice"><input name="TouristAccess" type="radio" value="Read-only" onchange="setAccessLevel('TouristPermissions', this.value)" /> Read-only</label>
-                        <p class="registration-error" id="TouristAccessError"></p>
-                    </div>
-                </div>
-                <div class="registration-row">
-                    <div class="registration-label"><label>Permissions:</label></div>
-                    <div class="registration-control">
-                        <div id="TouristPermissions">
-                        <label class="registration-choice"><input disabled name="TouristPermission" type="checkbox" value="View Tours" /> View Tours</label>
-                        <label class="registration-choice"><input disabled name="TouristPermission" type="checkbox" value="Book Tours" /> Book Tours</label>
-                        <label class="registration-choice"><input disabled name="TouristPermission" type="checkbox" value="Book Hotels" /> Book Hotels</label>
-                        <label class="registration-choice"><input disabled name="TouristPermission" type="checkbox" value="Write Reviews" /> Write Reviews</label>
-                        <label class="registration-choice"><input disabled name="TouristPermission" type="checkbox" value="Cancel Bookings" /> Cancel Bookings</label>
-                        </div>
-                        <p class="registration-hint">Permissions are set by the selected access level.</p>
-                        <p class="registration-error" id="TouristPermissionError"></p>
-                    </div>
-                </div>
+
+            <fieldset id="TourManagerFields" hidden>
+                <legend>Tour manager details</legend>
+                <table>
+                    <tr>
+                        <td><label for="TMSpecialization">Tour specialization</label></td>
+                        <td><select id="TMSpecialization">
+                            <option value="">-- Select specialization --</option>
+                            <option value="Adventure">Adventure</option>
+                            <option value="Cultural">Cultural</option>
+                            <option value="Beach">Beach</option>
+                            <option value="Wildlife">Wildlife</option>
+                        </select>
+                            <p id="TMSpecializationError"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="TMExperience">Experience (years)</label></td>
+                        <td><input id="TMExperience" min="0" max="50" placeholder="0 - 50" type="number" />
+                            <p id="TMExperienceError"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="TMLicense">Guide or operator license</label></td>
+                        <td><input id="TMLicense" placeholder="Enter license number" type="text" />
+                            <p id="TMLicenseError"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span>Languages</span></td>
+                        <td>
+                            <label><input name="TMLanguage" type="checkbox" value="Bangla" /> Bangla</label>
+                            <label><input name="TMLanguage" type="checkbox" value="English" /> English</label>
+                            <label><input name="TMLanguage" type="checkbox" value="Hindi" /> Hindi</label>
+                            <p id="TMLanguageError"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="TMMaxTours">Maximum active tours</label></td>
+                        <td><input id="TMMaxTours" min="1" max="20" placeholder="1 - 20" type="number" />
+                            <p id="TMMaxToursError"></p>
+                        </td>
+                    </tr>
+                </table>
             </fieldset>
-            </div>
-            <div class="registration-hidden" id="TourManagerSection">
-            <fieldset class="registration-section">
-                <legend>Tour Manager Details</legend>
-                <div class="registration-row">
-                    <div class="registration-label"><label for="TMSpecialization">Specialization:</label></div>
-                    <div class="registration-control"><select id="TMSpecialization"><option value="">-- Select Specialization --</option><option value="Adventure">Adventure</option><option value="Cultural">Cultural</option><option value="Beach">Beach</option><option value="Wildlife">Wildlife</option></select>
-                        <p class="registration-error" id="TMSpecializationError"></p>
-                    </div>
-                </div>
-                <div class="registration-row">
-                    <div class="registration-label"><label for="TMExperience">Experience (years):</label></div>
-                    <div class="registration-control"><input id="TMExperience" placeholder="Years of experience" type="number" min="0" max="50" />
-                        <p class="registration-error" id="TMExperienceError"></p>
-                    </div>
-                </div>
-                <div class="registration-row">
-                    <div class="registration-label"><label for="TMLicense">License No:</label></div>
-                    <div class="registration-control"><input id="TMLicense" placeholder="e.g. TM-1234" type="text" />
-                        <p class="registration-error" id="TMLicenseError"></p>
-                    </div>
-                </div>
-                <div class="registration-row">
-                    <div class="registration-label"><label>Languages:</label></div>
-                    <div class="registration-control">
-                        <label class="registration-choice"><input name="TMLanguage" type="checkbox" value="Bangla" /> Bangla</label>
-                        <label class="registration-choice"><input name="TMLanguage" type="checkbox" value="English" /> English</label>
-                        <label class="registration-choice"><input name="TMLanguage" type="checkbox" value="Hindi" /> Hindi</label>
-                        <p class="registration-error" id="TMLanguageError"></p>
-                    </div>
-                </div>
-                <div class="registration-row">
-                    <div class="registration-label"><label for="TMMaxTours">Max Active Tours:</label></div>
-                    <div class="registration-control"><input id="TMMaxTours" placeholder="1 - 20" type="number" min="1" max="20" />
-                        <p class="registration-error" id="TMMaxToursError"></p>
-                    </div>
-                </div>
+
+            <fieldset id="HotelManagerFields" hidden>
+                <legend>Hotel manager details</legend>
+                <table>
+                    <tr>
+                        <td><label for="HMHotelName">Hotel name</label></td>
+                        <td><input id="HMHotelName" placeholder="Enter hotel name" type="text" />
+                            <p id="HMHotelNameError"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="HMAddress">Hotel address</label></td>
+                        <td><textarea id="HMAddress" placeholder="Street, city, and country" rows="3"></textarea>
+                            <p id="HMAddressError"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="HMStars">Hotel rating</label></td>
+                        <td><select id="HMStars">
+                            <option value="">-- Select rating --</option>
+                            <option value="1">1 star</option>
+                            <option value="2">2 stars</option>
+                            <option value="3">3 stars</option>
+                            <option value="4">4 stars</option>
+                            <option value="5">5 stars</option>
+                        </select>
+                            <p id="HMStarsError"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="HMRooms">Room capacity</label></td>
+                        <td><input id="HMRooms" min="1" max="500" placeholder="Number of rooms" type="number" />
+                            <p id="HMRoomsError"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="HMLicense">Hotel license number</label></td>
+                        <td><input id="HMLicense" placeholder="Enter license number" type="text" />
+                            <p id="HMLicenseError"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span>Facilities</span></td>
+                        <td>
+                            <label><input name="HMFacility" type="checkbox" value="WiFi" /> Wi-Fi</label>
+                            <label><input name="HMFacility" type="checkbox" value="Pool" /> Pool</label>
+                            <label><input name="HMFacility" type="checkbox" value="Parking" /> Parking</label>
+                            <label><input name="HMFacility" type="checkbox" value="Restaurant" /> Restaurant</label>
+                            <label><input name="HMFacility" type="checkbox" value="Spa" /> Spa</label>
+                            <p id="HMFacilityError"></p>
+                        </td>
+                    </tr>
+                </table>
             </fieldset>
-            <fieldset class="registration-section">
-                <legend>Tour Manager Access</legend>
-                <div class="registration-row">
-                    <div class="registration-label"><label>Access Level:</label></div>
-                    <div class="registration-control">
-                        <label class="registration-choice"><input name="TMAccess" type="radio" value="Full" onchange="setAccessLevel('TMPermissions', this.value)" /> Full</label>
-                        <label class="registration-choice"><input name="TMAccess" type="radio" value="Limited" onchange="setAccessLevel('TMPermissions', this.value)" /> Limited</label>
-                        <label class="registration-choice"><input name="TMAccess" type="radio" value="Read-only" onchange="setAccessLevel('TMPermissions', this.value)" /> Read-only</label>
-                        <p class="registration-error" id="TMAccessError"></p>
-                    </div>
-                </div>
-                <div class="registration-row">
-                    <div class="registration-label"><label>Permissions:</label></div>
-                    <div class="registration-control">
-                        <div id="TMPermissions">
-                        <label class="registration-choice"><input disabled name="TMPermission" type="checkbox" value="View Bookings" /> View Bookings</label>
-                        <label class="registration-choice"><input disabled name="TMPermission" type="checkbox" value="Create Tours" /> Create Tours</label>
-                        <label class="registration-choice"><input disabled name="TMPermission" type="checkbox" value="Edit Tours" /> Edit Tours</label>
-                        <label class="registration-choice"><input disabled name="TMPermission" type="checkbox" value="Cancel Tours" /> Cancel Tours</label>
-                        <label class="registration-choice"><input disabled name="TMPermission" type="checkbox" value="Approve Guides" /> Approve Guides</label>
-                        </div>
-                        <p class="registration-hint">Permissions are set by the selected access level.</p>
-                        <p class="registration-error" id="TMPermissionError"></p>
-                    </div>
-                </div>
+
+            <fieldset>
+                <legend>Account setup</legend>
+                <table>
+                    <tr>
+                        <td><label for="NewUserName">Username</label></td>
+                        <td><input id="NewUserName" placeholder="4 - 15 letters, numbers, or underscores" type="text" />
+                            <p id="UserNameError"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="TempPassword">Temporary password</label></td>
+                        <td><input id="TempPassword" placeholder="Set a temporary password" type="password" />
+                            <p class="hint">At least 8 characters, including uppercase, lowercase, and a number.</p>
+                            <p id="PasswordError"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="ConfirmTemp">Confirm password</label></td>
+                        <td><input id="ConfirmTemp" placeholder="Re-enter temporary password" type="password" />
+                            <p id="ConfirmError"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="AccountStatus">Account status</label></td>
+                        <td><select id="AccountStatus">
+                            <option value="">-- Select status --</option>
+                            <option value="Active">Active</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Suspended">Suspended</option>
+                        </select>
+                            <p id="StatusError"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="Notes">Account note</label></td>
+                        <td><textarea id="Notes" maxlength="200" placeholder="Reason for creating this account" rows="3"></textarea>
+                            <p class="hint">Optional, up to 200 characters.</p>
+                            <p id="NotesError"></p>
+                        </td>
+                    </tr>
+                </table>
             </fieldset>
-            </div>
-            <div class="registration-hidden" id="HotelManagerSection">
-            <fieldset class="registration-section">
-                <legend>Hotel Manager Details</legend>
-                <div class="registration-row">
-                    <div class="registration-label"><label for="HMHotelName">Hotel Name:</label></div>
-                    <div class="registration-control"><input id="HMHotelName" placeholder="Enter hotel name" type="text" />
-                        <p class="registration-error" id="HMHotelNameError"></p>
-                    </div>
-                </div>
-                <div class="registration-row">
-                    <div class="registration-label"><label for="HMStars">Star Rating:</label></div>
-                    <div class="registration-control"><select id="HMStars"><option value="">-- Select Rating --</option><option value="1 Star">1 Star</option><option value="2 Star">2 Star</option><option value="3 Star">3 Star</option><option value="4 Star">4 Star</option><option value="5 Star">5 Star</option></select>
-                        <p class="registration-error" id="HMStarsError"></p>
-                    </div>
-                </div>
-                <div class="registration-row">
-                    <div class="registration-label"><label for="HMRooms">Total Rooms:</label></div>
-                    <div class="registration-control"><input id="HMRooms" placeholder="1 - 500" type="number" min="1" max="500" />
-                        <p class="registration-error" id="HMRoomsError"></p>
-                    </div>
-                </div>
-                <div class="registration-row">
-                    <div class="registration-label"><label for="HMLicense">License No:</label></div>
-                    <div class="registration-control"><input id="HMLicense" placeholder="e.g. HM-1234" type="text" />
-                        <p class="registration-error" id="HMLicenseError"></p>
-                    </div>
-                </div>
-                <div class="registration-row">
-                    <div class="registration-label"><label>Facilities:</label></div>
-                    <div class="registration-control">
-                        <label class="registration-choice"><input name="HMFacility" type="checkbox" value="WiFi" /> WiFi</label>
-                        <label class="registration-choice"><input name="HMFacility" type="checkbox" value="Pool" /> Pool</label>
-                        <label class="registration-choice"><input name="HMFacility" type="checkbox" value="Parking" /> Parking</label>
-                        <label class="registration-choice"><input name="HMFacility" type="checkbox" value="Restaurant" /> Restaurant</label>
-                        <label class="registration-choice"><input name="HMFacility" type="checkbox" value="Spa" /> Spa</label>
-                        <p class="registration-error" id="HMFacilityError"></p>
-                    </div>
-                </div>
-            </fieldset>
-            <fieldset class="registration-section">
-                <legend>Hotel Manager Access</legend>
-                <div class="registration-row">
-                    <div class="registration-label"><label>Access Level:</label></div>
-                    <div class="registration-control">
-                        <label class="registration-choice"><input name="HMAccess" type="radio" value="Full" onchange="setAccessLevel('HMPermissions', this.value)" /> Full</label>
-                        <label class="registration-choice"><input name="HMAccess" type="radio" value="Limited" onchange="setAccessLevel('HMPermissions', this.value)" /> Limited</label>
-                        <label class="registration-choice"><input name="HMAccess" type="radio" value="Read-only" onchange="setAccessLevel('HMPermissions', this.value)" /> Read-only</label>
-                        <p class="registration-error" id="HMAccessError"></p>
-                    </div>
-                </div>
-                <div class="registration-row">
-                    <div class="registration-label"><label>Permissions:</label></div>
-                    <div class="registration-control">
-                        <div id="HMPermissions">
-                        <label class="registration-choice"><input disabled name="HMPermission" type="checkbox" value="View Reservations" /> View Reservations</label>
-                        <label class="registration-choice"><input disabled name="HMPermission" type="checkbox" value="Manage Rooms" /> Manage Rooms</label>
-                        <label class="registration-choice"><input disabled name="HMPermission" type="checkbox" value="Set Prices" /> Set Prices</label>
-                        <label class="registration-choice"><input disabled name="HMPermission" type="checkbox" value="Cancel Reservations" /> Cancel Reservations</label>
-                        <label class="registration-choice"><input disabled name="HMPermission" type="checkbox" value="View Reports" /> View Reports</label>
-                        </div>
-                        <p class="registration-hint">Permissions are set by the selected access level.</p>
-                        <p class="registration-error" id="HMPermissionError"></p>
-                    </div>
-                </div>
-            </fieldset>
-            </div>
-            <fieldset class="registration-section">
-                <legend>Account Settings</legend>
-                <div class="registration-row">
-                    <div class="registration-label"><label for="AccountStatus">Account Status:</label></div>
-                    <div class="registration-control"><select id="AccountStatus"><option value="">-- Select Status --</option><option value="Active">Active</option><option value="Pending">Pending</option><option value="Suspended">Suspended</option></select>
-                        <p class="registration-error" id="StatusError"></p>
-                    </div>
-                </div>
-                <div class="registration-row">
-                    <div class="registration-label"><label for="ValidUntil">Valid Until:</label></div>
-                    <div class="registration-control"><input id="ValidUntil" placeholder="" type="date" />
-                        <p class="registration-hint">The date this account expires. It must be a future date</p>
-                        <p class="registration-error" id="ValidError"></p>
-                    </div>
-                </div>
-                <div class="registration-row">
-                    <div class="registration-label"><label for="NewUserName">Username:</label></div>
-                    <div class="registration-control"><input id="NewUserName" placeholder="4 - 15 characters" type="text" />
-                        <p class="registration-error" id="UserNameError"></p>
-                    </div>
-                </div>
-                <div class="registration-row">
-                    <div class="registration-label"><label for="TempPassword">Temporary Password:</label></div>
-                    <div class="registration-control"><input id="TempPassword" placeholder="Enter temporary password" type="password" />
-                        <p class="registration-hint">At least 8 characters with an uppercase letter, a lowercase letter and a number</p>
-                        <p class="registration-error" id="PasswordError"></p>
-                    </div>
-                </div>
-                <div class="registration-row">
-                    <div class="registration-label"><label for="ConfirmTemp">Confirm Password:</label></div>
-                    <div class="registration-control"><input id="ConfirmTemp" placeholder="Re-enter password" type="password" />
-                        <p class="registration-error" id="ConfirmError"></p>
-                    </div>
-                </div>
-            </fieldset>
-            <fieldset class="registration-section">
-                <legend>Account Notes</legend>
-                <div class="registration-row">
-                    <div class="registration-label"><label for="Notes">Reason for creating account:</label></div>
-                    <div class="registration-control"><textarea id="Notes" placeholder="Why is this account being created?"></textarea>
-                        <p class="registration-hint">20 - 200 characters</p>
-                        <p class="registration-error" id="NotesError"></p>
-                    </div>
-                </div>
-                <div class="registration-row">
-                    <div class="registration-label"><label>Confirmation:</label></div>
-                    <div class="registration-control">
-                        <label class="registration-choice"><input id="Confirm" type="checkbox" /> I confirm these details are correct</label>
-                        <p class="registration-error" id="ConfirmBoxError"></p>
-                    </div>
-                </div>
-            </fieldset>
-            <p aria-live="polite" id="ResultText"></p>
-            <input class="registration-button" id="submit" type="submit" value="Create User" />
-            <input class="registration-button" id="reset" type="reset" value="Reset" />
+            <p class="hint">Review contact details and role-specific information before creating the account.</p>
+            <label><input id="Confirm" type="checkbox" /> I confirm these details are correct.</label>
+            <p id="ConfirmBoxError"></p>
+            <p aria-live="polite" id="ResultError" hidden></p>
+            <p aria-live="polite" id="ResultSuccess" hidden></p>
+            <input type="submit" value="Create User" />
+            <input type="reset" value="Clear" />
         </form>
     </main>
-    <footer class="registration-footer">WanderVista</footer>
+    <footer>WanderVista | Travel Site</footer>
 </body>
 
 </html>
