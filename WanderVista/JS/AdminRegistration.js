@@ -1,125 +1,228 @@
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector("form");
-    form.addEventListener("submit", function (event) {
-        event.preventDefault();
-        collect_data();
-    });
-    form.addEventListener("reset", clearAllErrors);
-    document.getElementById("AdminRole").addEventListener("change", setAdminRolePermissions);
-    setAdminRolePermissions();
+
+    if (form) {
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            collectData();
+        });
+
+        form.addEventListener("reset", clearAllErrors);
+    }
+
+    const roleField = document.getElementById("AdminRole");
+
+    if (roleField) {
+        roleField.addEventListener("change", setAdminRolePermissions);
+        setAdminRolePermissions();
+    }
 });
 
-const field = (id) => document.getElementById(id);
-const value = (id) => field(id).value.trim();
-
-function showError(id, message) {
-    field(id).textContent = message;
-    return message === "";
-}
-
-function isValidPhone(phone) {
-    const digits = phone.replace(/\D/g, "");
-    return /^\+?[\d\s()-]+$/.test(phone) && digits.length >= 7 && digits.length <= 15;
-}
-
 function setAdminRolePermissions() {
-    const rolePermissions = {
-        "Super Admin": ["TourManagers", "HotelManagers", "Tourists", "Reports"],
-        "Tour Operations Admin": ["TourManagers", "Tourists"],
-        "Hotel & Booking Admin": ["HotelManagers", "Reports"]
-    };
-    const selectedPermissions = rolePermissions[value("AdminRole")] || [];
+    const role = document.getElementById("AdminRole").value;
+    const permissions = document.querySelectorAll('input[name="permission"]');
 
-    document.querySelectorAll('input[name="permission"]').forEach((permission) => {
-        permission.checked = selectedPermissions.includes(permission.value);
-        permission.disabled = true;
-    });
-    showError("PermissionError", "");
+    for (let i = 0; i < permissions.length; i++) {
+        permissions[i].checked = false;
+        permissions[i].disabled = true;
+
+        if (role === "Super Admin") {
+            permissions[i].checked = true;
+        } else if (role === "Tour Operations Admin") {
+            if (permissions[i].value === "TourManagers" || permissions[i].value === "Tourists") {
+                permissions[i].checked = true;
+            }
+        } else if (role === "Hotel & Booking Admin") {
+            if (permissions[i].value === "HotelManagers" || permissions[i].value === "Reports") {
+                permissions[i].checked = true;
+            }
+        }
+    }
+
+    document.getElementById("PermissionError").textContent = "";
 }
 
-function collect_data() {
-    const validName = validateName();
-    const validAdminID = validateAdminID();
-    const validEmail = validateEmail();
-    const validPhone = validatePhone();
-    const validRole = validateRole();
-    const validPermission = validatePermission();
-    const validUsername = validateUsername();
-    const validPassword = validatePassword();
-    const validConfirmation = validatePasswordConfirmation();
-    const isValid = validName && validAdminID && validEmail && validPhone && validRole &&
-        validPermission && validUsername && validPassword && validConfirmation;
+function collectData() {
+    const nameIsValid = validateName();
+    const idIsValid = validateAdminID();
+    const emailIsValid = validateEmail();
+    const phoneIsValid = validatePhone();
+    const roleIsValid = validateRole();
+    const permissionIsValid = validatePermission();
+    const usernameIsValid = validateUsername();
+    const passwordIsValid = validatePassword();
+    const confirmationIsValid = validatePasswordConfirmation();
 
-    if (!isValid) {
+    if (!nameIsValid || !idIsValid || !emailIsValid || !phoneIsValid ||
+        !roleIsValid || !permissionIsValid || !usernameIsValid ||
+        !passwordIsValid || !confirmationIsValid) {
         showResult(false, "Please correct the highlighted fields.");
         return false;
     }
 
-    field("Password").value = "";
-    field("ConfirmPassword").value = "";
+    document.getElementById("Password").value = "";
+    document.getElementById("ConfirmPassword").value = "";
+
     showResult(true, "Registration successful. Details were validated only; no account or credentials were stored. Redirecting to admin login...");
-    window.setTimeout(() => {
+
+    window.setTimeout(function () {
         window.location.href = "AdminLogin.html";
     }, 800);
+
     return true;
 }
 
 function validateName() {
-    return showError("NameError", value("AdminName").length >= 2 ? "" : "Enter your full name.");
+    const name = document.getElementById("AdminName").value.trim();
+    const error = document.getElementById("NameError");
+
+    if (name.length < 2) {
+        error.textContent = "Enter your full name.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
 }
 
 function validateAdminID() {
-    return showError("AdminIDError", /^ADM-\d{4}$/.test(value("AdminID")) ? "" : "Use the format ADM-1234.");
+    const adminID = document.getElementById("AdminID").value.trim();
+    const error = document.getElementById("AdminIDError");
+
+    if (!/^ADM-\d{4}$/.test(adminID)) {
+        error.textContent = "Use the format ADM-1234.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
 }
 
 function validateEmail() {
-    return showError("EmailError", /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value("AdminEmail")) ? "" : "Enter a valid email address.");
+    const email = document.getElementById("AdminEmail").value.trim();
+    const error = document.getElementById("EmailError");
+    const emailFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailFormat.test(email)) {
+        error.textContent = "Enter a valid email address.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
 }
 
 function validatePhone() {
-    return showError("PhoneError", isValidPhone(value("AdminPhone")) ? "" : "Enter a valid phone number.");
+    const phone = document.getElementById("AdminPhone").value.trim();
+    const error = document.getElementById("PhoneError");
+    const containsOnlyDigits = /^\d+$/.test(phone);
+    const hasElevenDigits = phone.length === 11;
+
+    if (!containsOnlyDigits || !hasElevenDigits) {
+        error.textContent = "Enter an 11-digit phone number.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
 }
 
 function validateRole() {
-    return showError("RoleError", value("AdminRole") ? "" : "Select an admin role.");
+    const role = document.getElementById("AdminRole").value;
+    const error = document.getElementById("RoleError");
+
+    if (role === "") {
+        error.textContent = "Select an admin role.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
 }
 
 function validatePermission() {
-    const selectedPermission = document.querySelector('input[name="permission"]:checked');
-    return showError("PermissionError", selectedPermission ? "" : "Select an admin role to assign access.");
+    const permission = document.querySelector('input[name="permission"]:checked');
+    const error = document.getElementById("PermissionError");
+
+    if (!permission) {
+        error.textContent = "Select an admin role to assign access.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
 }
 
 function validateUsername() {
-    return showError("UserNameError", /^[A-Za-z0-9_]{4,15}$/.test(value("UserName")) ? "" : "Use 4-15 letters, numbers or underscores.");
+    const username = document.getElementById("UserName").value.trim();
+    const error = document.getElementById("UserNameError");
+    const usernameFormat = /^[A-Za-z0-9_]{4,15}$/;
+
+    if (!usernameFormat.test(username)) {
+        error.textContent = "Use 4-15 letters, numbers or underscores.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
 }
 
 function validatePassword() {
-    const password = field("Password").value;
-    return showError("PasswordError", /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(password) ? "" : "Use at least 8 characters with uppercase, lowercase and a number.");
+    const password = document.getElementById("Password").value;
+    const error = document.getElementById("PasswordError");
+    const hasLowercase = /[a-z]/.test(password);
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasNumber = /\d/.test(password);
+
+    if (password.length < 8 || !hasLowercase || !hasUppercase || !hasNumber) {
+        error.textContent = "Use at least 8 characters with uppercase, lowercase and a number.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
 }
 
 function validatePasswordConfirmation() {
-    const password = field("Password").value;
-    const confirmation = field("ConfirmPassword").value;
-    return showError("ConfirmError", password && password === confirmation ? "" : "Passwords do not match.");
+    const password = document.getElementById("Password").value;
+    const confirmation = document.getElementById("ConfirmPassword").value;
+    const error = document.getElementById("ConfirmError");
+
+    if (password === "" || password !== confirmation) {
+        error.textContent = "Passwords do not match.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
 }
 
 function showResult(success, message) {
-    const error = field("ResultError");
-    const successMessage = field("ResultSuccess");
+    const error = document.getElementById("ResultError");
+    const successMessage = document.getElementById("ResultSuccess");
+
     error.textContent = "";
     successMessage.textContent = "";
     error.hidden = success;
     successMessage.hidden = !success;
-    (success ? successMessage : error).textContent = message;
+
+    if (success) {
+        successMessage.textContent = message;
+    } else {
+        error.textContent = message;
+    }
 }
 
 function clearAllErrors() {
-    document.querySelectorAll('p[id$="Error"]').forEach((item) => {
-        item.textContent = "";
-    });
-    field("ResultError").hidden = true;
-    field("ResultSuccess").textContent = "";
-    field("ResultSuccess").hidden = true;
+    const errorMessages = document.querySelectorAll('p[id$="Error"]');
+
+    for (let i = 0; i < errorMessages.length; i++) {
+        errorMessages[i].textContent = "";
+    }
+
+    document.getElementById("ResultError").hidden = true;
+    document.getElementById("ResultSuccess").textContent = "";
+    document.getElementById("ResultSuccess").hidden = true;
+
     window.setTimeout(setAdminRolePermissions, 0);
 }

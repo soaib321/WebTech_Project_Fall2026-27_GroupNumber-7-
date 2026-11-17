@@ -1,69 +1,139 @@
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector("form");
+    const showPasswordBox = document.getElementById("ShowPassword");
+
+    if (!form) {
+        return;
+    }
+
     form.addEventListener("submit", function (event) {
         event.preventDefault();
-        collect_data();
+        checkLoginForm();
     });
-    form.addEventListener("reset", clearLoginMessage);
-    document.getElementById("ShowPassword").addEventListener("change", togglePasswordVisibility);
+
+    form.addEventListener("reset", resetLoginForm);
+
+    if (showPasswordBox) {
+        showPasswordBox.addEventListener("change", togglePasswordVisibility);
+    }
 });
 
-function collect_data() {
-    document.getElementById("LoginMessage").textContent = "";
-    const validUsername = validateUsername();
-    const validPassword = validatePassword();
+function checkLoginForm() {
+    clearLoginMessage();
 
-    if (!validUsername || !validPassword) {
+    const usernameIsValid = validateUsername();
+    const passwordIsValid = validatePassword();
+
+    if (!usernameIsValid || !passwordIsValid) {
         return false;
     }
-    return loginAccount();
+
+    return loginAdmin();
 }
 
 function validateUsername() {
     const username = document.getElementById("LoginUsername").value.trim();
-    const error = document.getElementById("UsernameError");
-    error.textContent = username ? "" : "Enter your username.";
-    return username !== "";
+    const errorBox = document.getElementById("UsernameError");
+
+    if (username === "") {
+        errorBox.textContent = "Enter your username.";
+        return false;
+    }
+
+    errorBox.textContent = "";
+    return true;
 }
 
 function validatePassword() {
     const password = document.getElementById("LoginPassword").value;
-    const error = document.getElementById("PasswordError");
-    error.textContent = password ? "" : "Enter your password.";
-    return password !== "";
-}
+    const errorBox = document.getElementById("PasswordError");
 
-function loginAccount() {
-    const message = document.getElementById("LoginMessage");
-    const username = document.getElementById("LoginUsername").value.trim();
-    const password = document.getElementById("LoginPassword").value;
-    message.className = "error";
-
-    if (username !== "admin" || password !== "admin123") {
-        message.textContent = "Incorrect username or password. New admin accounts require secure server-side authentication.";
+    if (password === "") {
+        errorBox.textContent = "Enter your password.";
         return false;
     }
 
-    message.className = "notice";
-    message.textContent = "Login successful. Opening user management...";
-    window.setTimeout(() => {
+    errorBox.textContent = "";
+    return true;
+}
+
+function loginAdmin() {
+    const errorBox = document.getElementById("LoginError");
+    const successBox = document.getElementById("LoginSuccess");
+    const username = document.getElementById("LoginUsername").value.trim();
+    const password = document.getElementById("LoginPassword").value;
+
+    errorBox.hidden = true;
+    successBox.hidden = true;
+    errorBox.textContent = "";
+    successBox.textContent = "";
+
+    if (username !== "admin" || password !== "admin123") {
+        errorBox.textContent = "Incorrect username or password. New admin accounts require secure server-side authentication.";
+        errorBox.hidden = false;
+        return false;
+    }
+
+    successBox.textContent = "Login successful. Opening user management...";
+    successBox.hidden = false;
+
+    window.setTimeout(function () {
         window.location.href = "AdminCreateUser.html";
     }, 500);
+
     return true;
 }
 
 function clearLoginMessage() {
-    const message = document.getElementById("LoginMessage");
-    message.textContent = "";
-    message.className = "error";
-    document.getElementById("UsernameError").textContent = "";
-    document.getElementById("PasswordError").textContent = "";
-    document.getElementById("ShowPassword").checked = false;
-    document.getElementById("LoginPassword").type = "password";
+    const errorBox = document.getElementById("LoginError");
+    const successBox = document.getElementById("LoginSuccess");
+    const usernameError = document.getElementById("UsernameError");
+    const passwordError = document.getElementById("PasswordError");
+    const passwordField = document.getElementById("LoginPassword");
+    const showPasswordBox = document.getElementById("ShowPassword");
+
+    if (errorBox) {
+        errorBox.textContent = "";
+        errorBox.hidden = true;
+    }
+
+    if (successBox) {
+        successBox.textContent = "";
+        successBox.hidden = true;
+    }
+
+    if (usernameError) {
+        usernameError.textContent = "";
+    }
+
+    if (passwordError) {
+        passwordError.textContent = "";
+    }
+
+    if (showPasswordBox) {
+        showPasswordBox.checked = false;
+    }
+
+    if (passwordField) {
+        passwordField.type = "password";
+    }
+}
+
+function resetLoginForm() {
+    clearLoginMessage();
 }
 
 function togglePasswordVisibility() {
-    const password = document.getElementById("LoginPassword");
-    const showPassword = document.getElementById("ShowPassword").checked;
-    password.type = showPassword ? "text" : "password";
+    const passwordField = document.getElementById("LoginPassword");
+    const showPasswordBox = document.getElementById("ShowPassword");
+
+    if (!passwordField || !showPasswordBox) {
+        return;
+    }
+
+    if (showPasswordBox.checked) {
+        passwordField.type = "text";
+    } else {
+        passwordField.type = "password";
+    }
 }

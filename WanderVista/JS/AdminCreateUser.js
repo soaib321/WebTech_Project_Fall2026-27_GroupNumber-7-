@@ -1,16 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector("form");
-    form.addEventListener("submit", function (event) {
-        event.preventDefault();
-        collect_data();
-    });
-    form.addEventListener("reset", clearCreateUserForm);
-    document.getElementById("AssignedRole").addEventListener("change", showRoleFields);
-    showRoleFields();
+    const roleField = document.getElementById("AssignedRole");
+
+    if (form) {
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            collectData();
+        });
+        form.addEventListener("reset", clearCreateUserForm);
+    }
+
+    if (roleField) {
+        roleField.addEventListener("change", showRoleFields);
+        showRoleFields();
+    }
 });
 
-const userField = (id) => document.getElementById(id);
-const userValue = (id) => userField(id).value.trim();
 const roleFieldIds = ["TouristFields", "TourManagerFields", "HotelManagerFields"];
 const roleErrorIds = [
     "TouristDestinationError", "TouristStyleError", "TouristBudgetError",
@@ -19,97 +24,163 @@ const roleErrorIds = [
 ];
 
 function showRoleFields() {
-    roleFieldIds.forEach((id) => {
-        userField(id).hidden = true;
-    });
-    roleErrorIds.forEach((id) => {
-        userField(id).textContent = "";
-    });
-
-    const roleFields = {
-        "Tourist": "TouristFields",
-        "Tour Manager": "TourManagerFields",
-        "Hotel Manager": "HotelManagerFields"
-    };
-    const selectedFields = roleFields[userValue("AssignedRole")];
-    if (selectedFields) {
-        userField(selectedFields).hidden = false;
+    for (let i = 0; i < roleFieldIds.length; i++) {
+        document.getElementById(roleFieldIds[i]).hidden = true;
     }
 
-    userField("ResultError").textContent = "";
-    userField("ResultError").hidden = true;
-    userField("ResultSuccess").textContent = "";
-    userField("ResultSuccess").hidden = true;
+    for (let i = 0; i < roleErrorIds.length; i++) {
+        document.getElementById(roleErrorIds[i]).textContent = "";
+    }
+
+    const role = document.getElementById("AssignedRole").value;
+
+    if (role === "Tourist") {
+        document.getElementById("TouristFields").hidden = false;
+    } else if (role === "Tour Manager") {
+        document.getElementById("TourManagerFields").hidden = false;
+    } else if (role === "Hotel Manager") {
+        document.getElementById("HotelManagerFields").hidden = false;
+    }
+
+    document.getElementById("ResultError").textContent = "";
+    document.getElementById("ResultError").hidden = true;
+    document.getElementById("ResultSuccess").textContent = "";
+    document.getElementById("ResultSuccess").hidden = true;
 }
 
 function setUserError(id, message) {
-    userField(id).textContent = message;
-    return message === "";
+    document.getElementById(id).textContent = message;
 }
 
 function isValidPhone(phone) {
     const digits = phone.replace(/\D/g, "");
-    return /^\+?[\d\s()-]+$/.test(phone) && digits.length >= 7 && digits.length <= 15;
+    const hasAllowedCharacters = /^\+?[\d\s()-]+$/.test(phone);
+
+    if (!hasAllowedCharacters || digits.length < 7 || digits.length > 15) {
+        return false;
+    }
+
+    return true;
 }
 
 function isChecked(name) {
-    return document.querySelector('input[name="' + name + '"]:checked') !== null;
+    const choices = document.querySelectorAll('input[name="' + name + '"]');
+
+    for (let i = 0; i < choices.length; i++) {
+        if (choices[i].checked) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 function isNumberBetween(text, min, max) {
     const number = Number(text);
-    return text !== "" && Number.isInteger(number) && number >= min && number <= max;
+
+    if (text === "" || number % 1 !== 0 || number < min || number > max) {
+        return false;
+    }
+
+    return true;
 }
 
 function isPastOrToday(dateText) {
     if (!dateText) {
         return false;
     }
+
     const date = new Date(dateText + "T00:00:00");
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    return !Number.isNaN(date.getTime()) && date <= today;
-}
 
-function collect_data() {
-    const role = userValue("AssignedRole");
-    const checks = [
-        validateName(),
-        validateEmail(),
-        validatePhone(),
-        validateGender(),
-        validateNationality(),
-        validateDateOfBirth(),
-        validateAddress(),
-        validateEmergencyContact(),
-        validateRole(),
-        validateUsername(),
-        validatePassword(),
-        validatePasswordConfirmation(),
-        validateAccountStatus(),
-        validateAccountNote(),
-        validateConfirmation()
-    ];
-
-    if (role === "Tourist") {
-        checks.push(validateTravelerDetails());
-    } else if (role === "Tour Manager") {
-        checks.push(validateTourManagerDetails());
-    } else if (role === "Hotel Manager") {
-        checks.push(validateHotelManagerDetails());
+    if (isNaN(date.getTime()) || date > today) {
+        return false;
     }
 
-    const resultError = userField("ResultError");
-    const resultSuccess = userField("ResultSuccess");
-    if (!checks.every(Boolean)) {
+    return true;
+}
+
+function collectData() {
+    const role = document.getElementById("AssignedRole").value;
+    let allValid = true;
+
+    if (!validateName()) {
+        allValid = false;
+    }
+    if (!validateEmail()) {
+        allValid = false;
+    }
+    if (!validatePhone()) {
+        allValid = false;
+    }
+    if (!validateGender()) {
+        allValid = false;
+    }
+    if (!validateNationality()) {
+        allValid = false;
+    }
+    if (!validateDateOfBirth()) {
+        allValid = false;
+    }
+    if (!validateAddress()) {
+        allValid = false;
+    }
+    if (!validateEmergencyContact()) {
+        allValid = false;
+    }
+    if (!validateRole()) {
+        allValid = false;
+    }
+    if (!validateUsername()) {
+        allValid = false;
+    }
+    if (!validatePassword()) {
+        allValid = false;
+    }
+    if (!validatePasswordConfirmation()) {
+        allValid = false;
+    }
+    if (!validateAccountStatus()) {
+        allValid = false;
+    }
+    if (!validateAccountNote()) {
+        allValid = false;
+    }
+    if (!validateConfirmation()) {
+        allValid = false;
+    }
+
+    if (role === "Tourist") {
+        if (!validateTravelerDetails()) {
+            allValid = false;
+        }
+    } else if (role === "Tour Manager") {
+        if (!validateTourManagerDetails()) {
+            allValid = false;
+        }
+    } else if (role === "Hotel Manager") {
+        if (!validateHotelManagerDetails()) {
+            allValid = false;
+        }
+    }
+
+    const resultError = document.getElementById("ResultError");
+    const resultSuccess = document.getElementById("ResultSuccess");
+
+    if (!allValid) {
         resultError.hidden = false;
         resultError.textContent = "Please correct the highlighted fields.";
         return false;
     }
 
-    const roleLabel = role === "Tourist" ? "Traveler" : role;
-    userField("TempPassword").value = "";
-    userField("ConfirmTemp").value = "";
+    let roleLabel = role;
+    if (role === "Tourist") {
+        roleLabel = "Traveler";
+    }
+
+    document.getElementById("TempPassword").value = "";
+    document.getElementById("ConfirmTemp").value = "";
     resultError.textContent = "";
     resultError.hidden = true;
     resultSuccess.hidden = false;
@@ -118,102 +189,331 @@ function collect_data() {
 }
 
 function validateName() {
-    return setUserError("NameError", userValue("UserFullName").length >= 2 ? "" : "Enter the user's full name.");
+    const name = document.getElementById("UserFullName").value.trim();
+    const error = document.getElementById("NameError");
+
+    if (name.length < 2) {
+        error.textContent = "Enter the user's full name.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
 }
 
 function validateEmail() {
-    return setUserError("EmailError", /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userValue("UserEmail")) ? "" : "Enter a valid email address.");
+    const email = document.getElementById("UserEmail").value.trim();
+    const error = document.getElementById("EmailError");
+    const emailFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailFormat.test(email)) {
+        error.textContent = "Enter a valid email address.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
 }
 
 function validatePhone() {
-    return setUserError("PhoneError", isValidPhone(userValue("UserPhone")) ? "" : "Enter a valid phone number.");
+    const phone = document.getElementById("UserPhone").value.trim();
+    const error = document.getElementById("PhoneError");
+
+    if (!isValidPhone(phone)) {
+        error.textContent = "Enter a valid phone number.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
 }
 
 function validateGender() {
-    return setUserError("GenderError", isChecked("UserGender") ? "" : "Select a gender.");
+    const error = document.getElementById("GenderError");
+
+    if (!isChecked("UserGender")) {
+        error.textContent = "Select a gender.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
 }
 
 function validateNationality() {
-    return setUserError("NationalityError", userValue("UserNationality") ? "" : "Select a nationality.");
+    const nationality = document.getElementById("UserNationality").value;
+    const error = document.getElementById("NationalityError");
+
+    if (nationality === "") {
+        error.textContent = "Select a nationality.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
 }
 
 function validateDateOfBirth() {
-    return setUserError("DOBError", isPastOrToday(userValue("UserDOB")) ? "" : "Enter a valid date of birth that is not in the future.");
+    const dateOfBirth = document.getElementById("UserDOB").value;
+    const error = document.getElementById("DOBError");
+
+    if (!isPastOrToday(dateOfBirth)) {
+        error.textContent = "Enter a valid date of birth that is not in the future.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
 }
 
 function validateAddress() {
-    return setUserError("AddressError", userValue("UserAddress").length >= 5 ? "" : "Enter a complete home address.");
+    const address = document.getElementById("UserAddress").value.trim();
+    const error = document.getElementById("AddressError");
+
+    if (address.length < 5) {
+        error.textContent = "Enter a complete home address.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
 }
 
 function validateEmergencyContact() {
-    const phone = userValue("UserEmergency");
-    return setUserError("EmergencyError", !phone || isValidPhone(phone) ? "" : "Enter a valid emergency contact number.");
+    const phone = document.getElementById("UserEmergency").value.trim();
+    const error = document.getElementById("EmergencyError");
+
+    if (phone !== "" && !isValidPhone(phone)) {
+        error.textContent = "Enter a valid emergency contact number.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
 }
 
 function validateRole() {
-    const validRoles = ["Tourist", "Tour Manager", "Hotel Manager"];
-    return setUserError("RoleError", validRoles.includes(userValue("AssignedRole")) ? "" : "Select an account type.");
+    const role = document.getElementById("AssignedRole").value;
+    const error = document.getElementById("RoleError");
+
+    if (role !== "Tourist" && role !== "Tour Manager" && role !== "Hotel Manager") {
+        error.textContent = "Select an account type.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
 }
 
 function validateUsername() {
-    return setUserError("UserNameError", /^[A-Za-z0-9_]{4,15}$/.test(userValue("NewUserName")) ? "" : "Use 4-15 letters, numbers, or underscores.");
+    const username = document.getElementById("NewUserName").value.trim();
+    const error = document.getElementById("UserNameError");
+    const usernameFormat = /^[A-Za-z0-9_]{4,15}$/;
+
+    if (!usernameFormat.test(username)) {
+        error.textContent = "Use 4-15 letters, numbers, or underscores.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
 }
 
 function validatePassword() {
-    const password = userField("TempPassword").value;
-    return setUserError("PasswordError", /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(password) ? "" : "Use 8+ characters with uppercase, lowercase, and a number.");
+    const password = document.getElementById("TempPassword").value;
+    const error = document.getElementById("PasswordError");
+    const hasLowercase = /[a-z]/.test(password);
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasNumber = /\d/.test(password);
+
+    if (password.length < 8 || !hasLowercase || !hasUppercase || !hasNumber) {
+        error.textContent = "Use 8+ characters with uppercase, lowercase, and a number.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
 }
 
 function validatePasswordConfirmation() {
-    const password = userField("TempPassword").value;
-    const confirmation = userField("ConfirmTemp").value;
-    return setUserError("ConfirmError", password && password === confirmation ? "" : "Passwords do not match.");
+    const password = document.getElementById("TempPassword").value;
+    const confirmation = document.getElementById("ConfirmTemp").value;
+    const error = document.getElementById("ConfirmError");
+
+    if (password === "" || password !== confirmation) {
+        error.textContent = "Passwords do not match.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
 }
 
 function validateAccountStatus() {
-    return setUserError("StatusError", userValue("AccountStatus") ? "" : "Select an account status.");
+    const status = document.getElementById("AccountStatus").value;
+    const error = document.getElementById("StatusError");
+
+    if (status === "") {
+        error.textContent = "Select an account status.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
 }
 
 function validateAccountNote() {
-    return setUserError("NotesError", userValue("Notes").length <= 200 ? "" : "Keep the account note under 200 characters.");
+    const notes = document.getElementById("Notes").value.trim();
+    const error = document.getElementById("NotesError");
+
+    if (notes.length > 200) {
+        error.textContent = "Keep the account note under 200 characters.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
 }
 
 function validateConfirmation() {
-    return setUserError("ConfirmBoxError", userField("Confirm").checked ? "" : "Confirm that the details are correct.");
+    const confirmation = document.getElementById("Confirm").checked;
+    const error = document.getElementById("ConfirmBoxError");
+
+    if (!confirmation) {
+        error.textContent = "Confirm that the details are correct.";
+        return false;
+    }
+
+    error.textContent = "";
+    return true;
 }
 
 function validateTravelerDetails() {
-    const destinationValid = setUserError("TouristDestinationError", userValue("TouristDestination") ? "" : "Select a preferred destination.");
-    const styleValid = setUserError("TouristStyleError", isChecked("TouristStyle") ? "" : "Select a travel style.");
-    const budgetValid = setUserError("TouristBudgetError", userValue("TouristBudget") ? "" : "Select a typical travel budget.");
-    return destinationValid && styleValid && budgetValid;
+    let allValid = true;
+
+    if (document.getElementById("TouristDestination").value === "") {
+        setUserError("TouristDestinationError", "Select a preferred destination.");
+        allValid = false;
+    } else {
+        setUserError("TouristDestinationError", "");
+    }
+
+    if (!isChecked("TouristStyle")) {
+        setUserError("TouristStyleError", "Select a travel style.");
+        allValid = false;
+    } else {
+        setUserError("TouristStyleError", "");
+    }
+
+    if (document.getElementById("TouristBudget").value === "") {
+        setUserError("TouristBudgetError", "Select a typical travel budget.");
+        allValid = false;
+    } else {
+        setUserError("TouristBudgetError", "");
+    }
+
+    return allValid;
 }
 
 function validateTourManagerDetails() {
-    const specializationValid = setUserError("TMSpecializationError", userValue("TMSpecialization") ? "" : "Select a tour specialization.");
-    const experienceValid = setUserError("TMExperienceError", isNumberBetween(userValue("TMExperience"), 0, 50) ? "" : "Enter 0 to 50 years of experience.");
-    const licenseValid = setUserError("TMLicenseError", userValue("TMLicense").length >= 4 ? "" : "Enter a valid license number.");
-    const languagesValid = setUserError("TMLanguageError", isChecked("TMLanguage") ? "" : "Select at least one language.");
-    const toursValid = setUserError("TMMaxToursError", isNumberBetween(userValue("TMMaxTours"), 1, 20) ? "" : "Enter a number from 1 to 20.");
-    return specializationValid && experienceValid && licenseValid && languagesValid && toursValid;
+    let allValid = true;
+
+    if (document.getElementById("TMSpecialization").value === "") {
+        setUserError("TMSpecializationError", "Select a tour specialization.");
+        allValid = false;
+    } else {
+        setUserError("TMSpecializationError", "");
+    }
+
+    if (!isNumberBetween(document.getElementById("TMExperience").value, 0, 50)) {
+        setUserError("TMExperienceError", "Enter 0 to 50 years of experience.");
+        allValid = false;
+    } else {
+        setUserError("TMExperienceError", "");
+    }
+
+    if (document.getElementById("TMLicense").value.trim().length < 4) {
+        setUserError("TMLicenseError", "Enter a valid license number.");
+        allValid = false;
+    } else {
+        setUserError("TMLicenseError", "");
+    }
+
+    if (!isChecked("TMLanguage")) {
+        setUserError("TMLanguageError", "Select at least one language.");
+        allValid = false;
+    } else {
+        setUserError("TMLanguageError", "");
+    }
+
+    if (!isNumberBetween(document.getElementById("TMMaxTours").value, 1, 20)) {
+        setUserError("TMMaxToursError", "Enter a number from 1 to 20.");
+        allValid = false;
+    } else {
+        setUserError("TMMaxToursError", "");
+    }
+
+    return allValid;
 }
 
 function validateHotelManagerDetails() {
-    const nameValid = setUserError("HMHotelNameError", userValue("HMHotelName").length >= 2 ? "" : "Enter the hotel name.");
-    const addressValid = setUserError("HMAddressError", userValue("HMAddress").length >= 5 ? "" : "Enter the hotel's location.");
-    const ratingValid = setUserError("HMStarsError", userValue("HMStars") ? "" : "Select the hotel's rating.");
-    const roomsValid = setUserError("HMRoomsError", isNumberBetween(userValue("HMRooms"), 1, 500) ? "" : "Enter a room capacity from 1 to 500.");
-    const licenseValid = setUserError("HMLicenseError", userValue("HMLicense").length >= 4 ? "" : "Enter the hotel's license number.");
-    const facilitiesValid = setUserError("HMFacilityError", isChecked("HMFacility") ? "" : "Select at least one facility.");
-    return nameValid && addressValid && ratingValid && roomsValid && licenseValid && facilitiesValid;
+    let allValid = true;
+
+    if (document.getElementById("HMHotelName").value.trim().length < 2) {
+        setUserError("HMHotelNameError", "Enter the hotel name.");
+        allValid = false;
+    } else {
+        setUserError("HMHotelNameError", "");
+    }
+
+    if (document.getElementById("HMAddress").value.trim().length < 5) {
+        setUserError("HMAddressError", "Enter the hotel's location.");
+        allValid = false;
+    } else {
+        setUserError("HMAddressError", "");
+    }
+
+    if (document.getElementById("HMStars").value === "") {
+        setUserError("HMStarsError", "Select the hotel's rating.");
+        allValid = false;
+    } else {
+        setUserError("HMStarsError", "");
+    }
+
+    if (!isNumberBetween(document.getElementById("HMRooms").value, 1, 500)) {
+        setUserError("HMRoomsError", "Enter a room capacity from 1 to 500.");
+        allValid = false;
+    } else {
+        setUserError("HMRoomsError", "");
+    }
+
+    if (document.getElementById("HMLicense").value.trim().length < 4) {
+        setUserError("HMLicenseError", "Enter the hotel's license number.");
+        allValid = false;
+    } else {
+        setUserError("HMLicenseError", "");
+    }
+
+    if (!isChecked("HMFacility")) {
+        setUserError("HMFacilityError", "Select at least one facility.");
+        allValid = false;
+    } else {
+        setUserError("HMFacilityError", "");
+    }
+
+    return allValid;
 }
 
 function clearCreateUserForm() {
-    document.querySelectorAll('p[id$="Error"]').forEach((item) => {
-        item.textContent = "";
-    });
-    userField("ResultError").hidden = true;
-    userField("ResultSuccess").textContent = "";
-    userField("ResultSuccess").hidden = true;
+    const errorMessages = document.querySelectorAll('p[id$="Error"]');
+
+    for (let i = 0; i < errorMessages.length; i++) {
+        errorMessages[i].textContent = "";
+    }
+
+    document.getElementById("ResultError").hidden = true;
+    document.getElementById("ResultSuccess").textContent = "";
+    document.getElementById("ResultSuccess").hidden = true;
+
     window.setTimeout(showRoleFields, 0);
 }
