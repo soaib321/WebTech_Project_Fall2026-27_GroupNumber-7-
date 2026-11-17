@@ -36,11 +36,11 @@ function validateUsername() {
     const errorBox = document.getElementById("UsernameError");
 
     if (username === "") {
-        errorBox.textContent = "Enter your username.";
+        errorBox.innerHTML = "Enter your username.";
         return false;
     }
 
-    errorBox.textContent = "";
+    errorBox.innerHTML = "";
     return true;
 }
 
@@ -49,11 +49,11 @@ function validatePassword() {
     const errorBox = document.getElementById("PasswordError");
 
     if (password === "") {
-        errorBox.textContent = "Enter your password.";
+        errorBox.innerHTML = "Enter your password.";
         return false;
     }
 
-    errorBox.textContent = "";
+    errorBox.innerHTML = "";
     return true;
 }
 
@@ -65,16 +65,16 @@ function loginAdmin() {
 
     errorBox.hidden = true;
     successBox.hidden = true;
-    errorBox.textContent = "";
-    successBox.textContent = "";
+    errorBox.innerHTML = "";
+    successBox.innerHTML = "";
 
     if (username !== "admin" || password !== "admin123") {
-        errorBox.textContent = "Incorrect username or password. New admin accounts require secure server-side authentication.";
+        errorBox.innerHTML = "Incorrect username or password. New admin accounts require secure server-side authentication.";
         errorBox.hidden = false;
         return false;
     }
 
-    successBox.textContent = "Login successful. Opening user management...";
+    successBox.innerHTML = "Login successful. Opening user management...";
     successBox.hidden = false;
 
     window.setTimeout(function () {
@@ -93,21 +93,21 @@ function clearLoginMessage() {
     const showPasswordBox = document.getElementById("ShowPassword");
 
     if (errorBox) {
-        errorBox.textContent = "";
+        errorBox.innerHTML = "";
         errorBox.hidden = true;
     }
 
     if (successBox) {
-        successBox.textContent = "";
+        successBox.innerHTML = "";
         successBox.hidden = true;
     }
 
     if (usernameError) {
-        usernameError.textContent = "";
+        usernameError.innerHTML = "";
     }
 
     if (passwordError) {
-        passwordError.textContent = "";
+        passwordError.innerHTML = "";
     }
 
     if (showPasswordBox) {

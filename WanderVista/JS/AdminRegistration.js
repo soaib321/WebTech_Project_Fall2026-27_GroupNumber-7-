@@ -39,7 +39,7 @@ function setAdminRolePermissions() {
         }
     }
 
-    document.getElementById("PermissionError").textContent = "";
+    document.getElementById("PermissionError").innerHTML = "";
 }
 
 function collectData() {
@@ -77,11 +77,11 @@ function validateName() {
     const error = document.getElementById("NameError");
 
     if (name.length < 2) {
-        error.textContent = "Enter your full name.";
+        error.innerHTML = "Enter your full name.";
         return false;
     }
 
-    error.textContent = "";
+    error.innerHTML = "";
     return true;
 }
 
@@ -90,11 +90,11 @@ function validateAdminID() {
     const error = document.getElementById("AdminIDError");
 
     if (!/^ADM-\d{4}$/.test(adminID)) {
-        error.textContent = "Use the format ADM-1234.";
+        error.innerHTML = "Use the format ADM-1234.";
         return false;
     }
 
-    error.textContent = "";
+    error.innerHTML = "";
     return true;
 }
 
@@ -104,11 +104,11 @@ function validateEmail() {
     const emailFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailFormat.test(email)) {
-        error.textContent = "Enter a valid email address.";
+        error.innerHTML = "Enter a valid email address.";
         return false;
     }
 
-    error.textContent = "";
+    error.innerHTML = "";
     return true;
 }
 
@@ -119,11 +119,11 @@ function validatePhone() {
     const hasElevenDigits = phone.length === 11;
 
     if (!containsOnlyDigits || !hasElevenDigits) {
-        error.textContent = "Enter an 11-digit phone number.";
+        error.innerHTML = "Enter an 11-digit phone number.";
         return false;
     }
 
-    error.textContent = "";
+    error.innerHTML = "";
     return true;
 }
 
@@ -132,11 +132,11 @@ function validateRole() {
     const error = document.getElementById("RoleError");
 
     if (role === "") {
-        error.textContent = "Select an admin role.";
+        error.innerHTML = "Select an admin role.";
         return false;
     }
 
-    error.textContent = "";
+    error.innerHTML = "";
     return true;
 }
 
@@ -145,11 +145,11 @@ function validatePermission() {
     const error = document.getElementById("PermissionError");
 
     if (!permission) {
-        error.textContent = "Select an admin role to assign access.";
+        error.innerHTML = "Select an admin role to assign access.";
         return false;
     }
 
-    error.textContent = "";
+    error.innerHTML = "";
     return true;
 }
 
@@ -159,11 +159,11 @@ function validateUsername() {
     const usernameFormat = /^[A-Za-z0-9_]{4,15}$/;
 
     if (!usernameFormat.test(username)) {
-        error.textContent = "Use 4-15 letters, numbers or underscores.";
+        error.innerHTML = "Use 4-15 letters, numbers or underscores.";
         return false;
     }
 
-    error.textContent = "";
+    error.innerHTML = "";
     return true;
 }
 
@@ -175,11 +175,11 @@ function validatePassword() {
     const hasNumber = /\d/.test(password);
 
     if (password.length < 8 || !hasLowercase || !hasUppercase || !hasNumber) {
-        error.textContent = "Use at least 8 characters with uppercase, lowercase and a number.";
+        error.innerHTML = "Use at least 8 characters with uppercase, lowercase and a number.";
         return false;
     }
 
-    error.textContent = "";
+    error.innerHTML = "";
     return true;
 }
 
@@ -189,11 +189,11 @@ function validatePasswordConfirmation() {
     const error = document.getElementById("ConfirmError");
 
     if (password === "" || password !== confirmation) {
-        error.textContent = "Passwords do not match.";
+        error.innerHTML = "Passwords do not match.";
         return false;
     }
 
-    error.textContent = "";
+    error.innerHTML = "";
     return true;
 }
 
@@ -201,15 +201,15 @@ function showResult(success, message) {
     const error = document.getElementById("ResultError");
     const successMessage = document.getElementById("ResultSuccess");
 
-    error.textContent = "";
-    successMessage.textContent = "";
+    error.innerHTML = "";
+    successMessage.innerHTML = "";
     error.hidden = success;
     successMessage.hidden = !success;
 
     if (success) {
-        successMessage.textContent = message;
+        successMessage.innerHTML = message;
     } else {
-        error.textContent = message;
+        error.innerHTML = message;
     }
 }
 
@@ -217,11 +217,11 @@ function clearAllErrors() {
     const errorMessages = document.querySelectorAll('p[id$="Error"]');
 
     for (let i = 0; i < errorMessages.length; i++) {
-        errorMessages[i].textContent = "";
+        errorMessages[i].innerHTML = "";
     }
 
     document.getElementById("ResultError").hidden = true;
-    document.getElementById("ResultSuccess").textContent = "";
+    document.getElementById("ResultSuccess").innerHTML = "";
     document.getElementById("ResultSuccess").hidden = true;
 
     window.setTimeout(setAdminRolePermissions, 0);
