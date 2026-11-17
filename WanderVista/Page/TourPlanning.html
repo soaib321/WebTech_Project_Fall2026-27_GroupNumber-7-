@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour Planning</title>
+    <link rel="stylesheet" href="../Design/TourPlanning/TourPlanning.css">
+</head>
+<body>
+<div class="top">
+    <div class="brand">
+        <img src="../img/logo.svg" class="logo">
+        <div>
+            <h1>WanderVista</h1>
+            <p>Tour Manager Portal</p>
+        </div>
+    </div>
+</div>
+<div class="navigation">
+    <a href="TourManagerRegistration.html">Register</a>
+    <a href="TourManagerLogin.html">Login</a>
+    <a href="TourManagerDashboard.html">Dashboard</a>
+    <a href="TourPlanning.html">Tour Planning</a>
+</div>
+<div class="container">
+    <h2>Plan a Tour</h2>
+    <p>Fill in the form to plan a new tour.</p>
+    <form onsubmit="return planTour()" onreset="clearMessages()" novalidate>
+        <fieldset>
+            <legend>Tour Information</legend>
+            <table>
+                <tr><td><label for="TourName">Tour Name:</label></td>
+                    <td><input type="text" id="TourName" placeholder="Enter Tour Name">
+                        <p class="error" id="TourNameError"></p></td></tr>
+                <tr><td><label for="Destination">Destination:</label></td>
+                    <td><input type="text" id="Destination" placeholder="Enter Destination">
+                        <p class="error" id="DestinationError"></p></td></tr>
+                <tr><td><label for="TourDate">Tour Date:</label></td>
+                    <td><input type="date" id="TourDate">
+                        <p class="error" id="TourDateError"></p></td></tr>
+                <tr><td><label for="Tourists">Number of Tourists:</label></td>
+                    <td><input type="number" id="Tourists" placeholder="Enter Number of Tourists">
+                        <p class="error" id="TouristsError"></p></td></tr>
+                <tr><td><label for="Budget">Budget (BDT):</label></td>
+                    <td><input type="number" id="Budget" placeholder="Enter Budget">
+                        <p class="error" id="BudgetError"></p></td></tr>
+            </table>
+        </fieldset>
+        <p id="ResultText"></p>
+        <div class="buttons">
+            <input type="submit" value="Submit">
+            <input type="reset" value="Clear">
+        </div>
+    </form>
+    <p class="center"><a href="TourManagerDashboard.html">Back to Dashboard</a></p>
+</div>
+<div class="footer">WanderVista | Tour Manager | Created by Swachchho</div>
+<script src="../JS/TourPlanning/TourPlanning.js"></script>
+</body>
+</html>

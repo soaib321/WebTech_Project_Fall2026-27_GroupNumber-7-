@@ -1,28 +1,30 @@
+
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tour Manager Dashboard</title>
-    <link rel="stylesheet" href="../design/tourManager.css">
+    <link rel="stylesheet" href="../Design/Dashboard/Dashboard.css">
 </head>
-
 <body>
-
 <div class="top">
-    <h1>WanderVista</h1>
-    <p>Tour Manager Portal</p>
+    <div class="brand">
+        <img src="../img/logo.svg" class="logo">
+        <div>
+            <h1>WanderVista</h1>
+            <p>Tour Manager Portal</p>
+        </div>
+    </div>
 </div>
-
 <div class="navigation">
     <a href="TourManagerRegistration.html">Register</a>
     <a href="TourManagerLogin.html">Login</a>
     <a href="TourManagerDashboard.html">Dashboard</a>
-    <a href="hotelManagerRegistration.html">Hotel Manager</a>
+    <a href="TourPlanning.html">Tour Planning</a>
 </div>
-
 <div class="container dashboard">
-
     <h2>Manager Dashboard</h2>
-
     <fieldset>
         <legend>My Dashboard</legend>
 
@@ -30,18 +32,15 @@
         <p>Welcome to your Tour Manager dashboard.</p>
 
         <h3>Manager Information</h3>
-
         <table class="manager-table">
             <tr>
                 <td>Manager Role</td>
                 <td>Tour Manager</td>
             </tr>
-
             <tr>
                 <td>Work</td>
                 <td>Tour Planning and Management</td>
             </tr>
-
             <tr>
                 <td>Account Status</td>
                 <td>Active</td>
@@ -49,7 +48,6 @@
         </table>
 
         <h3>My Responsibilities</h3>
-
         <ul>
             <li>Plan and organize tours</li>
             <li>Manage travel schedules</li>
@@ -57,17 +55,12 @@
             <li>Provide a good travel experience</li>
         </ul>
 
+        <p><a href="TourPlanning.html">Plan a Tour</a></p>
+
         <button onclick="logoutManager()">Logout</button>
-
     </fieldset>
-
 </div>
-
-<div class="footer">
-    WanderVista | Tour Manager
-</div>
-
-<script src="../js/tourManager.js"></script>
-
+<div class="footer">WanderVista | Tour Manager | Created by Swachchho</div>
+<script src="../JS/Dashboard/Dashboard.js"></script>
 </body>
 </html>
