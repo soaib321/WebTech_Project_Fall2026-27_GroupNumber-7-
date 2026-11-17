@@ -1,26 +1,50 @@
-const field = (id) => document.getElementById(id);
-const value = (id) => field(id).value.trim();
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        collect_data();
+    });
+    form.addEventListener("reset", clearCreateUserForm);
+    document.getElementById("AssignedRole").addEventListener("change", showRoleFields);
+    showRoleFields();
+});
 
-// Which extra section belongs to which role
-const roleSections = {
-    "Tourist": "TouristSection",
-    "Tour Manager": "TourManagerSection",
-    "Hotel Manager": "HotelManagerSection"
-};
+const userField = (id) => document.getElementById(id);
+const userValue = (id) => userField(id).value.trim();
+const roleFieldIds = ["TouristFields", "TourManagerFields", "HotelManagerFields"];
+const roleErrorIds = [
+    "TouristDestinationError", "TouristStyleError", "TouristBudgetError",
+    "TMSpecializationError", "TMExperienceError", "TMLicenseError", "TMLanguageError", "TMMaxToursError",
+    "HMHotelNameError", "HMAddressError", "HMStarsError", "HMRoomsError", "HMLicenseError", "HMFacilityError"
+];
 
-// Short description shown under the role dropdown
-const roleNotes = {
-    "Tourist": "Tourists book tours and hotels. Set their travel details and what they may do.",
-    "Tour Manager": "Tour managers create and run tours. Set their expertise and tour permissions.",
-    "Hotel Manager": "Hotel managers run a hotel. Set the hotel details and reservation permissions."
-};
+function showRoleFields() {
+    roleFieldIds.forEach((id) => {
+        userField(id).hidden = true;
+    });
+    roleErrorIds.forEach((id) => {
+        userField(id).textContent = "";
+    });
 
-// Prefix used in the ids and names of each role's fields
-const rolePrefix = { "Tourist": "Tourist", "Tour Manager": "TM", "Hotel Manager": "HM" };
+    const roleFields = {
+        "Tourist": "TouristFields",
+        "Tour Manager": "TourManagerFields",
+        "Hotel Manager": "HotelManagerFields"
+    };
+    const selectedFields = roleFields[userValue("AssignedRole")];
+    if (selectedFields) {
+        userField(selectedFields).hidden = false;
+    }
 
-function showError(id, message) {
-    field(id).textContent = message;
-    return !message;
+    userField("ResultError").textContent = "";
+    userField("ResultError").hidden = true;
+    userField("ResultSuccess").textContent = "";
+    userField("ResultSuccess").hidden = true;
+}
+
+function setUserError(id, message) {
+    userField(id).textContent = message;
+    return message === "";
 }
 
 function isValidPhone(phone) {
@@ -28,148 +52,168 @@ function isValidPhone(phone) {
     return /^\+?[\d\s()-]+$/.test(phone) && digits.length >= 7 && digits.length <= 15;
 }
 
-// Returns true if the person born on this date is between 18 and 100 today
-function isAdult(dateText) {
-    if (!dateText) {
-        return false;
-    }
-    const birth = new Date(dateText);
-    const today = new Date();
-    let age = today.getFullYear() - birth.getFullYear();
-    if (today.getMonth() < birth.getMonth() ||
-        (today.getMonth() === birth.getMonth() && today.getDate() < birth.getDate())) {
-        age--;
-    }
-    return age >= 18 && age <= 100;
+function isChecked(name) {
+    return document.querySelector('input[name="' + name + '"]:checked') !== null;
 }
 
-function isFutureDate(dateText) {
-    if (!dateText) {
-        return false;
-    }
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    return new Date(dateText) > today;
-}
-
-// True if the text is a whole number between min and max
 function isNumberBetween(text, min, max) {
     const number = Number(text);
     return text !== "" && Number.isInteger(number) && number >= min && number <= max;
 }
 
-const isChecked = (name) => document.querySelector('input[name="' + name + '"]:checked') !== null;
-
-// Runs when the role dropdown changes: hide every role section, show only the chosen one
-function showRoleOptions() {
-    Object.values(roleSections).forEach((id) => field(id).classList.add("registration-hidden"));
-    const role = value("AssignedRole");
-    if (roleSections[role]) {
-        field(roleSections[role]).classList.remove("registration-hidden");
+function isPastOrToday(dateText) {
+    if (!dateText) {
+        return false;
     }
-    field("RoleNote").textContent = roleNotes[role] || "Select a role to see the options for that role.";
-    field("RoleError").textContent = "";
+    const date = new Date(dateText + "T00:00:00");
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return !Number.isNaN(date.getTime()) && date <= today;
 }
 
-// Runs when an access level is picked: tick the permissions that match it
-function setAccessLevel(groupId, level) {
-    const boxes = document.querySelectorAll("#" + groupId + " input[type=checkbox]");
-    boxes.forEach((box, index) => {
-        if (level === "Full") {
-            box.checked = true;
-        } else if (level === "Limited") {
-            box.checked = index < 2;
-        } else {
-            box.checked = index === 0;
-        }
-        box.disabled = true;
-    });
-}
+function collect_data() {
+    const role = userValue("AssignedRole");
+    const checks = [
+        validateName(),
+        validateEmail(),
+        validatePhone(),
+        validateGender(),
+        validateNationality(),
+        validateDateOfBirth(),
+        validateAddress(),
+        validateEmergencyContact(),
+        validateRole(),
+        validateUsername(),
+        validatePassword(),
+        validatePasswordConfirmation(),
+        validateAccountStatus(),
+        validateAccountNote(),
+        validateConfirmation()
+    ];
 
-function checkTourist(checks) {
-    checks.push(showError("TouristDestinationError", value("TouristDestination") ? "" : "Select a destination type."));
-    checks.push(showError("TouristStyleError", isChecked("TouristStyle") ? "" : "Select a travel style."));
-    checks.push(showError("TouristBudgetError", value("TouristBudget") ? "" : "Select a budget range."));
-    checks.push(showError("TouristMembershipError", value("TouristMembership") ? "" : "Select a membership."));
-}
-
-function checkTourManager(checks) {
-    checks.push(showError("TMSpecializationError", value("TMSpecialization") ? "" : "Select a specialization."));
-    checks.push(showError("TMExperienceError", isNumberBetween(value("TMExperience"), 0, 50) ? "" : "Enter 0 to 50 years."));
-    checks.push(showError("TMLicenseError", /^TM-\d{4}$/.test(value("TMLicense")) ? "" : "Use the format TM-1234."));
-    checks.push(showError("TMLanguageError", isChecked("TMLanguage") ? "" : "Select at least one language."));
-    checks.push(showError("TMMaxToursError", isNumberBetween(value("TMMaxTours"), 1, 20) ? "" : "Enter a number from 1 to 20."));
-}
-
-function checkHotelManager(checks) {
-    checks.push(showError("HMHotelNameError", value("HMHotelName").length >= 2 ? "" : "Enter the hotel name."));
-    checks.push(showError("HMStarsError", value("HMStars") ? "" : "Select a star rating."));
-    checks.push(showError("HMRoomsError", isNumberBetween(value("HMRooms"), 1, 500) ? "" : "Enter a number from 1 to 500."));
-    checks.push(showError("HMLicenseError", /^HM-\d{4}$/.test(value("HMLicense")) ? "" : "Use the format HM-1234."));
-    checks.push(showError("HMFacilityError", isChecked("HMFacility") ? "" : "Select at least one facility."));
-}
-
-function validateCreateUserForm() {
-    const checks = [];
-    const role = value("AssignedRole");
-
-    checks.push(showError("NameError", value("UserFullName").length >= 2 ? "" : "Enter the user's full name."));
-    checks.push(showError("EmailError", /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value("UserEmail")) ? "" : "Enter a valid email address."));
-    checks.push(showError("PhoneError", isValidPhone(value("UserPhone")) ? "" : "Enter a valid phone number."));
-    checks.push(showError("GenderError", isChecked("UserGender") ? "" : "Select a gender."));
-    checks.push(showError("NationalityError", value("UserNationality").length >= 2 ? "" : "Enter the user's nationality."));
-    checks.push(showError("AddressError", value("UserAddress").length >= 5 ? "" : "Enter the user's address."));
-    const emergencyContact = value("UserEmergency");
-    checks.push(showError("EmergencyError", !emergencyContact || isValidPhone(emergencyContact) ? "" : "Enter a valid emergency contact number."));
-    checks.push(showError("DOBError", isAdult(value("UserDOB")) ? "" : "Enter a valid date of birth (18 years or older)."));
-    checks.push(showError("RoleError", role ? "" : "Select a role."));
-
-    // Only the chosen role's fields are checked
-    if (role) {
-        const prefix = rolePrefix[role];
-        if (role === "Tourist") {
-            checkTourist(checks);
-        } else if (role === "Tour Manager") {
-            checkTourManager(checks);
-        } else {
-            checkHotelManager(checks);
-        }
-        checks.push(showError(prefix + "AccessError", isChecked(prefix + "Access") ? "" : "Select an access level."));
-        checks.push(showError(prefix + "PermissionError", isChecked(prefix + "Permission") ? "" : "Select at least one permission."));
+    if (role === "Tourist") {
+        checks.push(validateTravelerDetails());
+    } else if (role === "Tour Manager") {
+        checks.push(validateTourManagerDetails());
+    } else if (role === "Hotel Manager") {
+        checks.push(validateHotelManagerDetails());
     }
 
-    checks.push(showError("StatusError", value("AccountStatus") ? "" : "Select an account status."));
-    checks.push(showError("ValidError", isFutureDate(value("ValidUntil")) ? "" : "Choose a future date."));
-    checks.push(showError("UserNameError", /^[A-Za-z0-9_]{4,15}$/.test(value("NewUserName")) ? "" : "Use 4-15 letters, numbers or underscores."));
-    const password = field("TempPassword").value;
-    checks.push(showError("PasswordError", /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(password) ? "" : "Use at least 8 characters with uppercase, lowercase and a number."));
-    checks.push(showError("ConfirmError", password && password === field("ConfirmTemp").value ? "" : "Passwords do not match."));
-    const notes = value("Notes");
-    checks.push(showError("NotesError", notes.length >= 20 && notes.length <= 200 ? "" : "Write 20 to 200 characters."));
-    checks.push(showError("ConfirmBoxError", field("Confirm").checked ? "" : "Please confirm the details."));
-
+    const resultError = userField("ResultError");
+    const resultSuccess = userField("ResultSuccess");
     if (!checks.every(Boolean)) {
-        showResult(false, "Please correct the highlighted fields.");
+        resultError.hidden = false;
+        resultError.textContent = "Please correct the highlighted fields.";
         return false;
     }
 
-    const prefix = rolePrefix[role];
-    const level = document.querySelector('input[name="' + prefix + 'Access"]:checked').value;
-    const count = document.querySelectorAll('input[name="' + prefix + 'Permission"]:checked').length;
-    showResult(true, "Account created for " + value("UserFullName") + " as " + role + " (" + level + " access, " + count + " permissions, " + value("AccountStatus") + ").");
-    return false;
+    const roleLabel = role === "Tourist" ? "Traveler" : role;
+    userField("TempPassword").value = "";
+    userField("ConfirmTemp").value = "";
+    resultError.textContent = "";
+    resultError.hidden = true;
+    resultSuccess.hidden = false;
+    resultSuccess.textContent = "Details validated for a " + roleLabel + " account. No account or credentials were stored.";
+    return true;
 }
 
-function showResult(success, message) {
-    const result = field("ResultText");
-    result.textContent = message;
-    result.className = success ? "registration-success" : "registration-error";
+function validateName() {
+    return setUserError("NameError", userValue("UserFullName").length >= 2 ? "" : "Enter the user's full name.");
 }
 
-function clearAllErrors() {
-    document.querySelectorAll(".registration-error").forEach((item) => item.textContent = "");
-    field("ResultText").textContent = "";
-    field("ResultText").className = "";
-    // The form values reset after this event, so update the role sections just after
-    setTimeout(showRoleOptions, 0);
+function validateEmail() {
+    return setUserError("EmailError", /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userValue("UserEmail")) ? "" : "Enter a valid email address.");
+}
+
+function validatePhone() {
+    return setUserError("PhoneError", isValidPhone(userValue("UserPhone")) ? "" : "Enter a valid phone number.");
+}
+
+function validateGender() {
+    return setUserError("GenderError", isChecked("UserGender") ? "" : "Select a gender.");
+}
+
+function validateNationality() {
+    return setUserError("NationalityError", userValue("UserNationality") ? "" : "Select a nationality.");
+}
+
+function validateDateOfBirth() {
+    return setUserError("DOBError", isPastOrToday(userValue("UserDOB")) ? "" : "Enter a valid date of birth that is not in the future.");
+}
+
+function validateAddress() {
+    return setUserError("AddressError", userValue("UserAddress").length >= 5 ? "" : "Enter a complete home address.");
+}
+
+function validateEmergencyContact() {
+    const phone = userValue("UserEmergency");
+    return setUserError("EmergencyError", !phone || isValidPhone(phone) ? "" : "Enter a valid emergency contact number.");
+}
+
+function validateRole() {
+    const validRoles = ["Tourist", "Tour Manager", "Hotel Manager"];
+    return setUserError("RoleError", validRoles.includes(userValue("AssignedRole")) ? "" : "Select an account type.");
+}
+
+function validateUsername() {
+    return setUserError("UserNameError", /^[A-Za-z0-9_]{4,15}$/.test(userValue("NewUserName")) ? "" : "Use 4-15 letters, numbers, or underscores.");
+}
+
+function validatePassword() {
+    const password = userField("TempPassword").value;
+    return setUserError("PasswordError", /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(password) ? "" : "Use 8+ characters with uppercase, lowercase, and a number.");
+}
+
+function validatePasswordConfirmation() {
+    const password = userField("TempPassword").value;
+    const confirmation = userField("ConfirmTemp").value;
+    return setUserError("ConfirmError", password && password === confirmation ? "" : "Passwords do not match.");
+}
+
+function validateAccountStatus() {
+    return setUserError("StatusError", userValue("AccountStatus") ? "" : "Select an account status.");
+}
+
+function validateAccountNote() {
+    return setUserError("NotesError", userValue("Notes").length <= 200 ? "" : "Keep the account note under 200 characters.");
+}
+
+function validateConfirmation() {
+    return setUserError("ConfirmBoxError", userField("Confirm").checked ? "" : "Confirm that the details are correct.");
+}
+
+function validateTravelerDetails() {
+    const destinationValid = setUserError("TouristDestinationError", userValue("TouristDestination") ? "" : "Select a preferred destination.");
+    const styleValid = setUserError("TouristStyleError", isChecked("TouristStyle") ? "" : "Select a travel style.");
+    const budgetValid = setUserError("TouristBudgetError", userValue("TouristBudget") ? "" : "Select a typical travel budget.");
+    return destinationValid && styleValid && budgetValid;
+}
+
+function validateTourManagerDetails() {
+    const specializationValid = setUserError("TMSpecializationError", userValue("TMSpecialization") ? "" : "Select a tour specialization.");
+    const experienceValid = setUserError("TMExperienceError", isNumberBetween(userValue("TMExperience"), 0, 50) ? "" : "Enter 0 to 50 years of experience.");
+    const licenseValid = setUserError("TMLicenseError", userValue("TMLicense").length >= 4 ? "" : "Enter a valid license number.");
+    const languagesValid = setUserError("TMLanguageError", isChecked("TMLanguage") ? "" : "Select at least one language.");
+    const toursValid = setUserError("TMMaxToursError", isNumberBetween(userValue("TMMaxTours"), 1, 20) ? "" : "Enter a number from 1 to 20.");
+    return specializationValid && experienceValid && licenseValid && languagesValid && toursValid;
+}
+
+function validateHotelManagerDetails() {
+    const nameValid = setUserError("HMHotelNameError", userValue("HMHotelName").length >= 2 ? "" : "Enter the hotel name.");
+    const addressValid = setUserError("HMAddressError", userValue("HMAddress").length >= 5 ? "" : "Enter the hotel's location.");
+    const ratingValid = setUserError("HMStarsError", userValue("HMStars") ? "" : "Select the hotel's rating.");
+    const roomsValid = setUserError("HMRoomsError", isNumberBetween(userValue("HMRooms"), 1, 500) ? "" : "Enter a room capacity from 1 to 500.");
+    const licenseValid = setUserError("HMLicenseError", userValue("HMLicense").length >= 4 ? "" : "Enter the hotel's license number.");
+    const facilitiesValid = setUserError("HMFacilityError", isChecked("HMFacility") ? "" : "Select at least one facility.");
+    return nameValid && addressValid && ratingValid && roomsValid && licenseValid && facilitiesValid;
+}
+
+function clearCreateUserForm() {
+    document.querySelectorAll('p[id$="Error"]').forEach((item) => {
+        item.textContent = "";
+    });
+    userField("ResultError").hidden = true;
+    userField("ResultSuccess").textContent = "";
+    userField("ResultSuccess").hidden = true;
+    window.setTimeout(showRoleFields, 0);
 }

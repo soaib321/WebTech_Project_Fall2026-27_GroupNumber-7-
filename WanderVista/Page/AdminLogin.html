@@ -10,32 +10,39 @@
 </head>
 
 <body>
-    <header><a href="../index.html">WanderVista</a>
-        <nav><a href="../index.html">Home</a> | <a aria-current="page" href="AdminLogin.html">Login</a> |
-            <a href="AdminRegistration.html">Register</a> | <a href="AdminCreateUser.html">User Management</a></nav>
+    <header>
+        <img src="../img/logo-mark.svg" alt="WanderVista logo" />
+        <h1>WanderVista</h1>
     </header>
+    <nav><a href="../index.html">Home</a>
+        <a aria-current="page" href="AdminLogin.html">Admin Login</a>
+        <a href="AdminRegistration.html">Admin Registration</a>
+        <a href="AdminCreateUser.html">Create User</a></nav>
     <main>
-        <section>
-            <h1>Admin Login</h1>
-            <p>Enter your username and password.</p>
-        </section>
-        <form novalidate="" onreset="clearLoginMessage()" onsubmit="return loginAccount()">
+        <h2>Admin Login</h2>
+        <p>Sign in to manage WanderVista tours, stays, and traveler accounts.</p>
+        <form autocomplete="off" novalidate="">
             <fieldset>
-                <legend>Admin Account</legend>
-                <label for="LoginUsername">Username</label>
-                <input id="LoginUsername" placeholder="Enter username" required="" type="text" />
-                <label for="LoginPassword">Password</label>
-                <input id="LoginPassword" placeholder="Enter password" required="" type="password" />
-                <label class="show-password"><input id="ShowPassword" onchange="togglePasswordVisibility()" type="checkbox" />
-                    Show password</label>
-                <p aria-live="polite" class="error" id="LoginMessage"></p>
+                <legend>Admin account</legend>
+                <table>
+                    <tr><td><label for="LoginUsername">Username</label></td>
+                        <td><input id="LoginUsername" placeholder="Enter username" required type="text" />
+                            <p id="UsernameError"></p></td></tr>
+                    <tr><td><label for="LoginPassword">Password</label></td>
+                        <td><input id="LoginPassword" placeholder="Enter password" required type="password" />
+                            <p id="PasswordError"></p></td></tr>
+                    <tr><td></td><td><label><input id="ShowPassword" type="checkbox" />
+                        Show password</label></td></tr>
+                </table>
+                <p aria-live="polite" id="LoginError" hidden></p>
+                <p aria-live="polite" id="LoginSuccess" hidden></p>
                 <button type="submit">Login</button>
                 <button type="reset">Clear</button>
-                <p>New admin? <a href="AdminRegistration.html">Register here</a></p>
+                <p class="hint">New admin? <a href="AdminRegistration.html">Register here</a></p>
             </fieldset>
         </form>
     </main>
-    <footer>WandaVista | A responsive travel website</footer>
+    <footer>WanderVista | Travel Site</footer>
 </body>
 
 </html>

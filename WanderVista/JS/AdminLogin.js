@@ -1,30 +1,46 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        collect_data();
+    });
+    form.addEventListener("reset", clearLoginMessage);
+    document.getElementById("ShowPassword").addEventListener("change", togglePasswordVisibility);
+});
+
+function collect_data() {
+    document.getElementById("LoginMessage").textContent = "";
+    const validUsername = validateUsername();
+    const validPassword = validatePassword();
+
+    if (!validUsername || !validPassword) {
+        return false;
+    }
+    return loginAccount();
+}
+
+function validateUsername() {
+    const username = document.getElementById("LoginUsername").value.trim();
+    const error = document.getElementById("UsernameError");
+    error.textContent = username ? "" : "Enter your username.";
+    return username !== "";
+}
+
+function validatePassword() {
+    const password = document.getElementById("LoginPassword").value;
+    const error = document.getElementById("PasswordError");
+    error.textContent = password ? "" : "Enter your password.";
+    return password !== "";
+}
+
 function loginAccount() {
     const message = document.getElementById("LoginMessage");
     const username = document.getElementById("LoginUsername").value.trim();
     const password = document.getElementById("LoginPassword").value;
     message.className = "error";
 
-    if (!username || !password) {
-        message.textContent = "Enter both your username and password.";
-        return false;
-    }
-
-    let registeredCredentials;
-    try {
-        const savedCredentials = localStorage.getItem("wanderVistaAdminCredentials");
-        registeredCredentials = savedCredentials ? JSON.parse(savedCredentials) : null;
-    } catch (error) {
-        message.textContent = "Saved admin account data could not be read. Please register again.";
-        return false;
-    }
-
-    const isDemoAdmin = username === "admin" && password === "admin123";
-    const isRegisteredAdmin = registeredCredentials &&
-        username === registeredCredentials.username &&
-        password === registeredCredentials.password;
-
-    if (!isDemoAdmin && !isRegisteredAdmin) {
-        message.textContent = "Incorrect username or password.";
+    if (username !== "admin" || password !== "admin123") {
+        message.textContent = "Incorrect username or password. New admin accounts require secure server-side authentication.";
         return false;
     }
 
@@ -33,13 +49,15 @@ function loginAccount() {
     window.setTimeout(() => {
         window.location.href = "AdminCreateUser.html";
     }, 500);
-    return false;
+    return true;
 }
 
 function clearLoginMessage() {
     const message = document.getElementById("LoginMessage");
     message.textContent = "";
     message.className = "error";
+    document.getElementById("UsernameError").textContent = "";
+    document.getElementById("PasswordError").textContent = "";
     document.getElementById("ShowPassword").checked = false;
     document.getElementById("LoginPassword").type = "password";
 }
