@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Design/TouristRegistration.css">
+    <script src="../JS/TouristRegistration.js" defer></script>
+    <title>Tourist Registration | WanderVista</title>
+</head>
+
+<body>
+    <div class="container">
+
+        <header class="top">
+            <a class="brand" href="../index.html">
+                <img src="../img/wandervista-logo.png" alt="WanderVista Logo">
+                <span>WanderVista</span>
+            </a>
+            <nav class="topnav">
+                <a href="../index.html">Home</a>
+            </nav>
+        </header>
+
+        <div class="header">
+            <h1>Tourist Registration</h1>
+            <p>Fill in the form below to register.</p>
+        </div>
+
+        <form onsubmit="return validateTouristForm()" onreset="clearAllErrors()" novalidate>
+
+            <fieldset>
+                <legend>Tourist Personal Information</legend>
+                <table>
+                    <tr>
+                        <td><label for="TouristName">Tourist Name:</label></td>
+                        <td>
+                            <input type="text" id="TouristName" placeholder="Enter full name">
+                            <p class="error" id="NameError"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="TouristAge">Age:</label></td>
+                        <td>
+                            <input type="number" id="TouristAge" placeholder="1 - 120">
+                            <p class="error" id="AgeError"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="TouristEmail">Email:</label></td>
+                        <td>
+                            <input type="email" id="TouristEmail" placeholder="Enter email">
+                            <p class="error" id="EmailError"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="TouristPhone">Phone:</label></td>
+                        <td>
+                            <input type="tel" id="TouristPhone" placeholder="e.g. 01712345678">
+                            <p class="error" id="PhoneError"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label>Gender:</label></td>
+                        <td>
+                            <input type="radio" name="gender" value="Male"> Male
+                            <input type="radio" name="gender" value="Female"> Female
+                            <input type="radio" name="gender" value="Other"> Other
+                            <p class="error" id="GenderError"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="Destination">Preferred Destination:</label></td>
+                        <td>
+                            <select id="Destination">
+                                <option value="">-- Select Preferred Destination --</option>
+                                <option value="Cox's Bazar">Cox's Bazar</option>
+                                <option value="Sajek">Sajek Valley</option>
+                                <option value="Sylhet">Sylhet</option>
+                                <option value="Bandarban">Bandarban</option>
+                                <option value="Saint Martin">Saint Martin</option>
+                            </select>
+                            <p class="error" id="DestinationError"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="Address">Address:</label></td>
+                        <td>
+                            <textarea id="Address" placeholder="Enter your address" style="resize:none;"></textarea>
+                            <p class="error" id="AddressError"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="Nationality">Nationality:</label></td>
+                        <td>
+                            <select id="Nationality">
+                                <option value="">-- Select Nationality --</option>
+                                <option value="Bangladesh">Bangladesh</option>
+                                <option value="USA">USA</option>
+                                <option value="UK">UK</option>
+                                <option value="Canada">Canada</option>
+                            </select>
+                            <p class="error" id="NationalityError"></p>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+
+            <fieldset>
+                <legend>Travel Preferences</legend>
+                <table>
+                    <tr>
+                        <td><label>Travel Interests:</label></td>
+                        <td>
+                            <input type="checkbox" name="interest" value="Adventure"> Adventure
+                            <input type="checkbox" name="interest" value="Beach"> Beach
+                            <input type="checkbox" name="interest" value="Mountains"> Mountains
+                            <input type="checkbox" name="interest" value="Nature"> Nature
+                            <p class="error" id="InterestError"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="EmergencyPhone">Emergency Contact:</label></td>
+                        <td>
+                            <input type="tel" id="EmergencyPhone" placeholder="e.g. 01812345678">
+                            <p class="error" id="EmergencyError"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="TravelDocument">Travel Document (optional):</label></td>
+                        <td>
+                            <input type="file" id="TravelDocument" accept=".pdf,.jpg,.jpeg,.png">
+                            <p class="hint">PDF, JPG or PNG, up to 2 MB</p>
+                            <p class="error" id="FileError"></p>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+
+            <fieldset>
+                <legend>User Profile</legend>
+                <table>
+                    <tr>
+                        <td><label for="UserName">Username:</label></td>
+                        <td>
+                            <input type="text" id="UserName" placeholder="4 - 15 characters">
+                            <p class="error" id="UserNameError"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="Password">Password:</label></td>
+                        <td>
+                            <input type="password" id="Password" placeholder="Enter password">
+                            <p class="hint">At least 8 characters with uppercase, lowercase and a number.</p>
+                            <p class="error" id="PasswordError"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="ConfirmPassword">Confirm Password:</label></td>
+                        <td>
+                            <input type="password" id="ConfirmPassword" placeholder="Re-enter password">
+                            <p class="error" id="ConfirmError"></p>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+
+            <p id="ResultText"></p>
+
+            <a class="login-after" href="TouristLogin.html" id="LoginAfterRegister" style="display:none;">
+                Continue to Login
+            </a>
+
+            <p class="hint">Already registered? <a href="TouristLogin.html">Login here</a></p>
+
+            <input class="form-button" id="submit" type="submit" value="Register">
+            <input class="form-button" id="reset" type="reset" value="Reset">
+
+        </form>
+
+        <footer class="footer">
+            WanderVista | Offline educational project | HTML, CSS and JavaScript
+        </footer>
+
+    </div>
+</body>
+</html>
