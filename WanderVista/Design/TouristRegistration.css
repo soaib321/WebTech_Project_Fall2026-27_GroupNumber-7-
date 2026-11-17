@@ -13,6 +13,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
     padding: 18px 6%;
     background: #1e88c7;
     border-radius: 0 0 25px 25px
@@ -20,6 +22,12 @@ body {
 
 .top a {
     color: white
+}
+
+.top nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
 }
 
 .brand {
